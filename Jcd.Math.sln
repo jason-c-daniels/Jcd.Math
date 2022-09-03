@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcd.Math", "Jcd.Math\Jcd.Math.csproj", "{37F167C0-EC91-4044-AC02-D60D5C02B26B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcd.Math.Tests", "Jcd.Math.Tests\Jcd.Math.Tests.csproj", "{4BFC9618-514D-4FC5-AF1C-6E637103DFC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcd.Math.Examples", "Jcd.Math.Examples\Jcd.Math.Examples.csproj", "{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37F167C0-EC91-4044-AC02-D60D5C02B26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37F167C0-EC91-4044-AC02-D60D5C02B26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37F167C0-EC91-4044-AC02-D60D5C02B26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37F167C0-EC91-4044-AC02-D60D5C02B26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BFC9618-514D-4FC5-AF1C-6E637103DFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BFC9618-514D-4FC5-AF1C-6E637103DFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BFC9618-514D-4FC5-AF1C-6E637103DFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BFC9618-514D-4FC5-AF1C-6E637103DFC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
