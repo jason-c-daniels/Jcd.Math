@@ -2,7 +2,7 @@
 
 namespace Jcd.Math.Tests.Intervals;
 
-public class RangeExtensionsUnitTests
+public class ComparableExtensionsUnitTests
 {
     [Theory]
     [InlineData(1,0,5,true)]

@@ -2,7 +2,7 @@
 
 using System.Diagnostics;
 using Jcd.Math.Intervals;
-const int numberOfItemsToCreate = 1_000_000;
+const int numberOfItemsToCreate = 100_000_000;
 
 
 TimeClosedIntervalCreates();
@@ -220,7 +220,7 @@ static void TimeRangeExtensionsInRange()
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(RangeExtensions)}.{nameof(RangeExtensions.InRange)} contains {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(ComparableExtensions)}.{nameof(ComparableExtensions.InRange)} contains {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeRangeExtensionsCompareToRange()
@@ -234,5 +234,5 @@ static void TimeRangeExtensionsCompareToRange()
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(RangeExtensions)}.{nameof(RangeExtensions.CompareToRange)} contains {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(ComparableExtensions)}.{nameof(ComparableExtensions.CompareToRange)} contains {sw.ElapsedMilliseconds}ms");
 }

@@ -2,9 +2,9 @@
 
 | Classes | |
 | :--- | :--- |
+| [ComparableExtensions](Jcd.Math.Intervals.ComparableExtensions.md 'Jcd.Math.Intervals.ComparableExtensions') | Provides IComparable<T> range (closed interval) comparison facilities.<br/>Use this if you need things to be as fast as possible. |
 | [Interval](Jcd.Math.Intervals.Interval.md 'Jcd.Math.Intervals.Interval') | A helper class to simplify the notation for creating intervals. |
 | [IntervalLimit](Jcd.Math.Intervals.IntervalLimit.md 'Jcd.Math.Intervals.IntervalLimit') | Helper class to simplify the notation when creating an interval limit. |
-| [RangeExtensions](Jcd.Math.Intervals.RangeExtensions.md 'Jcd.Math.Intervals.RangeExtensions') | Provides IComparable<T> range (closed interval) comparison facilities.<br/>Use this if you need things to be as fast as possible. |
 
 | Structs | |
 | :--- | :--- |

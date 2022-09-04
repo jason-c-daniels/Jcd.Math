@@ -8,7 +8,8 @@ A specialization of Interval that represents a closed interval [start,end]
 ```csharp
 public readonly struct Range<T> :
 Jcd.Math.Intervals.IInterval<T>,
-System.IEquatable<Jcd.Math.Intervals.IInterval<T>>
+System.IEquatable<Jcd.Math.Intervals.IInterval<T>>,
+System.IEquatable<Jcd.Math.Intervals.Range<T>>
     where T : System.IComparable<T>
 ```
 #### Type parameters
@@ -19,7 +20,7 @@ System.IEquatable<Jcd.Math.Intervals.IInterval<T>>
 
 The underlying data type.
 
-Implements [Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')[T](Jcd.Math.Intervals.Range_T_.md#Jcd.Math.Intervals.Range_T_.T 'Jcd.Math.Intervals.Range<T>.T')[&gt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')[T](Jcd.Math.Intervals.Range_T_.md#Jcd.Math.Intervals.Range_T_.T 'Jcd.Math.Intervals.Range<T>.T')[&gt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
+Implements [Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')[T](Jcd.Math.Intervals.Range_T_.md#Jcd.Math.Intervals.Range_T_.T 'Jcd.Math.Intervals.Range<T>.T')[&gt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')[T](Jcd.Math.Intervals.Range_T_.md#Jcd.Math.Intervals.Range_T_.T 'Jcd.Math.Intervals.Range<T>.T')[&gt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[Jcd.Math.Intervals.Range&lt;](Jcd.Math.Intervals.Range_T_.md 'Jcd.Math.Intervals.Range<T>')[T](Jcd.Math.Intervals.Range_T_.md#Jcd.Math.Intervals.Range_T_.T 'Jcd.Math.Intervals.Range<T>.T')[&gt;](Jcd.Math.Intervals.Range_T_.md 'Jcd.Math.Intervals.Range<T>')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
 
 | Constructors | |
 | :--- | :--- |

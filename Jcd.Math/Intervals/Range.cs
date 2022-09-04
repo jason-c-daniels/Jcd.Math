@@ -9,13 +9,15 @@ namespace Jcd.Math.Intervals;
 /// (i.e. an interval that contains the start and end points)
 /// </summary>
 /// <typeparam name="T">The underlying data type.</typeparam>
-public readonly struct Range<T> : IInterval<T>
+public readonly struct Range<T> : IInterval<T>, IEquatable<Range<T>>
     where T: IComparable<T>
 {
     #region Implementation of IInterval<T>
 
     /// <inheritdoc />
-    public bool IsValid => Start.IsStart && End.IsEnd;
+    public bool IsValid => Start.LimitType == IntervalLimitType.Start
+                           && End.LimitType == IntervalLimitType.End
+                           ;
 
     /// <inheritdoc />
     public bool IsEmpty => false;
@@ -42,7 +44,9 @@ public readonly struct Range<T> : IInterval<T>
     /// <returns>True if this range contains the interval.</returns>
     public bool Contains(IInterval<T> other)
     {
-        return Start <= other.Start && End >= other.End;
+        //return Start <= other.Start && End >= other.End;
+        return Start.Limit!.CompareTo(other.Start.Limit!) <= 0
+               && End.Limit!.CompareTo(other.End.Limit!) >= 0;
     }
     
     /// <summary>
@@ -52,7 +56,9 @@ public readonly struct Range<T> : IInterval<T>
     /// <returns>True if this interval contains the other.</returns>
     public bool Contains(Range<T> other)
     {
-        return Start <= other.Start && End >= other.End;
+        //return Start <= other.Start && End >= other.End;
+        return Start.Limit!.CompareTo(other.Start.Limit!) <= 0
+               && End.Limit!.CompareTo(other.End.Limit!) >= 0;
     }
 
     /// <summary>
@@ -77,7 +83,20 @@ public readonly struct Range<T> : IInterval<T>
     /// <inheritdoc />
     public bool Equals(IInterval<T> other)
     {
-        return Start == other.Start && End == other.End;
+        //return Start == other.Start && End == other.End;
+        return    Start.Limit!.CompareTo(other.Start.Limit!) == 0
+               && End.Limit!.CompareTo(other.End.Limit!) == 0;
+    }
+
+    #endregion
+
+    #region Implementation of IEquatable<Range<T>>
+
+    /// <inheritdoc />
+    public bool Equals(Range<T> other)
+    {
+        return    Start.Limit!.CompareTo(other.Start.Limit!) == 0
+                  && End.Limit!.CompareTo(other.End.Limit!) == 0;
     }
 
     #endregion

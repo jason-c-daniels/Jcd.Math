@@ -23,24 +23,27 @@ public readonly struct Interval<T> :
     /// fields and properties in an uninitialized instance.
     /// (This is a .Net standard 2.0 assembly after all)
     /// </remarks> 
-    public bool IsValid => Start.IsStart && End.IsEnd;
+    public bool IsValid => Start.LimitType == IntervalLimitType.Start 
+                           && End.LimitType == IntervalLimitType.End ;
 
     /// <summary>
     ///  Indicates if the interval is empty:
     /// (0,0), (1,1) ...etc. are empty intervals.
     /// </summary>
-    public bool IsEmpty => Start.HasLimitValue 
-                           && End.HasLimitValue 
-                           && Start.IsOpen && End.IsOpen 
+    public bool IsEmpty =>    Start.Constraint.HasLimitValue 
+                           && End.Constraint.HasLimitValue 
+                           && Start.Constraint.IsOpen 
+                           && End.Constraint.IsOpen 
                            && Start.Limit!.CompareTo(End.Limit!)==0;
     
     /// <summary>
     /// Indicates if the interval is empty:
     /// [0,0], [1,1] ...etc. are single value intervals.
     /// </summary>
-    public bool IsSingleValue => Start.HasLimitValue 
-                           && End.HasLimitValue 
-                           && Start.IsClosed && End.IsClosed 
+    public bool IsSingleValue => Start.Constraint.HasLimitValue 
+                           && End.Constraint.HasLimitValue 
+                           && Start.Constraint.IsClosed 
+                           && End.Constraint.IsClosed 
                            && Start.Limit!.CompareTo(End.Limit!)==0;
 
     /// <summary>
@@ -151,14 +154,14 @@ public readonly struct Interval<T> :
     
     private Interval(IntervalLimit<T> start, IntervalLimit<T> end)
     {
-        if (!start.IsStart)
+        if (start.LimitType != IntervalLimitType.Start)
             throw new ArgumentOutOfRangeException(nameof(start), "End provided for interval openStart.");
         
-        if (!end.IsEnd)
+        if (end.LimitType != IntervalLimitType.End)
             throw new ArgumentOutOfRangeException(nameof(end), "Start provided for interval closedEnd.");
         
         if (start.CompareTo(end) > 0)
-            throw new ArgumentOutOfRangeException(nameof(end), $"Detected openStart ({start}) > closedEnd ({end}). closedEnd must be >= openStart");
+            throw new ArgumentOutOfRangeException(nameof(end), $"Detected start ({start}) > end ({end}). End must be >= start");
         
         Start = start;
         End = end;

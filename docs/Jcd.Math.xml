@@ -4,6 +4,34 @@
         <name>Jcd.Math</name>
     </assembly>
     <members>
+        <member name="T:Jcd.Math.Intervals.ComparableExtensions">
+            <summary>
+            Provides IComparable&lt;T&gt; range (closed interval) comparison facilities.
+            Use this if you need things to be as fast as possible.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Intervals.ComparableExtensions.InRange``1(``0,``0,``0)">
+            <summary>
+            Checks if a value is within a closed interval. (i.e. interval includes start and endpoints)
+            </summary>
+            <param name="value">The value to compare</param>
+            <param name="start">Start of the range to check</param>
+            <param name="end">End of the range to check.</param>
+            <typeparam name="T">The data type being compared.</typeparam>
+            <returns>true if the value is within the range.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.ComparableExtensions.CompareToRange``1(``0,``0,``0)">
+            <summary>
+            Determines if a value is less than the start (-1) of the
+            closed interval [start,end], within the interval (0),
+            or after the end of the interval (1)
+            </summary>
+            <param name="value">The value to compare</param>
+            <param name="start">Start of the range to check</param>
+            <param name="end">End of the range to check.</param>
+            <typeparam name="T">The data type being compared.</typeparam>
+            <returns>-1, for less than, 0 for in range, 1 for greater than end.</returns>
+        </member>
         <member name="T:Jcd.Math.Intervals.IInterval`1">
             <summary>
             Defines the operations and properties needed to create an interval.
@@ -888,33 +916,8 @@
         <member name="M:Jcd.Math.Intervals.Range`1.Equals(Jcd.Math.Intervals.IInterval{`0})">
             <inheritdoc />
         </member>
-        <member name="T:Jcd.Math.Intervals.RangeExtensions">
-            <summary>
-            Provides IComparable&lt;T&gt; range (closed interval) comparison facilities.
-            Use this if you need things to be as fast as possible.
-            </summary>
-        </member>
-        <member name="M:Jcd.Math.Intervals.RangeExtensions.InRange``1(``0,``0,``0)">
-            <summary>
-            Checks if a value is within a closed interval. (i.e. interval includes start and endpoints)
-            </summary>
-            <param name="value">The value to compare</param>
-            <param name="start">Start of the range to check</param>
-            <param name="end">End of the range to check.</param>
-            <typeparam name="T">The data type being compared.</typeparam>
-            <returns>true if the value is within the range.</returns>
-        </member>
-        <member name="M:Jcd.Math.Intervals.RangeExtensions.CompareToRange``1(``0,``0,``0)">
-            <summary>
-            Determines if a value is less than the start (-1) of the
-            closed interval [start,end], within the interval (0),
-            or after the end of the interval (1)
-            </summary>
-            <param name="value">The value to compare</param>
-            <param name="start">Start of the range to check</param>
-            <param name="end">End of the range to check.</param>
-            <typeparam name="T">The data type being compared.</typeparam>
-            <returns>-1, for less than, 0 for in range, 1 for greater than end.</returns>
+        <member name="M:Jcd.Math.Intervals.Range`1.Equals(Jcd.Math.Intervals.Range{`0})">
+            <inheritdoc />
         </member>
         <member name="T:Jcd.Math.NamespaceDoc">
             <summary>
