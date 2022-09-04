@@ -12,10 +12,11 @@ TimeClosedIntervalContainsValue();
 TimeRangeExtensionsInRange();
 TimeRangeExtensionsCompareToRange();
 TimeIntervalLimitCreates();
+TimeIntervalLimitCompareToValue();
 TimeIntervalLimitConstraintIsClosedRetrieval();
 TimeIntervalLimitConstraintIsOpenRetrieval();
 TimeIntervalLimitTypeCasts();
-TimeIntervalLimitCompareToCalls();
+TimeIntervalLimitTypeCompareToCalls();
 TimeIntervalLimitLessThanCalls();
 TimeRawEnumTypeCasts();
 TimeRawEnumCompareToCalls();
@@ -55,6 +56,24 @@ static void TimeIntervalLimitTypeCasts()
         $"{numberOfItemsToCreate:n0} x 2 {nameof(IntervalLimitType)} instances cast from byte in {sw.ElapsedMilliseconds}ms");
 }
 
+
+static void TimeIntervalLimitCompareToValue()
+{
+    var s = IntervalLimit.ClosedStart(10);
+    var e = IntervalLimit.ClosedEnd(100);
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ = s.CompareTo(12);
+        var __ = s.CompareTo(12);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} x 2 {nameof(IntervalLimit<byte>)}.{nameof(IntervalLimit<byte>.CompareTo)} value x 2 performed in {sw.ElapsedMilliseconds}ms");
+}
+
 static void TimeIntervalLimitConstraintIsClosedRetrieval()
 {
     var sw = new Stopwatch();
@@ -87,7 +106,7 @@ static void TimeIntervalLimitConstraintIsOpenRetrieval()
         $"{numberOfItemsToCreate:n0} x 3 {nameof(IntervalLimitConstraint)} IsOpen in {sw.ElapsedMilliseconds}ms");
 }
 
-static void TimeIntervalLimitCompareToCalls()
+static void TimeIntervalLimitTypeCompareToCalls()
 {
     var ilt0 = (IntervalLimitType)0;
     var ilt1 = (IntervalLimitType)1;
