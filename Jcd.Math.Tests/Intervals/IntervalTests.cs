@@ -6,6 +6,19 @@ public class IntervalTests
 {
     #region Factory method tests
 
+    [Theory]
+    [InlineData(-10,-50)]
+    [InlineData(10,5)]
+    [InlineData(6,5)]
+    public void All_Factory_Methods_Start_Greater_Than_End_Throws_Exception(int start, int end)
+    {
+        Assert.ThrowsAny<Exception>(() => Interval.Closed(start, end));
+        Assert.ThrowsAny<Exception>(() => Interval.Open(start, end));
+        Assert.ThrowsAny<Exception>(() => Interval.OpenClosed(start, end));
+        Assert.ThrowsAny<Exception>(() => Interval.ClosedOpen(start, end));
+    }
+    
+    
     [Fact]
     public void Default_Instance_Is_Invalid()
     {

@@ -56,12 +56,13 @@ public readonly struct Interval<T> :
     /// </summary>
     public IntervalLimit<T> Start { get; }
     
-    #region factory methods
-    
     /// <summary>
     /// The closedEnd of the interval.
     /// </summary>
     public IntervalLimit<T> End { get; }
+
+
+    #region factory methods
 
     /// <summary>
     /// Creates an closed interval: [closedStart,closedEnd]
@@ -71,7 +72,12 @@ public readonly struct Interval<T> :
     /// <param name="closedEnd">The inclusive openEnd point of the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> Closed(T closedStart, T closedEnd)
-        => new (IntervalLimit.ClosedStart(closedStart), IntervalLimit.ClosedEnd(closedEnd));
+    {
+        if (closedStart.CompareTo(closedEnd) > 0)
+            throw new ArgumentOutOfRangeException(nameof(closedEnd), $"Detected start ({closedStart}) > end ({closedEnd}). End must be >= start");
+        
+        return new(IntervalLimit.ClosedStart(closedStart), IntervalLimit.ClosedEnd(closedEnd));
+    }
 
     /// <summary>
     /// Creates an open interval: (openStart,openEnd)
@@ -81,7 +87,13 @@ public readonly struct Interval<T> :
     /// <param name="openEnd">The exclusive openEnd point of the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> Open(T openStart, T openEnd)
-        => new (IntervalLimit.OpenStart(openStart), IntervalLimit.OpenEnd(openEnd));
+    {
+        if (openStart.CompareTo(openEnd) > 0)
+            throw new ArgumentOutOfRangeException(nameof(openEnd),
+                $"Detected start ({openStart}) > end ({openEnd}). End must be >= start");
+
+        return new(IntervalLimit.OpenStart(openStart), IntervalLimit.OpenEnd(openEnd));
+    }
 
     /// <summary>
     /// Creates an open-closed interval: (openStart,closedEnd]
@@ -91,8 +103,13 @@ public readonly struct Interval<T> :
     /// <param name="closedEnd">The inclusive openEnd point of the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> OpenClosed(T openStart, T closedEnd)
-        => new (IntervalLimit.OpenStart(openStart), IntervalLimit.ClosedEnd(closedEnd));
+    {
+        if (openStart.CompareTo(closedEnd) > 0)
+            throw new ArgumentOutOfRangeException(nameof(closedEnd),
+                $"Detected start ({openStart}) > end ({closedEnd}). End must be >= start");
 
+        return new(IntervalLimit.OpenStart(openStart), IntervalLimit.ClosedEnd(closedEnd));
+    }
 
     /// <summary>
     /// Creates a closed-open interval: [openStart,closedEnd)
@@ -102,8 +119,13 @@ public readonly struct Interval<T> :
     /// <param name="openEnd">The exclusive openEnd point of the interval.</param>
     /// <returns>The new interval</returns>
     public static Interval<T> ClosedOpen(T closedStart, T openEnd)
-        => new (IntervalLimit.ClosedStart(closedStart), IntervalLimit.OpenEnd(openEnd));
+    {
+        if (closedStart.CompareTo(openEnd) > 0)
+            throw new ArgumentOutOfRangeException(nameof(openEnd),
+                $"Detected start ({closedStart}) > end ({openEnd}). End must be >= start");
 
+        return new(IntervalLimit.ClosedStart(closedStart), IntervalLimit.OpenEnd(openEnd));
+    }
 
     /// <summary>
     /// Creates a left-unbounded, right-open interval: (-infinity, openEnd)
@@ -154,14 +176,10 @@ public readonly struct Interval<T> :
     
     private Interval(IntervalLimit<T> start, IntervalLimit<T> end)
     {
-        if (start.LimitType != IntervalLimitType.Start)
-            throw new ArgumentOutOfRangeException(nameof(start), "End provided for interval openStart.");
-        
-        if (end.LimitType != IntervalLimitType.End)
-            throw new ArgumentOutOfRangeException(nameof(end), "Start provided for interval closedEnd.");
-        
+        /*
         if (start.CompareTo(end) > 0)
             throw new ArgumentOutOfRangeException(nameof(end), $"Detected start ({start}) > end ({end}). End must be >= start");
+        */
         
         Start = start;
         End = end;
