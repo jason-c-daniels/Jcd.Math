@@ -111,8 +111,10 @@ public readonly struct IntervalLimit<T> :
     /// For example: (-infinity,... 
     /// </summary>
     /// <returns>The new interval limit</returns>
-    public static IntervalLimit<T> UnboundedStart() =>
-        new (IntervalLimitType.Start, IntervalLimitConstraint.Unbounded, default(T?));
+    public static IntervalLimit<T> UnboundedStart() => UnboundedStartData;
+
+    private static readonly IntervalLimit<T> UnboundedStartData =
+        new(IntervalLimitType.Start, IntervalLimitConstraint.Unbounded, default(T?));
 
     /// <summary>
     /// Creates an unbounded end interval limit
@@ -120,7 +122,8 @@ public readonly struct IntervalLimit<T> :
     /// For example: ...,+infinity) 
     /// </summary>
     /// <returns></returns>
-    public static IntervalLimit<T> UnboundedEnd() =>
+    public static IntervalLimit<T> UnboundedEnd() => UnboundedEndData;
+    private static readonly IntervalLimit<T> UnboundedEndData = 
         new (IntervalLimitType.End, IntervalLimitConstraint.Unbounded, default(T?));
 
     /// <summary>

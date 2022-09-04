@@ -190,7 +190,7 @@ static void TimeClosedIntervalCreates()
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} creates {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} instances created in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeClosedIntervalCopies()
@@ -205,7 +205,7 @@ static void TimeClosedIntervalCopies()
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} copies {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} copies performed in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeClosedIntervalContainsValue()
@@ -220,7 +220,7 @@ static void TimeClosedIntervalContainsValue()
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} contains a value {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} contains a value performed in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeRangeExtensionsInRange()
@@ -234,7 +234,7 @@ static void TimeRangeExtensionsInRange()
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(ComparableExtensions)}.{nameof(ComparableExtensions.InRange)} contains {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(ComparableExtensions)}.{nameof(ComparableExtensions.InRange)} performed in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeRangeExtensionsCompareToRange()
@@ -248,5 +248,5 @@ static void TimeRangeExtensionsCompareToRange()
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(ComparableExtensions)}.{nameof(ComparableExtensions.CompareToRange)} contains {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(ComparableExtensions)}.{nameof(ComparableExtensions.CompareToRange)} performed in {sw.ElapsedMilliseconds}ms");
 }
