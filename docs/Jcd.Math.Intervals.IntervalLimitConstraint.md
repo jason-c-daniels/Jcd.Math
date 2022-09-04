@@ -22,7 +22,7 @@ Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/S
 | :--- | :--- |
 | [HasLimitValue](Jcd.Math.Intervals.IntervalLimitConstraint.HasLimitValue.md 'Jcd.Math.Intervals.IntervalLimitConstraint.HasLimitValue') | Indicates if the specified interval endpoint contains any<br/>limit whatsoever. (i.e. is it fully open at the start or end?) |
 | [IsClosed](Jcd.Math.Intervals.IntervalLimitConstraint.IsClosed.md 'Jcd.Math.Intervals.IntervalLimitConstraint.IsClosed') | Indicates if the specified interval endpoint contains the<br/>point in question. |
-| [IsOpen](Jcd.Math.Intervals.IntervalLimitConstraint.IsOpen.md 'Jcd.Math.Intervals.IntervalLimitConstraint.IsOpen') | Indicates if the specified interval endpoint contains the<br/>point in question. |
+| [IsOpen](Jcd.Math.Intervals.IntervalLimitConstraint.IsOpen.md 'Jcd.Math.Intervals.IntervalLimitConstraint.IsOpen') | Indicates if the specified interval endpoint includes the<br/>start/end point in question. |
 | [IsUnbounded](Jcd.Math.Intervals.IntervalLimitConstraint.IsUnbounded.md 'Jcd.Math.Intervals.IntervalLimitConstraint.IsUnbounded') | Indicates if there is no limit on the bounds of this constraint.<br/>This is effectively -infinity or +infinity depending on context. |
 
 | Methods | |

@@ -2,8 +2,8 @@
 
 ## IntervalLimitConstraint.IsOpen Property
 
-Indicates if the specified interval endpoint contains the  
-point in question.
+Indicates if the specified interval endpoint includes the  
+start/end point in question.
 
 ```csharp
 public bool IsOpen { get; }

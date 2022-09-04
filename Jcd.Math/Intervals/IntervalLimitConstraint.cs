@@ -36,8 +36,8 @@ public readonly struct IntervalLimitConstraint : IEquatable<IntervalLimitConstra
     public bool IsClosed => _state == ClosedValue;
 
     /// <summary>
-    /// Indicates if the specified interval endpoint contains the
-    /// point in question.
+    /// Indicates if the specified interval endpoint includes the
+    /// start/end point in question.
     /// </summary>
     public bool IsOpen => _state != ClosedValue;
 
@@ -75,7 +75,7 @@ public readonly struct IntervalLimitConstraint : IEquatable<IntervalLimitConstra
     /// <inheritdoc />
     public bool Equals(IntervalLimitConstraint other)
     {
-        return IsClosed == other.IsClosed && HasLimitValue == other.HasLimitValue;
+        return _state == other._state; 
     }
 
     /// <inheritdoc />
@@ -101,7 +101,7 @@ public readonly struct IntervalLimitConstraint : IEquatable<IntervalLimitConstra
     /// <returns>true if equivalent.</returns>
     public static bool operator ==(IntervalLimitConstraint left, IntervalLimitConstraint right)
     {
-        return left.Equals(right);
+        return left._state == right._state;
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public readonly struct IntervalLimitConstraint : IEquatable<IntervalLimitConstra
     /// <returns>true if not equivalent.</returns>
     public static bool operator !=(IntervalLimitConstraint left, IntervalLimitConstraint right)
     {
-        return !left.Equals(right);
+        return left._state != right._state;
     }
 
     #endregion

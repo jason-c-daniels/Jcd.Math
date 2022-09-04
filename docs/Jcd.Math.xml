@@ -729,8 +729,8 @@
         </member>
         <member name="P:Jcd.Math.Intervals.IntervalLimitConstraint.IsOpen">
             <summary>
-            Indicates if the specified interval endpoint contains the
-            point in question.
+            Indicates if the specified interval endpoint includes the
+            start/end point in question.
             </summary>
         </member>
         <member name="P:Jcd.Math.Intervals.IntervalLimitConstraint.HasLimitValue">
