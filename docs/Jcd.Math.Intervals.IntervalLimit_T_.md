@@ -2,6 +2,8 @@
 
 ## IntervalLimit<T> Struct
 
+A point in an interval.
+
 ```csharp
 public readonly struct IntervalLimit<T> :
 System.IComparable<Jcd.Math.Intervals.IntervalLimit<T>>,
@@ -17,7 +19,21 @@ System.IEquatable<T>
 
 `T`
 
+The data type for the interval using this limit.
+
 Implements [System.IComparable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IComparable-1 'System.IComparable`1')[Jcd.Math.Intervals.IntervalLimit&lt;](Jcd.Math.Intervals.IntervalLimit_T_.md 'Jcd.Math.Intervals.IntervalLimit<T>')[T](Jcd.Math.Intervals.IntervalLimit_T_.md#Jcd.Math.Intervals.IntervalLimit_T_.T 'Jcd.Math.Intervals.IntervalLimit<T>.T')[&gt;](Jcd.Math.Intervals.IntervalLimit_T_.md 'Jcd.Math.Intervals.IntervalLimit<T>')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IComparable-1 'System.IComparable`1'), [System.IComparable](https://docs.microsoft.com/en-us/dotnet/api/System.IComparable 'System.IComparable'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[Jcd.Math.Intervals.IntervalLimit&lt;](Jcd.Math.Intervals.IntervalLimit_T_.md 'Jcd.Math.Intervals.IntervalLimit<T>')[T](Jcd.Math.Intervals.IntervalLimit_T_.md#Jcd.Math.Intervals.IntervalLimit_T_.T 'Jcd.Math.Intervals.IntervalLimit<T>.T')[&gt;](Jcd.Math.Intervals.IntervalLimit_T_.md 'Jcd.Math.Intervals.IntervalLimit<T>')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1'), [System.IComparable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IComparable-1 'System.IComparable`1')[T](Jcd.Math.Intervals.IntervalLimit_T_.md#Jcd.Math.Intervals.IntervalLimit_T_.T 'Jcd.Math.Intervals.IntervalLimit<T>.T')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IComparable-1 'System.IComparable`1'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[T](Jcd.Math.Intervals.IntervalLimit_T_.md#Jcd.Math.Intervals.IntervalLimit_T_.T 'Jcd.Math.Intervals.IntervalLimit<T>.T')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
+
+### Remarks
+For the purposes of this library:  
+  * An Unbounded interval limit is both open and infinite. (HasLimitValue == false && IsUnbounded == true && IsOpen == true).  
+  * An Open interval limit is a non-infinite and open limit.  (i.e. HasLimitValue == true && IsUnbounded == false && IsOpen == true).  
+  * A Closed interval limit is both closed and non-infinite. (i.e. HasLimitValue == true && IsUnbounded == false && IsOpen == false).  
+  * Start interval limits compare as less than or equal to End interval limits for the same non-infinite limit value, depending on the Close-Open nature of the limits being compared.  
+  * Start interval limits compare as less than  End interval limits for infinite limit values.  
+  * Open-Start interval limits compare greater than Closed-Start interval limits.  
+  * Open-End interval limits compare less than Closed-End interval limits.  
+  * Unbounded-Start interval limits compare less than Open or Closed-Start interval limits.  
+  * Unbounded-End interval limits compare greater than Open or Closed-End interval limits.
 
 | Constructors | |
 | :--- | :--- |

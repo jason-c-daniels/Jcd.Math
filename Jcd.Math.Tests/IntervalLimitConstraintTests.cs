@@ -55,8 +55,8 @@ public class IntervalLimitConstraintTests
     [Fact]
     public void Default_Is_Unbounded()
     {
-        IntervalLimitConstraint @default;
-        Assert.Equal(IntervalLimitConstraint.Unbounded, default);
+        IntervalLimitConstraint @default=default;
+        Assert.Equal(IntervalLimitConstraint.Unbounded, @default);
     }
     
     public static IEnumerable<object[]> EquivalenceData =>

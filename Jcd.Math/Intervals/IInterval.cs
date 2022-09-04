@@ -2,6 +2,10 @@
 
 namespace Jcd.Math.Intervals;
 
+/// <summary>
+/// Defines the operations and properties needed to create an interval.
+/// </summary>
+/// <typeparam name="T">The underlying data type for the interval.</typeparam>
 public interface IInterval<T> : IEquatable<IInterval<T>> 
     where T : IComparable<T>
 {

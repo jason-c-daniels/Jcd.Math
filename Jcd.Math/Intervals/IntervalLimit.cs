@@ -13,9 +13,9 @@ namespace Jcd.Math.Intervals;
 /// <typeparam name="T">The data type for the interval using this limit.</typeparam>
 /// <remarks>
 /// For the purposes of this library:
-///   * An Unbounded interval limit is both open and infinite. (HasLimitValue == false && IsUnbounded == true && IsOpen == true).
-///   * An Open interval limit is a non-infinite and open limit.  (i.e. HasLimitValue == true && IsUnbounded == false && IsOpen == true).
-///   * A Closed interval limit is both closed and non-infinite. (i.e. HasLimitValue == true && IsUnbounded == false && IsOpen == false).
+///   * An Unbounded interval limit is both open and infinite. (HasLimitValue == false &amp;&amp; IsUnbounded == true &amp;&amp; IsOpen == true).
+///   * An Open interval limit is a non-infinite and open limit.  (i.e. HasLimitValue == true &amp;&amp; IsUnbounded == false &amp;&amp; IsOpen == true).
+///   * A Closed interval limit is both closed and non-infinite. (i.e. HasLimitValue == true &amp;&amp; IsUnbounded == false &amp;&amp; IsOpen == false).
 ///   * Start interval limits compare as less than or equal to End interval limits for the same non-infinite limit value, depending on the Close-Open nature of the limits being compared.
 ///   * Start interval limits compare as less than  End interval limits for infinite limit values.
 ///   * Open-Start interval limits compare greater than Closed-Start interval limits.

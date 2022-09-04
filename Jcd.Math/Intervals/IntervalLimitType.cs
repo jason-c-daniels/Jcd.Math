@@ -52,11 +52,23 @@ public readonly struct IntervalLimitType :
         return _value.GetHashCode();
     }
 
+    /// <summary>
+    /// Compares two IntervalLimitTypes for equality.
+    /// </summary>
+    /// <param name="left">The left hand operand.</param>
+    /// <param name="right">The right hand operand.</param>
+    /// <returns>True if they're equal.</returns>
     public static bool operator ==(IntervalLimitType left, IntervalLimitType right)
     {
         return left.Equals(right);
     }
 
+    /// <summary>
+    /// Compares two IntervalLimitTypes for inequality.
+    /// </summary>
+    /// <param name="left">The left hand operand.</param>
+    /// <param name="right">The right hand operand.</param>
+    /// <returns>True if they're not equal.</returns>
     public static bool operator !=(IntervalLimitType left, IntervalLimitType right)
     {
         return !left.Equals(right);
@@ -79,21 +91,45 @@ public readonly struct IntervalLimitType :
         return obj is IntervalLimitType other ? _value.CompareTo(other._value) : throw new ArgumentException($"Object must be of type {nameof(IntervalLimitType)}");
     }
 
+    /// <summary>
+    /// Checks if the left hand IntervalLimitType is less than the right hand IntervalLimitType.
+    /// </summary>
+    /// <param name="left">The left hand operand.</param>
+    /// <param name="right">The right hand operand.</param>
+    /// <returns>True if left is less than right.</returns>
     public static bool operator <(IntervalLimitType left, IntervalLimitType right)
     {
         return left._value < right._value;
     }
 
+    /// <summary>
+    /// Checks if the left hand IntervalLimitType is greater than the right hand IntervalLimitType.
+    /// </summary>
+    /// <param name="left">The left hand operand.</param>
+    /// <param name="right">The right hand operand.</param>
+    /// <returns>True if left is greater than right.</returns>
     public static bool operator >(IntervalLimitType left, IntervalLimitType right)
     {
         return left._value > right._value;
     }
 
+    /// <summary>
+    /// Checks if the left hand IntervalLimitType is less than or equal to the right hand IntervalLimitType.
+    /// </summary>
+    /// <param name="left">The left hand operand.</param>
+    /// <param name="right">The right hand operand.</param>
+    /// <returns>True if left is less than or equal to right.</returns>
     public static bool operator <=(IntervalLimitType left, IntervalLimitType right)
     {
         return left._value <= right._value;
     }
 
+    /// <summary>
+    /// Checks if the left hand IntervalLimitType is greater than or equal to the right hand IntervalLimitType.
+    /// </summary>
+    /// <param name="left">The left hand operand.</param>
+    /// <param name="right">The right hand operand.</param>
+    /// <returns>True if left is greater  than or equal to right.</returns>
     public static bool operator >=(IntervalLimitType left, IntervalLimitType right)
     {
         return left._value >= right._value;

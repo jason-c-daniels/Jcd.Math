@@ -62,13 +62,17 @@ public class IntervalLimitTypeTests
     [Fact]
     public void Start_Equals_Start_Is_True()
     {
-        Assert.True(IntervalLimitType.Start == IntervalLimitType.Start);
+        var s1 = IntervalLimitType.Start;
+        var s2 = IntervalLimitType.Start;
+        Assert.True(s1 == s2);
     }
 
     [Fact]
     public void Start_Not_Equals_Start_Is_False()
     {
-        Assert.False(IntervalLimitType.Start != IntervalLimitType.Start);
+        var s1 = IntervalLimitType.Start;
+        var s2 = IntervalLimitType.Start;
+        Assert.False(s1 != s2);
     }
 
     [Fact]
@@ -122,7 +126,6 @@ public class IntervalLimitTypeTests
     public void CompareTo_Object_Returns_NonZero_When_Null()
     {
         var x = IntervalLimitType.Start;
-        object y = new ();
         Assert.NotEqual(0,x.CompareTo(null));
     }
 

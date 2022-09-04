@@ -4,6 +4,12 @@
         <name>Jcd.Math</name>
     </assembly>
     <members>
+        <member name="T:Jcd.Math.Intervals.IInterval`1">
+            <summary>
+            Defines the operations and properties needed to create an interval.
+            </summary>
+            <typeparam name="T">The underlying data type for the interval.</typeparam>
+        </member>
         <member name="P:Jcd.Math.Intervals.IInterval`1.IsValid">
             <summary>
             Indicates if the interval was properly constructed.
@@ -268,7 +274,24 @@
             </summary>
             <returns>The new interval</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Jcd.Math.Intervals.IntervalLimit`1" -->
+        <member name="T:Jcd.Math.Intervals.IntervalLimit`1">
+            <summary>
+            A point in an interval.
+            </summary>
+            <typeparam name="T">The data type for the interval using this limit.</typeparam>
+            <remarks>
+            For the purposes of this library:
+              * An Unbounded interval limit is both open and infinite. (HasLimitValue == false &amp;&amp; IsUnbounded == true &amp;&amp; IsOpen == true).
+              * An Open interval limit is a non-infinite and open limit.  (i.e. HasLimitValue == true &amp;&amp; IsUnbounded == false &amp;&amp; IsOpen == true).
+              * A Closed interval limit is both closed and non-infinite. (i.e. HasLimitValue == true &amp;&amp; IsUnbounded == false &amp;&amp; IsOpen == false).
+              * Start interval limits compare as less than or equal to End interval limits for the same non-infinite limit value, depending on the Close-Open nature of the limits being compared.
+              * Start interval limits compare as less than  End interval limits for infinite limit values.
+              * Open-Start interval limits compare greater than Closed-Start interval limits.
+              * Open-End interval limits compare less than Closed-End interval limits.
+              * Unbounded-Start interval limits compare less than Open or Closed-Start interval limits.
+              * Unbounded-End interval limits compare greater than Open or Closed-End interval limits.
+            </remarks>
+        </member>
         <member name="F:Jcd.Math.Intervals.IntervalLimit`1.Default">
             <summary>
             The default IntervalLimit. This is equivalent to IntervalLimit&lt;T&gt;.UnboundedStart
@@ -712,11 +735,59 @@
         <member name="M:Jcd.Math.Intervals.IntervalLimitType.GetHashCode">
             <inheritdoc />
         </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_Equality(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitType)">
+            <summary>
+            Compares two IntervalLimitTypes for equality.
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand.</param>
+            <returns>True if they're equal.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_Inequality(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitType)">
+            <summary>
+            Compares two IntervalLimitTypes for inequality.
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand.</param>
+            <returns>True if they're not equal.</returns>
+        </member>
         <member name="M:Jcd.Math.Intervals.IntervalLimitType.CompareTo(Jcd.Math.Intervals.IntervalLimitType)">
             <inheritdoc />
         </member>
         <member name="M:Jcd.Math.Intervals.IntervalLimitType.CompareTo(System.Object)">
             <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_LessThan(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitType)">
+            <summary>
+            Checks if the left hand IntervalLimitType is less than the right hand IntervalLimitType.
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand.</param>
+            <returns>True if left is less than right.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_GreaterThan(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitType)">
+            <summary>
+            Checks if the left hand IntervalLimitType is greater than the right hand IntervalLimitType.
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand.</param>
+            <returns>True if left is greater than right.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_LessThanOrEqual(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitType)">
+            <summary>
+            Checks if the left hand IntervalLimitType is less than or equal to the right hand IntervalLimitType.
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand.</param>
+            <returns>True if left is less than or equal to right.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_GreaterThanOrEqual(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitType)">
+            <summary>
+            Checks if the left hand IntervalLimitType is greater than or equal to the right hand IntervalLimitType.
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand.</param>
+            <returns>True if left is greater  than or equal to right.</returns>
         </member>
         <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_Explicit(System.Byte)~Jcd.Math.Intervals.IntervalLimitType">
             <summary>

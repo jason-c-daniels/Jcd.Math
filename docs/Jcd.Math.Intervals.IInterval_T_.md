@@ -2,6 +2,8 @@
 
 ## IInterval<T> Interface
 
+Defines the operations and properties needed to create an interval.
+
 ```csharp
 public interface IInterval<T> :
 System.IEquatable<Jcd.Math.Intervals.IInterval<T>>
@@ -12,6 +14,8 @@ System.IEquatable<Jcd.Math.Intervals.IInterval<T>>
 <a name='Jcd.Math.Intervals.IInterval_T_.T'></a>
 
 `T`
+
+The underlying data type for the interval.
 
 Derived  
 &#8627; [Interval&lt;T&gt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')  
