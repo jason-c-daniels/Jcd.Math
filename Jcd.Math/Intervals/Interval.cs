@@ -92,7 +92,7 @@ public readonly struct Interval<T> :
             throw new ArgumentOutOfRangeException(nameof(openEnd),
                 $"Detected start ({openStart}) > end ({openEnd}). End must be >= start");
 
-        return new(IntervalLimit.OpenStart(openStart), IntervalLimit.OpenEnd(openEnd));
+        return new Interval<T>(IntervalLimit.OpenStart(openStart), IntervalLimit.OpenEnd(openEnd));
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ public readonly struct Interval<T> :
             throw new ArgumentOutOfRangeException(nameof(closedEnd),
                 $"Detected start ({openStart}) > end ({closedEnd}). End must be >= start");
 
-        return new(IntervalLimit.OpenStart(openStart), IntervalLimit.ClosedEnd(closedEnd));
+        return new Interval<T>(IntervalLimit.OpenStart(openStart), IntervalLimit.ClosedEnd(closedEnd));
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public readonly struct Interval<T> :
             throw new ArgumentOutOfRangeException(nameof(openEnd),
                 $"Detected start ({closedStart}) > end ({openEnd}). End must be >= start");
 
-        return new(IntervalLimit.ClosedStart(closedStart), IntervalLimit.OpenEnd(openEnd));
+        return new Interval<T>(IntervalLimit.ClosedStart(closedStart), IntervalLimit.OpenEnd(openEnd));
     }
 
     /// <summary>
