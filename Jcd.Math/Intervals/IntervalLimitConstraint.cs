@@ -33,33 +33,39 @@ public readonly struct IntervalLimitConstraint : IEquatable<IntervalLimitConstra
     /// Indicates if the specified interval endpoint contains the
     /// point in question.
     /// </summary>
-    public readonly bool IsClosed { get; } = false;
+    public bool IsClosed => (_bits & HasLimitValueBit) !=0;
     
     /// <summary>
     /// Indicates if the specified interval endpoint contains the
     /// point in question.
     /// </summary>
-    public bool IsOpen=>!IsClosed;
+    public bool IsOpen => (_bits & IsClosedBit) ==0;
 
     /// <summary>
     /// Indicates if the specified interval endpoint contains any
     /// limit whatsoever. (i.e. is it fully open at the start or end?)
     /// </summary>
-    public bool HasLimitValue { get; } = false;
+    public bool HasLimitValue => (_bits & HasLimitValueBit) !=0;
 
     /// <summary>
     /// Indicates if there is no limit on the bounds of this constraint.
     /// This is effectively -infinity or +infinity depending on context.
     /// </summary>
-    public bool IsUnbounded => !HasLimitValue;
+    public bool IsUnbounded => (_bits & HasLimitValueBit) ==0;
+
+    
+    private const byte IsClosedBit=0x01;
+    private const byte HasLimitValueBit=0x02;
+    private readonly byte _bits;
     
     private IntervalLimitConstraint(bool isClosed, bool hasLimitValue)
     {
+        _bits = 0;
         if (isClosed && !hasLimitValue)
             throw new ArgumentOutOfRangeException(nameof(hasLimitValue),
                 $"The endpoint of an interval may not be both fully open and required to contain a limit.");
-        IsClosed = isClosed;
-        HasLimitValue = hasLimitValue;
+        _bits |= (byte)(isClosed ? IsClosedBit : 0);
+        _bits |= (byte)(hasLimitValue ? HasLimitValueBit : 0);
     }
 
     #region Equality members
