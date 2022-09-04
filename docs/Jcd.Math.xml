@@ -4,10 +4,806 @@
         <name>Jcd.Math</name>
     </assembly>
     <members>
-        <member name="T:Jcd.Math.Class1">
+        <member name="P:Jcd.Math.Intervals.IInterval`1.IsValid">
             <summary>
-            TODO: Add some documentation as you write your code.
+            Indicates if the interval was properly constructed.
             </summary>
+            <remarks>
+            The only way for this to be false is by using an
+            uninitialized instance. Sadly, structs zero out all
+            fields and properties in an uninitialized instance.
+            (This is a .Net standard 2.0 assembly after all)
+            </remarks> 
+        </member>
+        <member name="P:Jcd.Math.Intervals.IInterval`1.IsEmpty">
+            <summary>
+             Indicates if the interval is empty:
+            (0,0), (1,1) ...etc. are empty intervals.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IInterval`1.IsSingleValue">
+            <summary>
+            Indicates if the interval is empty:
+            [0,0], [1,1] ...etc. are single value intervals.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IInterval`1.Start">
+            <summary>
+            The start of the interval.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IInterval`1.End">
+            <summary>
+            The end of the interval.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IInterval`1.Contains(`0)">
+            <summary>
+            Determines if the interval contains the provided point.
+            </summary>
+            <param name="point">The point to compare</param>
+            <returns>True if the interval contains the point.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IInterval`1.Contains(Jcd.Math.Intervals.IInterval{`0})">
+            <summary>
+            Determines if this interval completely contains another.
+            </summary>
+            <param name="other">The interval being compared for containment within the current.</param>
+            <returns>True if this interval contains the other.</returns>
+        </member>
+        <member name="T:Jcd.Math.Intervals.Interval`1">
+            <summary>
+            Represents a mathematical interval whose limits can be any valid
+            combination of Unbounded, Closed or Open.
+            </summary>
+            <typeparam name="T">The underlying data type for the interval.</typeparam>
+        </member>
+        <member name="P:Jcd.Math.Intervals.Interval`1.IsValid">
+            <summary>
+            Indicates if the interval was properly constructed.
+            </summary>
+            <remarks>
+            The only way for this to be false is by using an
+            uninitialized instance. Sadly, structs zero out all
+            fields and properties in an uninitialized instance.
+            (This is a .Net standard 2.0 assembly after all)
+            </remarks> 
+        </member>
+        <member name="P:Jcd.Math.Intervals.Interval`1.IsEmpty">
+            <summary>
+             Indicates if the interval is empty:
+            (0,0), (1,1) ...etc. are empty intervals.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.Interval`1.IsSingleValue">
+            <summary>
+            Indicates if the interval is empty:
+            [0,0], [1,1] ...etc. are single value intervals.
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Intervals.Interval`1.Invalid">
+            <summary>
+            By default an uninitialized 
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.Interval`1.Start">
+            <summary>
+            The start of the interval.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.Interval`1.End">
+            <summary>
+            The end of the interval.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.Closed(`0,`0)">
+            <summary>
+            Creates an closed interval: [start,end]
+            (i.e. includes both start and end)
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.Open(`0,`0)">
+            <summary>
+            Creates an open interval: (start,end)
+            (i.e. excludes both start and end)
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.OpenClosed(`0,`0)">
+            <summary>
+            Creates an open-closed interval: (start,end]
+            (i.e. excludes start and includes end)
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.ClosedOpen(`0,`0)">
+            <summary>
+            Creates a closed-open interval: [start,end)
+            (i.e. includes start and excludes end)
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.UnboundedOpen(`0)">
+            <summary>
+            Creates a left-unbounded, right-open interval: (-infinity, end)
+            (i.e. -infinity to end - excludes end.)
+            </summary>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.UnboundedClosed(`0)">
+            <summary>
+            Creates a left-unbounded, right-closed interval: (-infinity, end]
+            (i.e. -infinity to end - includes end.)
+            </summary>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.ClosedUnbounded(`0)">
+            <summary>
+            Creates a left-closed, right-unbounded interval: [start, +infinity)
+            (i.e. start to +infinity - includes start.)
+            </summary>
+            <param name="start"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.OpenUnbounded(`0)">
+            <summary>
+            Creates a left-open, right-unbounded interval: (start, +infinity)
+            (i.e. start to +infinity - excludes start.)
+            </summary>
+            <param name="start"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.Unbounded">
+            <summary>
+            Creates a completely unbounded interval. (-infinity, +infinity)
+            (i.e. -infinity to +infinity - excluding the infinities, of course.)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.Contains(`0)">
+            <summary>
+            Determines if the interval contains the provided point.
+            </summary>
+            <param name="point">The point to compare</param>
+            <returns>True if the interval contains the point.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.Contains(Jcd.Math.Intervals.IInterval{`0})">
+            <summary>
+            Determines if this interval completely contains another.
+            </summary>
+            <param name="other">The interval being compared for containment within the current.</param>
+            <returns>True if this interval contains the other.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.Equals(Jcd.Math.Intervals.IInterval{`0})">
+            <inheritdoc />
+        </member>
+        <member name="T:Jcd.Math.Intervals.Interval">
+            <summary>
+            A helper class to simplify the notation for creating intervals.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.Closed``1(``0,``0)">
+            <summary>
+            Creates an closed interval: [start,end]
+            (i.e. includes both start and end)
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.Open``1(``0,``0)">
+            <summary>
+            Creates an open interval: (start,end)
+            (i.e. excludes both start and end)
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.OpenClosed``1(``0,``0)">
+            <summary>
+            Creates an open-closed interval: (start,end]
+            (i.e. excludes start and includes end)
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.ClosedOpen``1(``0,``0)">
+            <summary>
+            Creates a closed-open interval: [start,end)
+            (i.e. includes start and excludes end)
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.UnboundedOpen``1(``0)">
+            <summary>
+            Creates a left-unbounded, right-open interval: (-infinity, end)
+            (i.e. -infinity to end - excludes end.)
+            </summary>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.UnboundedClosed``1(``0)">
+            <summary>
+            Creates a left-unbounded, right-closed interval: (-infinity, end]
+            (i.e. -infinity to end - includes end.)
+            </summary>
+            <param name="end"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.ClosedUnbounded``1(``0)">
+            <summary>
+            Creates a left-closed, right-unbounded interval: [start, +infinity)
+            (i.e. start to +infinity - includes start.)
+            </summary>
+            <param name="start"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.OpenUnbounded``1(``0)">
+            <summary>
+            Creates a left-open, right-unbounded interval: (start, +infinity)
+            (i.e. start to +infinity - excludes start.)
+            </summary>
+            <param name="start"></param>
+            <returns>The new interval</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval.Unbounded``1">
+            <summary>
+            Creates a completely unbounded interval. (-infinity, +infinity)
+            (i.e. -infinity to +infinity - excluding the infinities, of course.)
+            </summary>
+            <returns>The new interval</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Jcd.Math.Intervals.IntervalLimit`1" -->
+        <member name="F:Jcd.Math.Intervals.IntervalLimit`1.Default">
+            <summary>
+            The default IntervalLimit. This is equivalent to IntervalLimit&lt;T&gt;.UnboundedStart
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.Constraint">
+            <summary>
+            Unbounded (i.e. no limit), Open, Closed. 
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.Limit">
+            <summary>
+            The limit for the interval point, if applicable. (Unbounded = null or default(T), the value is ignored.)
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.LimitType">
+            <summary>
+            The type of interval limit, Start or End. This dictates how comparisons happen.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.IsStart">
+            <summary>
+            Indicates if this interval limit is an interval start limit.
+            If so, when Unbounded is true the Limit value is treated as -infinity.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.IsEnd">
+            <summary>
+            Indicates if this interval limit is an interval end limit.
+            If so, when Unbounded is true the Limit value is treated as +infinity.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.IsOpen">
+            <summary>
+            Indicates if the limit is open. (Unbounded is open at +/-infinity)
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.IsClosed">
+            <summary>
+            Indicates if the limit is closed.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.IsUnbounded">
+            <summary>
+            Indicates if the limit is unbounded.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimit`1.HasLimitValue">
+            <summary>
+            Indicates if there is a discrete, non-infinite value for a limit.
+            </summary>
+            <returns>True if IsUnbounded is false</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.UnboundedStart">
+            <summary>
+            Creates an unbounded start interval limit.
+            In other words: creates an exclusive infinite start limit.  
+            For example: (-infinity,... 
+            </summary>
+            <returns>The new interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.UnboundedEnd">
+            <summary>
+            Creates an unbounded end interval limit
+            In other words: creates an exclusive infinite end limit.  
+            For example: ...,+infinity) 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.OpenStart(`0)">
+            <summary>
+            Creates an open-start interval limit.
+            In other words: creates an exclusive start limit.  
+            For example: (limit,... 
+            </summary>
+            <param name="limit">the limiting value.</param>
+            <returns>The new interval limit.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.ClosedStart(`0)">
+            <summary>
+            Creates a closed start interval limit.
+            In other words: creates an inclusive start limit.  
+            For example: [limit,... 
+            </summary>
+            <param name="limit">the limiting value.</param>
+            <returns>The new interval limit.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.OpenEnd(`0)">
+            <summary>
+            Creates an open end interval limit.
+            In other words: creates an exclusive end limit.  
+            For example: ...,limit) 
+            </summary>
+            <param name="limit">the limiting value.</param>
+            <returns>The new interval limit.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.ClosedEnd(`0)">
+            <summary>
+            Creates an open end interval limit.
+            In other words: creates an inclusive end limit.  
+            For example: ...,limit]
+            </summary>
+            <param name="limit">the limiting value.</param>
+            <returns>The new interval limit.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.#ctor(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitConstraint,`0)">
+            <summary>
+            Construct an interval limit from a limit value, constraint and type. 
+            </summary>
+            <param name="limitType">The interval limit type.</param>
+            <param name="constraint">The limit constraints.</param>
+            <param name="limit">The limit value.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.CompareTo(Jcd.Math.Intervals.IntervalLimit{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.CompareTo(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_LessThan(Jcd.Math.Intervals.IntervalLimit{`0},`0)">
+            <summary>
+            Determines if an interval limit is less than a specified value. 
+            </summary>
+            <param name="left">The interval limit to compare.</param>
+            <param name="right">The value to compare</param>
+            <returns>True if the interval limit is less than the specified value.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_GreaterThan(Jcd.Math.Intervals.IntervalLimit{`0},`0)">
+            <summary>
+            Determines if an interval limit is greater than a specified value. 
+            </summary>
+            <param name="left">The interval limit to compare.</param>
+            <param name="right">The value to compare</param>
+            <returns>True if the interval limit is greater than the specified value.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_LessThanOrEqual(Jcd.Math.Intervals.IntervalLimit{`0},`0)">
+            <summary>
+            Determines if an interval limit is less than or equal to a specified value. 
+            </summary>
+            <param name="left">The interval limit to compare.</param>
+            <param name="right">The value to compare</param>
+            <returns>True if the interval limit is less than or equal to the specified value.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_GreaterThanOrEqual(Jcd.Math.Intervals.IntervalLimit{`0},`0)">
+            <summary>
+            Determines if an interval limit is less greater or equal to a specified value. 
+            </summary>
+            <param name="left">The interval limit to compare.</param>
+            <param name="right">The value to compare</param>
+            <returns>True if the interval limit is greater than or equal to the specified value.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_LessThan(`0,Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Determines if a specified value is less than an interval limit.
+            </summary>
+            <param name="left">the specified value.</param>
+            <param name="right">The interval limit</param>
+            <returns>True if the specified value is less than the interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_GreaterThan(`0,Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Determines if a specified value is greater than an interval limit.
+            </summary>
+            <param name="left">the specified value.</param>
+            <param name="right">The interval limit</param>
+            <returns>True if the specified value is greater than the interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_LessThanOrEqual(`0,Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Determines if a specified value is less than or equal to an interval limit.
+            </summary>
+            <param name="left">the specified value.</param>
+            <param name="right">The interval limit</param>
+            <returns>True if the specified value is less than or equal to the interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_GreaterThanOrEqual(`0,Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Determines if a specified value is greater than or equal to an interval limit.
+            </summary>
+            <param name="left">the specified value.</param>
+            <param name="right">The interval limit</param>
+            <returns>True if the specified value is greater than or equal to the interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_LessThan(Jcd.Math.Intervals.IntervalLimit{`0},Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Determines if one interval limit is less than another.
+            </summary>
+            <param name="left">the left hand parameter</param>
+            <param name="right">the right hand parameter</param>
+            <returns>True if left is less than right</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_GreaterThan(Jcd.Math.Intervals.IntervalLimit{`0},Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Determines if one interval limit is greater than another.
+            </summary>
+            <param name="left">the left hand parameter</param>
+            <param name="right">the right hand parameter</param>
+            <returns>True if left is greater than right</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_LessThanOrEqual(Jcd.Math.Intervals.IntervalLimit{`0},Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Determines if one interval limit is less than or equal to another.
+            </summary>
+            <param name="left">the left hand parameter</param>
+            <param name="right">the right hand parameter</param>
+            <returns>True if left is less than or equal to right</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_GreaterThanOrEqual(Jcd.Math.Intervals.IntervalLimit{`0},Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Determines if one interval limit is greater than or equal to another.
+            </summary>
+            <param name="left">the left hand parameter</param>
+            <param name="right">the right hand parameter</param>
+            <returns>True if left is greater than or equal to right</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.Equals(Jcd.Math.Intervals.IntervalLimit{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.CompareTo(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.Equals(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_Equality(Jcd.Math.Intervals.IntervalLimit{`0},Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Equivalence operator.
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>True if equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_Inequality(Jcd.Math.Intervals.IntervalLimit{`0},Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Non=equivalence operator.
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>True if not equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_Equality(Jcd.Math.Intervals.IntervalLimit{`0},`0)">
+            <summary>
+            Equivalence operator.
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>True if equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_Inequality(Jcd.Math.Intervals.IntervalLimit{`0},`0)">
+            <summary>
+            Non=equivalence operator.
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>True if not equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_Equality(`0,Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Equivalence operator.
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>True if equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_Inequality(`0,Jcd.Math.Intervals.IntervalLimit{`0})">
+            <summary>
+            Non=equivalence operator.
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>True if not equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.op_Explicit(Jcd.Math.Intervals.IntervalLimit{`0})~`0">
+            <summary>
+            Converts to the underlying value type.
+            </summary>
+            <param name="limit">The limit to convert.</param>
+            <returns>The underlying value.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Jcd.Math.Intervals.IntervalLimit">
+            <summary>
+            Helper class to simplify the notation when creating an interval limit.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit.UnboundedStart``1">
+            <summary>
+            Creates an unbounded start interval limit.
+            In other words: creates an exclusive infinite start limit.  
+            For example: (-infinity,... 
+            </summary>
+            <returns>The new interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit.UnboundedEnd``1">
+            <summary>
+            Creates an unbounded end interval limit.
+            In other words: creates an exclusive infinite end limit.  
+            For example: ...,+infinity) 
+            </summary>
+            <returns>The new interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit.OpenStart``1(``0)">
+            <summary>
+            Creates an open start interval limit.
+            In other words: creates an exclusive start limit.  
+            For example: (limit,... 
+            </summary>
+            <returns>The new interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit.ClosedStart``1(``0)">
+            <summary>
+            Creates a closed start interval limit.
+            In other words: creates an inclusive start limit.  
+            For example: [limit,... 
+            </summary>
+            <returns>The new interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit.OpenEnd``1(``0)">
+            <summary>
+            Creates an open end interval limit.
+            In other words: creates an exclusive end limit.  
+            For example: ...,limit) 
+            </summary>
+            <returns>The new interval limit</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit.ClosedEnd``1(``0)">
+            <summary>
+            Creates a closed end interval limit.
+            In other words: creates an inclusive end limit.  
+            For example: ...,limit] 
+            </summary>
+            <returns>The new interval limit</returns>
+        </member>
+        <member name="T:Jcd.Math.Intervals.IntervalLimitConstraint">
+            <summary>
+            Describes how an endpoint in an interval is to be handled (Open with limit?
+            Fully open? Closed on the limit?)
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Intervals.IntervalLimitConstraint.Unbounded">
+            <summary>
+            The endpoint in question has no limit and therefore is fully open.
+            </summary>
+            <remarks>
+            For a start point on a one dimensional scale this implies all values from -infinity
+            to the end limit are part of the interval. (The end limit may be an open limit
+            and therefore exclude the limit point making [-infinity,end) the appropriate
+            representation for the interval.
+            </remarks> 
+        </member>
+        <member name="F:Jcd.Math.Intervals.IntervalLimitConstraint.Open">
+            <summary>
+            The endpoint in question has a limit and is open. (i.e. excludes the limit point)
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Intervals.IntervalLimitConstraint.Closed">
+            <summary>
+            The endpoint in question has a limit and is closed. (i.e. includes the limit point)
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimitConstraint.IsClosed">
+            <summary>
+            Indicates if the specified interval endpoint contains the
+            point in question.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimitConstraint.IsOpen">
+            <summary>
+            Indicates if the specified interval endpoint contains the
+            point in question.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimitConstraint.HasLimitValue">
+            <summary>
+            Indicates if the specified interval endpoint contains any
+            limit whatsoever. (i.e. is it fully open at the start or end?)
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimitConstraint.IsUnbounded">
+            <summary>
+            Indicates if there is no limit on the bounds of this constraint.
+            This is effectively -infinity or +infinity depending on context.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitConstraint.Equals(Jcd.Math.Intervals.IntervalLimitConstraint)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitConstraint.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitConstraint.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitConstraint.op_Equality(Jcd.Math.Intervals.IntervalLimitConstraint,Jcd.Math.Intervals.IntervalLimitConstraint)">
+            <summary>
+            Equivalence operator
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>true if equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitConstraint.op_Inequality(Jcd.Math.Intervals.IntervalLimitConstraint,Jcd.Math.Intervals.IntervalLimitConstraint)">
+            <summary>
+            Non-equivalence operator
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>true if not equivalent.</returns>
+        </member>
+        <member name="T:Jcd.Math.Intervals.IntervalLimitType">
+            <summary>
+            An equatable and comparable type-safe and highly performant DDD-like enumeration type.
+            To keep high performance the usual DDD name/description property is omitted.
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Intervals.IntervalLimitType.Start">
+            <summary>
+            The start point of an interval. Start must be &lt;= end
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Intervals.IntervalLimitType.End">
+            <summary>
+            The end point of an interval. End must be &gt;= start
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.Equals(Jcd.Math.Intervals.IntervalLimitType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.CompareTo(Jcd.Math.Intervals.IntervalLimitType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.CompareTo(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_Explicit(System.Byte)~Jcd.Math.Intervals.IntervalLimitType">
+            <summary>
+            Conversion operator from byte.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.op_Explicit(Jcd.Math.Intervals.IntervalLimitType)~System.Byte">
+            <summary>
+            Convert to byte operator.
+            </summary>
+            <param name="type">the type to convert</param>
+            <returns>The underlying value.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimitType.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Jcd.Math.Intervals.Range`1">
+            <summary>
+            A specialization of Interval that represents a closed interval [start,end]
+            (i.e. an interval that contains the start and end points)
+            </summary>
+            <typeparam name="T">The underlying data type.</typeparam>
+        </member>
+        <member name="P:Jcd.Math.Intervals.Range`1.IsValid">
+            <inheritdoc />
+        </member>
+        <member name="P:Jcd.Math.Intervals.Range`1.IsEmpty">
+            <inheritdoc />
+        </member>
+        <member name="P:Jcd.Math.Intervals.Range`1.IsSingleValue">
+            <inheritdoc />
+        </member>
+        <member name="P:Jcd.Math.Intervals.Range`1.Start">
+            <inheritdoc />
+        </member>
+        <member name="P:Jcd.Math.Intervals.Range`1.End">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.Range`1.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Intervals.Range`1.Contains(Jcd.Math.Intervals.IInterval{`0})">
+            <summary>
+            Determines if this interval completely contains another.
+            </summary>
+            <param name="other">The interval being compared for containment within the current.</param>
+            <returns>True if this interval contains the other.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Range`1.#ctor(`0,`0)">
+            <summary>
+            Create a new range from a start and end
+            </summary>
+            <param name="start">The start of the range.</param>
+            <param name="end">The end of the range.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Range`1.Equals(Jcd.Math.Intervals.IInterval{`0})">
+            <inheritdoc />
+        </member>
+        <member name="T:Jcd.Math.Intervals.RangeExtensions">
+            <summary>
+            Provides range comparison facilities.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Intervals.RangeExtensions.InRange``1(``0,``0,``0)">
+            <summary>
+            Checks if a value is within a closed interval. (i.e. interval includes start and endpoints)
+            </summary>
+            <param name="value">The value to compare</param>
+            <param name="start">Start of the range to check</param>
+            <param name="end">End of the range to check.</param>
+            <typeparam name="T">The data type being compared.</typeparam>
+            <returns>true if the value is within the range.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.RangeExtensions.CompareToRange``1(``0,``0,``0)">
+            <summary>
+            Determines if a value is less than the start (-1) of the
+            closed interval [start,end], within the interval (0),
+            or after the end of the interval (1)
+            </summary>
+            <param name="value">The value to compare</param>
+            <param name="start">Start of the range to check</param>
+            <param name="end">End of the range to check.</param>
+            <typeparam name="T">The data type being compared.</typeparam>
+            <returns>-1, for less than, 0 for in range, 1 for greater than end.</returns>
         </member>
         <member name="T:Jcd.Math.NamespaceDoc">
             <summary>

@@ -1,6 +1,23 @@
 # Jcd.Math
 
-A *.NET Standard 2.0* library that provides **a description of what features/classes/services the library provides goes here.**
+A *.NET Standard 2.0* library that provides some rudimentary mathematics helpers.
+While I'm no expert in mathematics, .Net is sorely missing some rudimentary types
+causing programmers to continuously reinvent the wheel.
+
+This library offers some efficient data types and algorithms to help with some common 
+use cases. (I started it when I found that none of the Interval implementations I 
+could find were neither "minimally complete" nor memory efficient if they even handled 
+all the bounding edge cases with intervals.)
+
+*On memory efficiency:* One common trend I saw was that people were implementing what is
+in all rights an immutable value type (read struct!) as a mutable class. This incurs both 
+unneeded memory pressure on the GC and a slight performance hit outside of the GC 
+concerns. While premature optimization is a serious issue in our industry. Selecting readonly  
+structs for items such as Intervals we both eliminate the unwanted GC pressure
+while also ensuring immutability, reducing the chances of programmer error for consumers.
+Immutability and stack storage are usually our friends when it comes to performant data 
+types and algorithms.
+
 
 ## Before you begin coding
 
