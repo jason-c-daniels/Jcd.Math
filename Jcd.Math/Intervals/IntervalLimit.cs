@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 // ReSharper disable UnassignedReadonlyField
 // ReSharper disable MemberCanBePrivate.Global
@@ -171,6 +172,7 @@ public readonly struct IntervalLimit<T> :
     #region Relational members
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CompareTo(IntervalLimit<T> y)
     {
         // nomenclature:
@@ -287,6 +289,7 @@ public readonly struct IntervalLimit<T> :
     }
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CompareTo(object? obj)
     {
         if (ReferenceEquals(null, obj)) return 1;
@@ -300,6 +303,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The interval limit to compare.</param>
     /// <param name="right">The value to compare</param>
     /// <returns>True if the interval limit is less than the specified value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <(IntervalLimit<T> left, T right)
     {
         return left.CompareTo(right) < 0;
@@ -311,6 +315,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The interval limit to compare.</param>
     /// <param name="right">The value to compare</param>
     /// <returns>True if the interval limit is greater than the specified value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator >(IntervalLimit<T> left, T right)
     {
         return left.CompareTo(right) > 0;
@@ -322,6 +327,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The interval limit to compare.</param>
     /// <param name="right">The value to compare</param>
     /// <returns>True if the interval limit is less than or equal to the specified value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <=(IntervalLimit<T> left, T right)
     {
         return left.CompareTo(right) <= 0;
@@ -333,6 +339,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The interval limit to compare.</param>
     /// <param name="right">The value to compare</param>
     /// <returns>True if the interval limit is greater than or equal to the specified value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator >=(IntervalLimit<T> left, T right)
     {
         return left.CompareTo(right) >= 0;
@@ -344,6 +351,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">the specified value.</param>
     /// <param name="right">The interval limit</param>
     /// <returns>True if the specified value is less than the interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <(T left, IntervalLimit<T> right)
     {
         return right.CompareTo(left) > 0;
@@ -355,6 +363,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">the specified value.</param>
     /// <param name="right">The interval limit</param>
     /// <returns>True if the specified value is greater than the interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator >(T left, IntervalLimit<T> right)
     {
         return right.CompareTo(left) < 0;
@@ -366,6 +375,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">the specified value.</param>
     /// <param name="right">The interval limit</param>
     /// <returns>True if the specified value is less than or equal to the interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <=(T left, IntervalLimit<T> right)
     {
         return right.CompareTo(left) >= 0;
@@ -377,6 +387,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">the specified value.</param>
     /// <param name="right">The interval limit</param>
     /// <returns>True if the specified value is greater than or equal to the interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator >=(T left, IntervalLimit<T> right)
     {
         return right.CompareTo(left) <= 0;
@@ -388,6 +399,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">the left hand parameter</param>
     /// <param name="right">the right hand parameter</param>
     /// <returns>True if left is less than right</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <(IntervalLimit<T> left, IntervalLimit<T> right)
     {
         return left.CompareTo(right) < 0;
@@ -399,6 +411,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">the left hand parameter</param>
     /// <param name="right">the right hand parameter</param>
     /// <returns>True if left is greater than right</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator >(IntervalLimit<T> left, IntervalLimit<T> right)
     {
         return left.CompareTo(right) > 0;
@@ -410,6 +423,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">the left hand parameter</param>
     /// <param name="right">the right hand parameter</param>
     /// <returns>True if left is less than or equal to right</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <=(IntervalLimit<T> left, IntervalLimit<T> right)
     {
         return left.CompareTo(right) <= 0;
@@ -421,6 +435,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">the left hand parameter</param>
     /// <param name="right">the right hand parameter</param>
     /// <returns>True if left is greater than or equal to right</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator >=(IntervalLimit<T> left, IntervalLimit<T> right)
     {
         return left.CompareTo(right) >= 0;
@@ -431,12 +446,14 @@ public readonly struct IntervalLimit<T> :
     #region Equality members
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(IntervalLimit<T> other)
     {
         return Constraint.Equals(other.Constraint) && EqualityComparer<T?>.Default.Equals(Limit, other.Limit) && LimitType == other.LimitType;
     }
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CompareTo(T value)
     {
         if (Constraint.IsUnbounded)
@@ -461,12 +478,14 @@ public readonly struct IntervalLimit<T> :
     }
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(T other)
     {
         return CompareTo(other) == 0;
     }
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public override bool Equals(object? obj)
     {
         return obj is IntervalLimit<T> other && Equals(other);
@@ -490,6 +509,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The left hand parameter</param>
     /// <param name="right">The right hand parameter</param>
     /// <returns>True if equivalent.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator ==(IntervalLimit<T> left, IntervalLimit<T> right)
     {
         return left.Equals(right);
@@ -501,6 +521,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The left hand parameter</param>
     /// <param name="right">The right hand parameter</param>
     /// <returns>True if not equivalent.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator !=(IntervalLimit<T> left, IntervalLimit<T> right)
     {
         return !left.Equals(right);
@@ -523,6 +544,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The left hand parameter</param>
     /// <param name="right">The right hand parameter</param>
     /// <returns>True if not equivalent.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator !=(IntervalLimit<T> left, T right)
     {
         return !left.Equals(right);
@@ -534,6 +556,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The left hand parameter</param>
     /// <param name="right">The right hand parameter</param>
     /// <returns>True if equivalent.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator ==(T left, IntervalLimit<T> right)
     {
         return right.Equals(left);
@@ -545,6 +568,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The left hand parameter</param>
     /// <param name="right">The right hand parameter</param>
     /// <returns>True if not equivalent.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator !=(T left, IntervalLimit<T> right)
     {
         return !right.Equals(left);
@@ -559,6 +583,7 @@ public readonly struct IntervalLimit<T> :
     /// </summary>
     /// <param name="limit">The limit to convert.</param>
     /// <returns>The underlying value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static explicit operator T?(IntervalLimit<T> limit) => limit.Limit;
 
     #endregion
