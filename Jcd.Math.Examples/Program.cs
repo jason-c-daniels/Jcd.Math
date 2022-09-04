@@ -4,7 +4,8 @@ using System.Diagnostics;
 using Jcd.Math.Intervals;
 const int numberOfItemsToCreate = 100_000_000;
 
-
+var _ = Interval<byte>.Closed(10,100);
+var __ = _.Contains(11);
 TimeClosedIntervalCreates();
 TimeClosedIntervalCopies();
 TimeClosedIntervalContainsValue();
