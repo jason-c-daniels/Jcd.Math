@@ -28,38 +28,46 @@ public readonly struct IntervalLimitConstraint : IEquatable<IntervalLimitConstra
     /// The endpoint in question has a limit and is closed. (i.e. includes the limit point)
     /// </summary>
     public static readonly IntervalLimitConstraint Closed = new (true,true);
-    
+
     /// <summary>
     /// Indicates if the specified interval endpoint contains the
     /// point in question.
     /// </summary>
-    public readonly bool IsClosed { get; } = false;
-    
+    public bool IsClosed => _state == ClosedValue;
+
     /// <summary>
     /// Indicates if the specified interval endpoint contains the
     /// point in question.
     /// </summary>
-    public bool IsOpen=>!IsClosed;
+    public bool IsOpen => _state != ClosedValue;
 
     /// <summary>
     /// Indicates if the specified interval endpoint contains any
     /// limit whatsoever. (i.e. is it fully open at the start or end?)
     /// </summary>
-    public bool HasLimitValue { get; } = false;
+    public bool HasLimitValue => _state != UnboundedState;
 
     /// <summary>
     /// Indicates if there is no limit on the bounds of this constraint.
     /// This is effectively -infinity or +infinity depending on context.
     /// </summary>
-    public bool IsUnbounded => !HasLimitValue;
-    
+    public bool IsUnbounded => _state==UnboundedState;
+
+    private const byte UnboundedState = 0;
+    private const byte OpenValue = 1;
+    private const byte ClosedValue = 2;
+
+    private readonly byte _state;
     private IntervalLimitConstraint(bool isClosed, bool hasLimitValue)
     {
         if (isClosed && !hasLimitValue)
             throw new ArgumentOutOfRangeException(nameof(hasLimitValue),
                 $"The endpoint of an interval may not be both fully open and required to contain a limit.");
-        IsClosed = isClosed;
-        HasLimitValue = hasLimitValue;
+        _state = isClosed
+            ? ClosedValue
+            : hasLimitValue
+                ? OpenValue
+                : UnboundedState;
     }
 
     #region Equality members
