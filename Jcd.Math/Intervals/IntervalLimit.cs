@@ -86,6 +86,24 @@ public readonly struct IntervalLimit<T> :
     public bool HasLimitValue => Constraint.HasLimitValue;
     
     #region Constructor and Factory methods
+    /// <summary>
+    /// Construct an interval limit from a limit value, constraint and type. 
+    /// </summary>
+    /// <param name="limitType">The interval limit type.</param>
+    /// <param name="constraint">The limit constraints.</param>
+    /// <param name="limit">The limit value.</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    private IntervalLimit(IntervalLimitType limitType, 
+                          IntervalLimitConstraint constraint, 
+                          T? limit)
+    {
+        if (limit is null && constraint.HasLimitValue)
+            throw new ArgumentOutOfRangeException(nameof(limit),
+                "Limit constraint indicates a non-null limit value would be provided, yet null was provided. Please use a different constraint, or provide the limit value.");
+        Constraint = constraint;
+        LimitType = limitType;
+        Limit = limit;
+    }
 
     /// <summary>
     /// Creates an unbounded start interval limit.
@@ -145,25 +163,6 @@ public readonly struct IntervalLimit<T> :
     public static IntervalLimit<T> ClosedEnd(T limit) =>
         new (IntervalLimitType.End, IntervalLimitConstraint.Closed, limit);
     
-    /// <summary>
-    /// Construct an interval limit from a limit value, constraint and type. 
-    /// </summary>
-    /// <param name="limitType">The interval limit type.</param>
-    /// <param name="constraint">The limit constraints.</param>
-    /// <param name="limit">The limit value.</param>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
-    private IntervalLimit(IntervalLimitType limitType, 
-                          IntervalLimitConstraint constraint, 
-                          T? limit)
-    {
-        if (limit == null && constraint.HasLimitValue)
-            throw new ArgumentOutOfRangeException(nameof(limit),
-                "Limit constraint indicates a non-null limit value would be provided, yet null was provided. Please use a different constraint, or provide the limit value.");
-        Constraint = constraint;
-        LimitType = limitType;
-        Limit = limit;
-    }
-
     #endregion
     
     #region Relational members
