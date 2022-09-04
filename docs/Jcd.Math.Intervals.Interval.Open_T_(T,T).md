@@ -2,11 +2,11 @@
 
 ## Interval.Open<T>(T, T) Method
 
-Creates an open interval: (start,end)  
-(i.e. excludes both start and end)
+Creates an open interval: (openStart,openEnd)  
+(i.e. excludes both openStart and openEnd)
 
 ```csharp
-public static Jcd.Math.Intervals.Interval<T> Open<T>(T start, T end)
+public static Jcd.Math.Intervals.Interval<T> Open<T>(T openStart, T openEnd)
     where T : System.IComparable<T>;
 ```
 #### Type parameters
@@ -16,13 +16,17 @@ public static Jcd.Math.Intervals.Interval<T> Open<T>(T start, T end)
 `T`
 #### Parameters
 
-<a name='Jcd.Math.Intervals.Interval.Open_T_(T,T).start'></a>
+<a name='Jcd.Math.Intervals.Interval.Open_T_(T,T).openStart'></a>
 
-`start` [T](Jcd.Math.Intervals.Interval.Open_T_(T,T).md#Jcd.Math.Intervals.Interval.Open_T_(T,T).T 'Jcd.Math.Intervals.Interval.Open<T>(T, T).T')
+`openStart` [T](Jcd.Math.Intervals.Interval.Open_T_(T,T).md#Jcd.Math.Intervals.Interval.Open_T_(T,T).T 'Jcd.Math.Intervals.Interval.Open<T>(T, T).T')
 
-<a name='Jcd.Math.Intervals.Interval.Open_T_(T,T).end'></a>
+The exclusive start to the interval.
 
-`end` [T](Jcd.Math.Intervals.Interval.Open_T_(T,T).md#Jcd.Math.Intervals.Interval.Open_T_(T,T).T 'Jcd.Math.Intervals.Interval.Open<T>(T, T).T')
+<a name='Jcd.Math.Intervals.Interval.Open_T_(T,T).openEnd'></a>
+
+`openEnd` [T](Jcd.Math.Intervals.Interval.Open_T_(T,T).md#Jcd.Math.Intervals.Interval.Open_T_(T,T).T 'Jcd.Math.Intervals.Interval.Open<T>(T, T).T')
+
+The exclusive end to the interval
 
 #### Returns
 [Jcd.Math.Intervals.Interval&lt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')[T](Jcd.Math.Intervals.Interval.Open_T_(T,T).md#Jcd.Math.Intervals.Interval.Open_T_(T,T).T 'Jcd.Math.Intervals.Interval.Open<T>(T, T).T')[&gt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')  

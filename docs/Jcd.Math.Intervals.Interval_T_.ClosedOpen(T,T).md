@@ -2,21 +2,25 @@
 
 ## Interval<T>.ClosedOpen(T, T) Method
 
-Creates a closed-open interval: [start,end)  
-(i.e. includes start and excludes end)
+Creates a closed-open interval: [openStart,closedEnd)  
+(i.e. includes openStart and excludes closedEnd)
 
 ```csharp
-public static Jcd.Math.Intervals.Interval<T> ClosedOpen(T start, T end);
+public static Jcd.Math.Intervals.Interval<T> ClosedOpen(T closedStart, T openEnd);
 ```
 #### Parameters
 
-<a name='Jcd.Math.Intervals.Interval_T_.ClosedOpen(T,T).start'></a>
+<a name='Jcd.Math.Intervals.Interval_T_.ClosedOpen(T,T).closedStart'></a>
 
-`start` [T](Jcd.Math.Intervals.Interval_T_.md#Jcd.Math.Intervals.Interval_T_.T 'Jcd.Math.Intervals.Interval<T>.T')
+`closedStart` [T](Jcd.Math.Intervals.Interval_T_.md#Jcd.Math.Intervals.Interval_T_.T 'Jcd.Math.Intervals.Interval<T>.T')
 
-<a name='Jcd.Math.Intervals.Interval_T_.ClosedOpen(T,T).end'></a>
+The inclusive starting point of the interval
 
-`end` [T](Jcd.Math.Intervals.Interval_T_.md#Jcd.Math.Intervals.Interval_T_.T 'Jcd.Math.Intervals.Interval<T>.T')
+<a name='Jcd.Math.Intervals.Interval_T_.ClosedOpen(T,T).openEnd'></a>
+
+`openEnd` [T](Jcd.Math.Intervals.Interval_T_.md#Jcd.Math.Intervals.Interval_T_.T 'Jcd.Math.Intervals.Interval<T>.T')
+
+The exclusive openEnd point of the interval.
 
 #### Returns
 [Jcd.Math.Intervals.Interval&lt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')[T](Jcd.Math.Intervals.Interval_T_.md#Jcd.Math.Intervals.Interval_T_.T 'Jcd.Math.Intervals.Interval<T>.T')[&gt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')  

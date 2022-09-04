@@ -2,11 +2,11 @@
 
 ## Interval.OpenUnbounded<T>(T) Method
 
-Creates a left-open, right-unbounded interval: (start, +infinity)  
-(i.e. start to +infinity - excludes start.)
+Creates a left-open, right-unbounded interval: (openStart, +infinity)  
+(i.e. openStart to +infinity - excludes openStart.)
 
 ```csharp
-public static Jcd.Math.Intervals.Interval<T> OpenUnbounded<T>(T start)
+public static Jcd.Math.Intervals.Interval<T> OpenUnbounded<T>(T openStart)
     where T : System.IComparable<T>;
 ```
 #### Type parameters
@@ -16,9 +16,11 @@ public static Jcd.Math.Intervals.Interval<T> OpenUnbounded<T>(T start)
 `T`
 #### Parameters
 
-<a name='Jcd.Math.Intervals.Interval.OpenUnbounded_T_(T).start'></a>
+<a name='Jcd.Math.Intervals.Interval.OpenUnbounded_T_(T).openStart'></a>
 
-`start` [T](Jcd.Math.Intervals.Interval.OpenUnbounded_T_(T).md#Jcd.Math.Intervals.Interval.OpenUnbounded_T_(T).T 'Jcd.Math.Intervals.Interval.OpenUnbounded<T>(T).T')
+`openStart` [T](Jcd.Math.Intervals.Interval.OpenUnbounded_T_(T).md#Jcd.Math.Intervals.Interval.OpenUnbounded_T_(T).T 'Jcd.Math.Intervals.Interval.OpenUnbounded<T>(T).T')
+
+The exclusive start to the interval.
 
 #### Returns
 [Jcd.Math.Intervals.Interval&lt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')[T](Jcd.Math.Intervals.Interval.OpenUnbounded_T_(T).md#Jcd.Math.Intervals.Interval.OpenUnbounded_T_(T).T 'Jcd.Math.Intervals.Interval.OpenUnbounded<T>(T).T')[&gt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')  

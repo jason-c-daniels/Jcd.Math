@@ -344,7 +344,7 @@ public readonly struct IntervalLimit<T> :
     /// <returns>True if the specified value is less than the interval limit</returns>
     public static bool operator <(T left, IntervalLimit<T> right)
     {
-        return right.CompareTo(left) >= 0;
+        return right.CompareTo(left) > 0;
     }
 
     /// <summary>
@@ -355,7 +355,7 @@ public readonly struct IntervalLimit<T> :
     /// <returns>True if the specified value is greater than the interval limit</returns>
     public static bool operator >(T left, IntervalLimit<T> right)
     {
-        return right.CompareTo(left) <= 0;
+        return right.CompareTo(left) < 0;
     }
 
     /// <summary>
@@ -366,7 +366,7 @@ public readonly struct IntervalLimit<T> :
     /// <returns>True if the specified value is less than or equal to the interval limit</returns>
     public static bool operator <=(T left, IntervalLimit<T> right)
     {
-        return right.CompareTo(left) > 0;
+        return right.CompareTo(left) >= 0;
     }
 
     /// <summary>
@@ -377,7 +377,7 @@ public readonly struct IntervalLimit<T> :
     /// <returns>True if the specified value is greater than or equal to the interval limit</returns>
     public static bool operator >=(T left, IntervalLimit<T> right)
     {
-        return right.CompareTo(left) < 0;
+        return right.CompareTo(left) <= 0;
     }
 
     /// <summary>
@@ -570,15 +570,16 @@ public readonly struct IntervalLimit<T> :
         {
             if (IsUnbounded) return "(-infinity";
             if (IsOpen) return $"({Limit}";
-            if (IsClosed) return $"[{Limit}";
+            
+            // We know IsClosed == true 
+            return $"[{Limit}";
         }
         
         if (IsUnbounded) return "+infinity)";
         if (IsOpen) return $"{Limit})";
-        if (IsClosed) return $"{Limit}]";
-        
-        // this code should never be reached, but just in case return the raw limit. 
-        return $"{Limit}";
+            
+        // We know IsClosed == true 
+        return $"{Limit}]";
     }
 
     #endregion

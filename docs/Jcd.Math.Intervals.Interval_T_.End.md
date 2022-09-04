@@ -2,7 +2,7 @@
 
 ## Interval<T>.End Property
 
-The end of the interval.
+The closedEnd of the interval.
 
 ```csharp
 public Jcd.Math.Intervals.IntervalLimit<T> End { get; }
