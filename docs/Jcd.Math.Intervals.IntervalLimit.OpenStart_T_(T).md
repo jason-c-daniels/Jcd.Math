@@ -1,0 +1,26 @@
+### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals').[IntervalLimit](Jcd.Math.Intervals.IntervalLimit.md 'Jcd.Math.Intervals.IntervalLimit')
+
+## IntervalLimit.OpenStart<T>(T) Method
+
+Creates an open start interval limit.  
+In other words: creates an exclusive start limit.    
+For example: (limit,...
+
+```csharp
+public static Jcd.Math.Intervals.IntervalLimit<T> OpenStart<T>(T limit)
+    where T : System.IComparable<T>;
+```
+#### Type parameters
+
+<a name='Jcd.Math.Intervals.IntervalLimit.OpenStart_T_(T).T'></a>
+
+`T`
+#### Parameters
+
+<a name='Jcd.Math.Intervals.IntervalLimit.OpenStart_T_(T).limit'></a>
+
+`limit` [T](Jcd.Math.Intervals.IntervalLimit.OpenStart_T_(T).md#Jcd.Math.Intervals.IntervalLimit.OpenStart_T_(T).T 'Jcd.Math.Intervals.IntervalLimit.OpenStart<T>(T).T')
+
+#### Returns
+[Jcd.Math.Intervals.IntervalLimit&lt;](Jcd.Math.Intervals.IntervalLimit_T_.md 'Jcd.Math.Intervals.IntervalLimit<T>')[T](Jcd.Math.Intervals.IntervalLimit.OpenStart_T_(T).md#Jcd.Math.Intervals.IntervalLimit.OpenStart_T_(T).T 'Jcd.Math.Intervals.IntervalLimit.OpenStart<T>(T).T')[&gt;](Jcd.Math.Intervals.IntervalLimit_T_.md 'Jcd.Math.Intervals.IntervalLimit<T>')  
+The new interval limit
