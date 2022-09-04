@@ -6,6 +6,7 @@ const int numberOfItemsToCreate = 100_000_000;
 
 
 TimeClosedIntervalCreates();
+TimeClosedIntervalCopies();
 TimeClosedIntervalContainsValue();
 TimeRangeExtensionsInRange();
 TimeRangeExtensionsCompareToRange();
@@ -175,7 +176,7 @@ static void TimeIntervalLimitCreates()
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(IntervalLimit)} instances created byte in {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(IntervalLimit)}<byte> instances created in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeClosedIntervalCreates()
@@ -192,6 +193,20 @@ static void TimeClosedIntervalCreates()
         $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} creates {sw.ElapsedMilliseconds}ms");
 }
 
+static void TimeClosedIntervalCopies()
+{
+    var source = Interval<byte>.Closed(1, 10);
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ = source;
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} copies {sw.ElapsedMilliseconds}ms");
+}
 
 static void TimeClosedIntervalContainsValue()
 {
@@ -207,7 +222,6 @@ static void TimeClosedIntervalContainsValue()
     Console.WriteLine(
         $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} contains a value {sw.ElapsedMilliseconds}ms");
 }
-
 
 static void TimeRangeExtensionsInRange()
 {
