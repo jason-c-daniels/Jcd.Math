@@ -2,7 +2,8 @@
 
 ## RangeExtensions Class
 
-Provides range comparison facilities.
+Provides IComparable<T> range (closed interval) comparison facilities.  
+Use this if you need things to be as fast as possible.
 
 ```csharp
 public static class RangeExtensions

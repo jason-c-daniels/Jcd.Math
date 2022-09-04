@@ -1,5 +1,6 @@
 ﻿using System;
 // ReSharper disable UnusedType.Global
+// ReSharper disable UnusedMember.Global
 
 namespace Jcd.Math.Intervals;
 
@@ -35,15 +36,24 @@ public readonly struct Range<T> : IInterval<T>
     }
     
     /// <summary>
-    /// Determines if this interval completely contains another.
+    /// Determines if this range completely contains an interval.
     /// </summary>
     /// <param name="other">The interval being compared for containment within the current.</param>
-    /// <returns>True if this interval contains the other.</returns>
+    /// <returns>True if this range contains the interval.</returns>
     public bool Contains(IInterval<T> other)
     {
         return Start <= other.Start && End >= other.End;
     }
     
+    /// <summary>
+    /// Determines if this range completely contains another.
+    /// </summary>
+    /// <param name="other">The interval being compared for containment within the current.</param>
+    /// <returns>True if this interval contains the other.</returns>
+    public bool Contains(Range<T> other)
+    {
+        return Start <= other.Start && End >= other.End;
+    }
 
     /// <summary>
     /// Create a new range from a start and end
@@ -71,5 +81,4 @@ public readonly struct Range<T> : IInterval<T>
     }
 
     #endregion
-
 }

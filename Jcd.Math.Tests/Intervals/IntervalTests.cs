@@ -1,6 +1,6 @@
 ﻿using Jcd.Math.Intervals;
 
-namespace Jcd.Math.Tests;
+namespace Jcd.Math.Tests.Intervals;
 
 public class IntervalTests
 {

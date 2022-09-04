@@ -210,6 +210,22 @@
         <member name="M:Jcd.Math.Intervals.Interval`1.GetHashCode">
             <inheritdoc />
         </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.op_Equality(Jcd.Math.Intervals.Interval{`0},Jcd.Math.Intervals.Interval{`0})">
+            <summary>
+            Performs equivalence comparisons between two intervals.
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>True if they're equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Interval`1.op_Inequality(Jcd.Math.Intervals.Interval{`0},Jcd.Math.Intervals.Interval{`0})">
+            <summary>
+            Performs non-equivalence comparison between two intervals.
+            </summary>
+            <param name="left">The left hand parameter</param>
+            <param name="right">The right hand parameter</param>
+            <returns>True if they're not equivalent.</returns>
+        </member>
         <member name="T:Jcd.Math.Intervals.Interval">
             <summary>
             A helper class to simplify the notation for creating intervals.
@@ -849,7 +865,14 @@
         </member>
         <member name="M:Jcd.Math.Intervals.Range`1.Contains(Jcd.Math.Intervals.IInterval{`0})">
             <summary>
-            Determines if this interval completely contains another.
+            Determines if this range completely contains an interval.
+            </summary>
+            <param name="other">The interval being compared for containment within the current.</param>
+            <returns>True if this range contains the interval.</returns>
+        </member>
+        <member name="M:Jcd.Math.Intervals.Range`1.Contains(Jcd.Math.Intervals.Range{`0})">
+            <summary>
+            Determines if this range completely contains another.
             </summary>
             <param name="other">The interval being compared for containment within the current.</param>
             <returns>True if this interval contains the other.</returns>
@@ -867,7 +890,8 @@
         </member>
         <member name="T:Jcd.Math.Intervals.RangeExtensions">
             <summary>
-            Provides range comparison facilities.
+            Provides IComparable&lt;T&gt; range (closed interval) comparison facilities.
+            Use this if you need things to be as fast as possible.
             </summary>
         </member>
         <member name="M:Jcd.Math.Intervals.RangeExtensions.InRange``1(``0,``0,``0)">

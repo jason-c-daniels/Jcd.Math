@@ -50,3 +50,8 @@ Implements [Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md
 | [Unbounded()](Jcd.Math.Intervals.Interval_T_.Unbounded().md 'Jcd.Math.Intervals.Interval<T>.Unbounded()') | Creates a completely unbounded interval. (-infinity, +infinity)<br/>(i.e. -infinity to +infinity - excluding the infinities, of course.) |
 | [UnboundedClosed(T)](Jcd.Math.Intervals.Interval_T_.UnboundedClosed(T).md 'Jcd.Math.Intervals.Interval<T>.UnboundedClosed(T)') | Creates a left-unbounded, right-closed interval: (-infinity, closedEnd]<br/>(i.e. -infinity to closedEnd - includes closedEnd.) |
 | [UnboundedOpen(T)](Jcd.Math.Intervals.Interval_T_.UnboundedOpen(T).md 'Jcd.Math.Intervals.Interval<T>.UnboundedOpen(T)') | Creates a left-unbounded, right-open interval: (-infinity, openEnd)<br/>(i.e. -infinity to openEnd - excludes openEnd.) |
+
+| Operators | |
+| :--- | :--- |
+| [operator ==(Interval&lt;T&gt;, Interval&lt;T&gt;)](Jcd.Math.Intervals.Interval_T_.op_Equality(Jcd.Math.Intervals.Interval_T_,Jcd.Math.Intervals.Interval_T_).md 'Jcd.Math.Intervals.Interval<T>.op_Equality(Jcd.Math.Intervals.Interval<T>, Jcd.Math.Intervals.Interval<T>)') | Performs equivalence comparisons between two intervals. |
+| [operator !=(Interval&lt;T&gt;, Interval&lt;T&gt;)](Jcd.Math.Intervals.Interval_T_.op_Inequality(Jcd.Math.Intervals.Interval_T_,Jcd.Math.Intervals.Interval_T_).md 'Jcd.Math.Intervals.Interval<T>.op_Inequality(Jcd.Math.Intervals.Interval<T>, Jcd.Math.Intervals.Interval<T>)') | Performs non-equivalence comparison between two intervals. |

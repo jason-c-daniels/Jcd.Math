@@ -249,11 +249,23 @@ public readonly struct Interval<T> :
         return HashCode.Combine(Start, End);
     }
 
+    /// <summary>
+    /// Performs equivalence comparisons between two intervals.
+    /// </summary>
+    /// <param name="left">The left hand parameter</param>
+    /// <param name="right">The right hand parameter</param>
+    /// <returns>True if they're equivalent.</returns>
     public static bool operator ==(Interval<T> left, Interval<T> right)
     {
         return left.Equals(right);
     }
 
+    /// <summary>
+    /// Performs non-equivalence comparison between two intervals.
+    /// </summary>
+    /// <param name="left">The left hand parameter</param>
+    /// <param name="right">The right hand parameter</param>
+    /// <returns>True if they're not equivalent.</returns>
     public static bool operator !=(Interval<T> left, Interval<T> right)
     {
         return !left.Equals(right);

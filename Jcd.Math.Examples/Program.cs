@@ -2,11 +2,14 @@
 
 using System.Diagnostics;
 using Jcd.Math.Intervals;
-const int NumberOfItemsToCreate = 10_000_000;
+const int numberOfItemsToCreate = 1_000_000;
 
 
+TimeClosedIntervalCreates();
+TimeClosedIntervalContainsValue();
+TimeRangeExtensionsInRange();
+TimeRangeExtensionsCompareToRange();
 TimeIntervalLimitCreates();
-TimeIntervalCreates();
 TimeIntervalLimitConstraintIsClosedRetrieval();
 TimeIntervalLimitConstraintIsOpenRetrieval();
 TimeIntervalLimitTypeCasts();
@@ -39,7 +42,7 @@ static void TimeIntervalLimitTypeCasts()
 {
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var _ = (IntervalLimitType)0;
         var _2 = (IntervalLimitType)1;
@@ -47,14 +50,14 @@ static void TimeIntervalLimitTypeCasts()
 
     sw.Stop();
     Console.WriteLine(
-        $"{NumberOfItemsToCreate:n0} x 2 {nameof(IntervalLimitType)} instances cast from byte in {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} x 2 {nameof(IntervalLimitType)} instances cast from byte in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeIntervalLimitConstraintIsClosedRetrieval()
 {
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var _1 = IntervalLimitConstraint.Open.IsClosed;
         var _2 = IntervalLimitConstraint.Closed.IsClosed;
@@ -63,14 +66,14 @@ static void TimeIntervalLimitConstraintIsClosedRetrieval()
 
     sw.Stop();
     Console.WriteLine(
-        $"{NumberOfItemsToCreate:n0} x 3 {nameof(IntervalLimitConstraint)} IsClosed in {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} x 3 {nameof(IntervalLimitConstraint)} IsClosed in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeIntervalLimitConstraintIsOpenRetrieval()
 {
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var _1 = IntervalLimitConstraint.Open.IsOpen;
         var _2 = IntervalLimitConstraint.Closed.IsOpen;
@@ -79,7 +82,7 @@ static void TimeIntervalLimitConstraintIsOpenRetrieval()
 
     sw.Stop();
     Console.WriteLine(
-        $"{NumberOfItemsToCreate:n0} x 3 {nameof(IntervalLimitConstraint)} IsOpen in {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} x 3 {nameof(IntervalLimitConstraint)} IsOpen in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeIntervalLimitCompareToCalls()
@@ -88,13 +91,13 @@ static void TimeIntervalLimitCompareToCalls()
     var ilt1 = (IntervalLimitType)1;
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var r0 = ilt0.CompareTo(ilt1);
     }
 
     sw.Stop();
-    Console.WriteLine($"{NumberOfItemsToCreate:n0} {nameof(IntervalLimitType)} CompareTo calls in {sw.ElapsedMilliseconds}ms");
+    Console.WriteLine($"{numberOfItemsToCreate:n0} {nameof(IntervalLimitType)} CompareTo calls in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeIntervalLimitLessThanCalls()
@@ -103,13 +106,13 @@ static void TimeIntervalLimitLessThanCalls()
     var ilt1 = (IntervalLimitType)1;
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var r0 = ilt0 < ilt1;
     }
 
     sw.Stop();
-    Console.WriteLine($"{NumberOfItemsToCreate:n0} {nameof(IntervalLimitType)} < calls in {sw.ElapsedMilliseconds}ms");
+    Console.WriteLine($"{numberOfItemsToCreate:n0} {nameof(IntervalLimitType)} < calls in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeRawEnumTypeCasts()
@@ -118,7 +121,7 @@ static void TimeRawEnumTypeCasts()
     sw.Start();
     const byte b0 = 0;
     const byte b1 = 1;
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var _ = (RawEnum)b0;
         var _2 = (RawEnum)b1;
@@ -126,7 +129,7 @@ static void TimeRawEnumTypeCasts()
 
     sw.Stop();
     Console.WriteLine(
-        $"{NumberOfItemsToCreate:n0} x 2 {nameof(IntervalLimitType)} instances cast from byte in {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} x 2 {nameof(IntervalLimitType)} instances cast from byte in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeRawEnumCompareToCalls()
@@ -135,14 +138,14 @@ static void TimeRawEnumCompareToCalls()
     var ilt1 = (RawEnum)1;
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         // this boxing allocation slows down comparisons.
         var r0 = ilt0.CompareTo(ilt1); 
     }
 
     sw.Stop();
-    Console.WriteLine($"{NumberOfItemsToCreate:n0} {nameof(RawEnum)} CompareTo calls in {sw.ElapsedMilliseconds}ms");
+    Console.WriteLine($"{numberOfItemsToCreate:n0} {nameof(RawEnum)} CompareTo calls in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeRawEnumLessThanCalls()
@@ -151,42 +154,85 @@ static void TimeRawEnumLessThanCalls()
     var ilt1 = (RawEnum)1;
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var r0 = ilt0 < ilt1;
     }
 
     sw.Stop();
     
-    Console.WriteLine($"{NumberOfItemsToCreate:n0} {nameof(RawEnum)} < calls in {sw.ElapsedMilliseconds}ms");
+    Console.WriteLine($"{numberOfItemsToCreate:n0} {nameof(RawEnum)} < calls in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeIntervalLimitCreates()
 {
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var _ = IntervalLimit<byte>.ClosedStart(10);
     }
 
     sw.Stop();
     Console.WriteLine(
-        $"{NumberOfItemsToCreate:n0} {nameof(IntervalLimit)} instances created byte in {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(IntervalLimit)} instances created byte in {sw.ElapsedMilliseconds}ms");
 }
 
-
-
-static void TimeIntervalCreates()
+static void TimeClosedIntervalCreates()
 {
     var sw = new Stopwatch();
     sw.Start();
-    for (var i = 0; i < NumberOfItemsToCreate; i++)
+    for (var i = 0; i < numberOfItemsToCreate; i++)
     {
-        var _ = Interval<byte>.Closed(10,10);
+        var _ = Interval<byte>.Closed(1,10);
     }
 
     sw.Stop();
     Console.WriteLine(
-        $"{NumberOfItemsToCreate:n0} {nameof(Interval)} creates {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} creates {sw.ElapsedMilliseconds}ms");
+}
+
+
+static void TimeClosedIntervalContainsValue()
+{
+    var interval = Interval<byte>.Closed(1, 254);
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ =interval.Contains(10);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} contains a value {sw.ElapsedMilliseconds}ms");
+}
+
+
+static void TimeRangeExtensionsInRange()
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _=i.InRange(200,20_000_000);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(RangeExtensions)}.{nameof(RangeExtensions.InRange)} contains {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeRangeExtensionsCompareToRange()
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _=i.CompareToRange(200,20_000_000);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(RangeExtensions)}.{nameof(RangeExtensions.CompareToRange)} contains {sw.ElapsedMilliseconds}ms");
 }

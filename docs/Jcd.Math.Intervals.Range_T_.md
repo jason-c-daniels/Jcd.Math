@@ -35,5 +35,6 @@ Implements [Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md
 
 | Methods | |
 | :--- | :--- |
-| [Contains(IInterval&lt;T&gt;)](Jcd.Math.Intervals.Range_T_.Contains(Jcd.Math.Intervals.IInterval_T_).md 'Jcd.Math.Intervals.Range<T>.Contains(Jcd.Math.Intervals.IInterval<T>)') | Determines if this interval completely contains another. |
+| [Contains(IInterval&lt;T&gt;)](Jcd.Math.Intervals.Range_T_.Contains(Jcd.Math.Intervals.IInterval_T_).md 'Jcd.Math.Intervals.Range<T>.Contains(Jcd.Math.Intervals.IInterval<T>)') | Determines if this range completely contains an interval. |
+| [Contains(Range&lt;T&gt;)](Jcd.Math.Intervals.Range_T_.Contains(Jcd.Math.Intervals.Range_T_).md 'Jcd.Math.Intervals.Range<T>.Contains(Jcd.Math.Intervals.Range<T>)') | Determines if this range completely contains another. |
 | [Contains(T)](Jcd.Math.Intervals.Range_T_.Contains(T).md 'Jcd.Math.Intervals.Range<T>.Contains(T)') | Determines if the interval contains the provided point. |

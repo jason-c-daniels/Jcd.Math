@@ -2,7 +2,7 @@
 
 ## Range<T>.Contains(IInterval<T>) Method
 
-Determines if this interval completely contains another.
+Determines if this range completely contains an interval.
 
 ```csharp
 public bool Contains(Jcd.Math.Intervals.IInterval<T> other);
@@ -19,4 +19,4 @@ Implements [Contains(IInterval&lt;T&gt;)](Jcd.Math.Intervals.IInterval_T_.Contai
 
 #### Returns
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')  
-True if this interval contains the other.
+True if this range contains the interval.

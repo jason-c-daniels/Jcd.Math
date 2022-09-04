@@ -4,7 +4,8 @@
 namespace Jcd.Math.Intervals;
 
 /// <summary>
-/// Provides range comparison facilities.
+/// Provides IComparable&lt;T&gt; range (closed interval) comparison facilities.
+/// Use this if you need things to be as fast as possible.
 /// </summary>
 public static class RangeExtensions
 {
