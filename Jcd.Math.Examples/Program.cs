@@ -10,7 +10,6 @@ TimeClosedIntervalContainsValue();
 TimeRangeExtensionsInRange();
 TimeRangeExtensionsCompareToRange();
 TimeIntervalLimitCreates();
-TimeIntervalLimitConstraintCopy();
 TimeIntervalLimitConstraintIsClosedRetrieval();
 TimeIntervalLimitConstraintIsOpenRetrieval();
 TimeIntervalLimitTypeCasts();
@@ -53,23 +52,6 @@ static void TimeIntervalLimitTypeCasts()
     Console.WriteLine(
         $"{numberOfItemsToCreate:n0} x 2 {nameof(IntervalLimitType)} instances cast from byte in {sw.ElapsedMilliseconds}ms");
 }
-
-static void TimeIntervalLimitConstraintCopy()
-{
-    var sw = new Stopwatch();
-    sw.Start();
-    for (var i = 0; i < numberOfItemsToCreate; i++)
-    {
-        var _1 = IntervalLimitConstraint.Open;
-        var _2 = IntervalLimitConstraint.Closed;
-        var _3 = IntervalLimitConstraint.Unbounded;
-    }
-
-    sw.Stop();
-    Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} x 3 {nameof(IntervalLimitConstraint)} Copies in {sw.ElapsedMilliseconds}ms");
-}
-
 
 static void TimeIntervalLimitConstraintIsClosedRetrieval()
 {
