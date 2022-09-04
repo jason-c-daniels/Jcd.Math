@@ -125,7 +125,6 @@ public readonly struct IntervalLimit<T> :
     public static IntervalLimit<T> ClosedStart(T limit) =>
         new (IntervalLimitType.Start, IntervalLimitConstraint.Closed, limit);
 
-    
     /// <summary>
     /// Creates an open end interval limit.
     /// In other words: creates an exclusive end limit.  
@@ -187,13 +186,13 @@ public readonly struct IntervalLimit<T> :
             // When both are a start this is x = -infinity, therefore x < y.
             // conversely when it's an end limit, x = +infinity, therefore x > y.
             if (x.IsUnbounded && y.HasLimitValue)
-                return y.LimitType == IntervalLimitType.Start ? -1 : 1; 
+                return y.IsStart ? -1 : 1;
             
             // The right hand side has no limit and the left hand side has a limit.
             // When both are a start this makes y = -infinity, therefore x > y.
             // conversely when it's an end limit, y = +infinity, therefore x < y.
             if (x.HasLimitValue && y.IsUnbounded) 
-                return x.LimitType == IntervalLimitType.End ? 1 : -1;
+                return x.IsStart ? 1 : -1;
             
             // At this point, we know that both have a limit value.
             // So compare the limit values directly and cache the result.
@@ -289,6 +288,7 @@ public readonly struct IntervalLimit<T> :
     public int CompareTo(object? obj)
     {
         if (ReferenceEquals(null, obj)) return 1;
+        if (obj is T value) return CompareTo(value);
         return obj is IntervalLimit<T> other ? CompareTo(other) : throw new ArgumentException($"Object must be of type {nameof(IntervalLimit<T>)}");
     }
 
@@ -440,7 +440,9 @@ public readonly struct IntervalLimit<T> :
         if (IsUnbounded)
         {
             if (IsStart) return -1; // the limit is < the value.
-            if (IsEnd) return 1; // the limit is > the value.
+            
+            // since IsStart == false, we know IsEnd == true 
+            return 1; // the limit is > the value.
         }
 
         var limitComparison = Limit!.CompareTo(value);
