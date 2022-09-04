@@ -5,7 +5,7 @@
 The default IntervalLimit. This is equivalent to IntervalLimit<T>.UnboundedStart
 
 ```csharp
-public static IntervalLimit<T> Default;
+public static readonly IntervalLimit<T> Default;
 ```
 
 #### Field Value

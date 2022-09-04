@@ -35,7 +35,7 @@ public readonly struct IntervalLimit<T> :
     /// The default IntervalLimit. This is equivalent to IntervalLimit&lt;T&gt;.UnboundedStart
     /// </summary>
     // ReSharper disable once UnassignedField.Global
-    public static IntervalLimit<T> Default;
+    public static readonly IntervalLimit<T> Default;
     
     /// <summary>
     /// Unbounded (i.e. no limit), Open, Closed. 
@@ -190,7 +190,7 @@ public readonly struct IntervalLimit<T> :
             // The right hand side has no limit and the left hand side has a limit.
             // When both are a start this makes y = -infinity, therefore x > y.
             // conversely when it's an end limit, y = +infinity, therefore x < y.
-            if (x.HasLimitValue && y.IsUnbounded) 
+            if (x.Constraint.HasLimitValue && y.Constraint.IsUnbounded) 
                 return x.LimitType == IntervalLimitType.Start ? 1 : -1;
             
             // At this point, we know that both have a limit value.
@@ -436,7 +436,7 @@ public readonly struct IntervalLimit<T> :
     /// <inheritdoc />
     public int CompareTo(T value)
     {
-        if (IsUnbounded)
+        if (Constraint.IsUnbounded)
         {
             if (IsStart) return -1; // the limit is < the value.
             
@@ -445,10 +445,10 @@ public readonly struct IntervalLimit<T> :
         }
 
         var limitComparison = Limit!.CompareTo(value);
-        if (IsOpen /* && HasLimitValue*/)
+        if (Constraint.IsOpen /* && HasLimitValue*/)
         {
-            if (IsStart && limitComparison == 0) return 1; // value is at the exact start limit, limit > value.
-            if (IsEnd && limitComparison == 0) return -1; // value is at the exact end limit, limit < value.
+            if (LimitType == IntervalLimitType.Start && limitComparison == 0) return 1; // value is at the exact start limit, limit > value.
+            if (LimitType == IntervalLimitType.End && limitComparison == 0) return -1; // value is at the exact end limit, limit < value.
             return limitComparison;
         }
         
@@ -475,7 +475,7 @@ public readonly struct IntervalLimit<T> :
         unchecked
         {
             var hashCode = Constraint.GetHashCode();
-            if (HasLimitValue) hashCode = (hashCode * 397) ^ Limit!.GetHashCode();
+            if (Constraint.HasLimitValue) hashCode = (hashCode * 397) ^ Limit!.GetHashCode();
             hashCode = (hashCode * 397) ^ (int)LimitType;
             return hashCode;
         }
@@ -565,17 +565,17 @@ public readonly struct IntervalLimit<T> :
     /// <inheritdoc />
     public override string ToString()
     {
-        if (IsStart)
+        if (LimitType == IntervalLimitType.Start)
         {
-            if (IsUnbounded) return "(-infinity";
-            if (IsOpen) return $"({Limit}";
+            if (Constraint.IsUnbounded) return "(-infinity";
+            if (Constraint.IsOpen) return $"({Limit}";
             
             // We know IsClosed == true 
             return $"[{Limit}";
         }
         
-        if (IsUnbounded) return "+infinity)";
-        if (IsOpen) return $"{Limit})";
+        if (Constraint.IsUnbounded) return "+infinity)";
+        if (Constraint.IsOpen) return $"{Limit})";
             
         // We know IsClosed == true 
         return $"{Limit}]";

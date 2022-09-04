@@ -405,6 +405,15 @@
             </summary>
             <returns>True if IsUnbounded is false</returns>
         </member>
+        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.#ctor(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitConstraint,`0)">
+            <summary>
+            Construct an interval limit from a limit value, constraint and type. 
+            </summary>
+            <param name="limitType">The interval limit type.</param>
+            <param name="constraint">The limit constraints.</param>
+            <param name="limit">The limit value.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
         <member name="M:Jcd.Math.Intervals.IntervalLimit`1.UnboundedStart">
             <summary>
             Creates an unbounded start interval limit.
@@ -456,15 +465,6 @@
             </summary>
             <param name="limit">the limiting value.</param>
             <returns>The new interval limit.</returns>
-        </member>
-        <member name="M:Jcd.Math.Intervals.IntervalLimit`1.#ctor(Jcd.Math.Intervals.IntervalLimitType,Jcd.Math.Intervals.IntervalLimitConstraint,`0)">
-            <summary>
-            Construct an interval limit from a limit value, constraint and type. 
-            </summary>
-            <param name="limitType">The interval limit type.</param>
-            <param name="constraint">The limit constraints.</param>
-            <param name="limit">The limit value.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
         </member>
         <member name="M:Jcd.Math.Intervals.IntervalLimit`1.CompareTo(Jcd.Math.Intervals.IntervalLimit{`0})">
             <inheritdoc />
