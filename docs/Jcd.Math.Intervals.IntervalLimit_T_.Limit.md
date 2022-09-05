@@ -1,8 +1,9 @@
+#### [Jcd.Math](index.md 'index')
 ### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals').[IntervalLimit&lt;T&gt;](Jcd.Math.Intervals.IntervalLimit_T_.md 'Jcd.Math.Intervals.IntervalLimit<T>')
 
 ## IntervalLimit<T>.Limit Property
 
-The limit for the interval point, if applicable. (Unbounded = null or default(T), the value is ignored.)
+The limit value for the interval point, if applicable. (Unbounded = default(T), the value is ignored for comparisons.)
 
 ```csharp
 public T? Limit { get; }

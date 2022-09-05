@@ -1,8 +1,9 @@
+#### [Jcd.Math](index.md 'index')
 ### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals')
 
 ## IntervalLimit<T> Struct
 
-A point in an interval.
+Defines a limit point in an interval. (i.e. starting point or ending point.)
 
 ```csharp
 public readonly struct IntervalLimit<T> :
@@ -26,10 +27,10 @@ Implements [System.IComparable&lt;](https://docs.microsoft.com/en-us/dotnet/api/
 ### Remarks
 For the purposes of this library:  
   * An Unbounded interval limit is both open and infinite. (HasLimitValue == false && IsUnbounded == true && IsOpen == true).  
-  * An Open interval limit is a non-infinite and open limit.  (i.e. HasLimitValue == true && IsUnbounded == false && IsOpen == true).  
-  * A Closed interval limit is both closed and non-infinite. (i.e. HasLimitValue == true && IsUnbounded == false && IsOpen == false).  
-  * Start interval limits compare as less than or equal to End interval limits for the same non-infinite limit value, depending on the Close-Open nature of the limits being compared.  
-  * Start interval limits compare as less than  End interval limits for infinite limit values.  
+  * An Open interval limit is a finite and open limit.  (i.e. HasLimitValue == true && IsUnbounded == false && IsOpen == true).  
+  * A Closed interval limit is both closed and finite. (i.e. HasLimitValue == true && IsUnbounded == false && IsOpen == false).  
+  * Start interval limits compare as less than or equal to End interval limits for the same non-infinite limit value, depending on the Closed-Open nature of the limits being compared.  
+  * Start interval limits compare as less than End interval limits for infinite (Unbounded) limit values.  
   * Open-Start interval limits compare greater than Closed-Start interval limits.  
   * Open-End interval limits compare less than Closed-End interval limits.  
   * Unbounded-Start interval limits compare less than Open or Closed-Start interval limits.  
@@ -46,13 +47,13 @@ For the purposes of this library:
 | Properties | |
 | :--- | :--- |
 | [Constraint](Jcd.Math.Intervals.IntervalLimit_T_.Constraint.md 'Jcd.Math.Intervals.IntervalLimit<T>.Constraint') | Unbounded (i.e. no limit), Open, Closed. |
-| [HasLimitValue](Jcd.Math.Intervals.IntervalLimit_T_.HasLimitValue.md 'Jcd.Math.Intervals.IntervalLimit<T>.HasLimitValue') | Indicates if there is a discrete, non-infinite value for a limit. |
+| [HasLimitValue](Jcd.Math.Intervals.IntervalLimit_T_.HasLimitValue.md 'Jcd.Math.Intervals.IntervalLimit<T>.HasLimitValue') | Indicates if there is a discrete, non-infinite value for the limit. |
 | [IsClosed](Jcd.Math.Intervals.IntervalLimit_T_.IsClosed.md 'Jcd.Math.Intervals.IntervalLimit<T>.IsClosed') | Indicates if the limit is closed. |
-| [IsEnd](Jcd.Math.Intervals.IntervalLimit_T_.IsEnd.md 'Jcd.Math.Intervals.IntervalLimit<T>.IsEnd') | Indicates if this interval limit is an interval end limit.<br/>If so, when Unbounded is true the Limit value is treated as +infinity. |
-| [IsOpen](Jcd.Math.Intervals.IntervalLimit_T_.IsOpen.md 'Jcd.Math.Intervals.IntervalLimit<T>.IsOpen') | Indicates if the limit is open. (Unbounded is open at +/-infinity) |
-| [IsStart](Jcd.Math.Intervals.IntervalLimit_T_.IsStart.md 'Jcd.Math.Intervals.IntervalLimit<T>.IsStart') | Indicates if this interval limit is an interval start limit.<br/>If so, when Unbounded is true the Limit value is treated as -infinity. |
+| [IsEnd](Jcd.Math.Intervals.IntervalLimit_T_.IsEnd.md 'Jcd.Math.Intervals.IntervalLimit<T>.IsEnd') | Indicates if this interval limit is an interval end limit.<br/>When true and Unbounded is true the Limit value is treated as +infinity. |
+| [IsOpen](Jcd.Math.Intervals.IntervalLimit_T_.IsOpen.md 'Jcd.Math.Intervals.IntervalLimit<T>.IsOpen') | Indicates if the limit is open. (Note: Unbounded is open at +/-infinity) |
+| [IsStart](Jcd.Math.Intervals.IntervalLimit_T_.IsStart.md 'Jcd.Math.Intervals.IntervalLimit<T>.IsStart') | Indicates if this interval limit is a start limit.<br/>When true and Unbounded is true the Limit value is treated as -infinity. |
 | [IsUnbounded](Jcd.Math.Intervals.IntervalLimit_T_.IsUnbounded.md 'Jcd.Math.Intervals.IntervalLimit<T>.IsUnbounded') | Indicates if the limit is unbounded. |
-| [Limit](Jcd.Math.Intervals.IntervalLimit_T_.Limit.md 'Jcd.Math.Intervals.IntervalLimit<T>.Limit') | The limit for the interval point, if applicable. (Unbounded = null or default(T), the value is ignored.) |
+| [Limit](Jcd.Math.Intervals.IntervalLimit_T_.Limit.md 'Jcd.Math.Intervals.IntervalLimit<T>.Limit') | The limit value for the interval point, if applicable. (Unbounded = default(T), the value is ignored for comparisons.) |
 | [LimitType](Jcd.Math.Intervals.IntervalLimit_T_.LimitType.md 'Jcd.Math.Intervals.IntervalLimit<T>.LimitType') | The type of interval limit, Start or End. This dictates how comparisons happen. |
 
 | Methods | |
@@ -64,6 +65,8 @@ For the purposes of this library:
 | [Equals(object)](Jcd.Math.Intervals.IntervalLimit_T_.Equals(object).md 'Jcd.Math.Intervals.IntervalLimit<T>.Equals(object)') | Indicates whether this instance and a specified object are equal. |
 | [Equals(T)](Jcd.Math.Intervals.IntervalLimit_T_.Equals(T).md 'Jcd.Math.Intervals.IntervalLimit<T>.Equals(T)') | Indicates whether the current object is equal to another object of the same type. |
 | [GetHashCode()](Jcd.Math.Intervals.IntervalLimit_T_.GetHashCode().md 'Jcd.Math.Intervals.IntervalLimit<T>.GetHashCode()') | Returns the hash code for this instance. |
+| [MakeEnd(IntervalLimit&lt;T&gt;)](Jcd.Math.Intervals.IntervalLimit_T_.MakeEnd(Jcd.Math.Intervals.IntervalLimit_T_).md 'Jcd.Math.Intervals.IntervalLimit<T>.MakeEnd(Jcd.Math.Intervals.IntervalLimit<T>)') | Ensures that an interval limit is a end limit by examining properties<br/>and, if necessary returning a new instance. Boundedness, Openness and<br/>Limit value are all retained. |
+| [MakeStart(IntervalLimit&lt;T&gt;)](Jcd.Math.Intervals.IntervalLimit_T_.MakeStart(Jcd.Math.Intervals.IntervalLimit_T_).md 'Jcd.Math.Intervals.IntervalLimit<T>.MakeStart(Jcd.Math.Intervals.IntervalLimit<T>)') | Ensures that an interval limit is a start limit by examining properties<br/>and, if necessary returning a new instance. Boundedness, Openness and<br/>Limit value are all retained. |
 | [OpenEnd(T)](Jcd.Math.Intervals.IntervalLimit_T_.OpenEnd(T).md 'Jcd.Math.Intervals.IntervalLimit<T>.OpenEnd(T)') | Creates an open end interval limit.<br/>In other words: creates an exclusive end limit.  <br/>For example: ...,limit) |
 | [OpenStart(T)](Jcd.Math.Intervals.IntervalLimit_T_.OpenStart(T).md 'Jcd.Math.Intervals.IntervalLimit<T>.OpenStart(T)') | Creates an open-start interval limit.<br/>In other words: creates an exclusive start limit.  <br/>For example: (limit,... |
 | [ToString()](Jcd.Math.Intervals.IntervalLimit_T_.ToString().md 'Jcd.Math.Intervals.IntervalLimit<T>.ToString()') | Returns the fully qualified type name of this instance. |

@@ -1,3 +1,4 @@
+#### [Jcd.Math](index.md 'index')
 ### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals').[IntervalLimit&lt;T&gt;](Jcd.Math.Intervals.IntervalLimit_T_.md 'Jcd.Math.Intervals.IntervalLimit<T>')
 
 ## IntervalLimit<T>.LimitType Property

@@ -1,3 +1,4 @@
+#### [Jcd.Math](index.md 'index')
 ### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals').[IntervalLimitType](Jcd.Math.Intervals.IntervalLimitType.md 'Jcd.Math.Intervals.IntervalLimitType')
 
 ## IntervalLimitType.operator ==(IntervalLimitType, IntervalLimitType) Operator

@@ -1,12 +1,13 @@
 ﻿using System;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedType.Global
+// ReSharper disable UnusedMember.Global
 
 namespace Jcd.Math.Intervals;
 
 /// <summary>
-/// Represents a mathematical interval whose limits can be any valid
-/// combination of Unbounded, Closed or Open.
+/// Represents a mathematical interval whose limits can be any 
+/// pairing of Unbounded, Closed or Open.
 /// </summary>
 /// <typeparam name="T">The underlying data type for the interval.</typeparam>
 public readonly struct Interval<T> : 
@@ -24,7 +25,12 @@ public readonly struct Interval<T> :
     /// (This is a .Net standard 2.0 assembly after all)
     /// </remarks> 
     public bool IsValid => Start.IsStart && End.IsEnd;
-
+    
+    /// <summary>
+    /// Indicates if this interval is the interval of all numbers.
+    /// </summary>
+    public bool ContainsAll => Start.IsUnbounded && End.IsUnbounded;
+    
     /// <summary>
     ///  Indicates if the interval is empty:
     /// (0,0), (1,1) ...etc. are empty intervals.
@@ -44,6 +50,16 @@ public readonly struct Interval<T> :
                            && Start.Limit!.Equals(End.Limit!);
 
     /// <summary>
+    /// The empty interval
+    /// </summary>
+    public static readonly Interval<T> Empty = Create(default, default);
+
+    /// <summary>
+    /// The interval containing all values.
+    /// </summary>
+    public static readonly Interval<T> All = Unbounded();
+
+    /// <summary>
     /// By default an uninitialized and invalid instance.
     /// </summary>
     public static Interval<T> Invalid;
@@ -58,8 +74,25 @@ public readonly struct Interval<T> :
     /// </summary>
     public IntervalLimit<T> End { get; }
 
-
     #region factory methods
+    
+    /// <summary>
+    /// Creates an interval from two limits.
+    /// </summary>
+    /// <remarks>
+    /// Any limit type can be passed in. Their types are converted
+    /// and all other attributes are preserved.
+    /// </remarks>
+    /// <param name="start">The starting limit for the interval</param>
+    /// <param name="end">The end limit for the interval</param>
+    /// <returns>The new interval</returns>
+    public static Interval<T> Create(IntervalLimit<T> start, IntervalLimit<T>  end)
+    {
+        if (start.CompareTo(end) > 0)
+            throw new ArgumentOutOfRangeException(nameof(end), $"Detected start ({start}) > end ({end}). End must be >= start");
+    
+        return new Interval<T>(IntervalLimit<T>.MakeStart(start), IntervalLimit<T>.MakeEnd(end));
+    }
 
     /// <summary>
     /// Creates an closed interval: [closedStart,closedEnd]
@@ -181,20 +214,41 @@ public readonly struct Interval<T> :
     #region Implementation of IInterval<T>
     
     /// <summary>
-    /// Determines if the interval contains the provided point.
+    /// Determines if the interval contains the provided value.
     /// </summary>
-    /// <param name="point">The point to compare</param>
-    /// <returns>True if the interval contains the point.</returns>
-    public bool Contains(T point)
+    /// <param name="value">The value to check for inclusion in the interval.</param>
+    /// <returns>True if the interval contains the value.</returns>
+    public bool Contains(T value)
     {
-        return Start <= point && point <= End;
+        ThrowIfInvalid();
+        return Start <= value && value <= End;
     }
 
     /// <summary>
-    /// Determines if this interval completely contains another.
+    /// Determines if the interval contains the value represented by limit.
+    /// (e.g. A left-unbounded interval will contain any discrete value less
+    /// than or equal to the end of the interval.)
+    /// </summary>
+    /// <param name="limit">The limit to inspect.</param>
+    /// <returns>True if the interval contains the limit.</returns>
+    public bool Contains(IntervalLimit<T> limit)
+    {
+        ThrowIfInvalid();
+        return Start <= limit && limit <= End;
+    }
+
+    private void ThrowIfInvalid()
+    {
+        if (!IsValid)
+            throw new ArgumentOutOfRangeException(nameof(IsValid),
+                $"\"this\" is a default, and therefore uninitialized, of {nameof(Interval<T>)}. Do not use default Interval instances.");
+    }
+
+    /// <summary>
+    /// Returns true if this interval completely contains the provided interval.
     /// </summary>
     /// <param name="other">The interval being compared for containment within the current.</param>
-    /// <returns>True if this interval contains the other.</returns>
+    /// <returns>True if this interval contains both endpoints of `other`.</returns>
     public bool Contains(IInterval<T> other)
     {
         if (!IsValid)
@@ -208,6 +262,12 @@ public readonly struct Interval<T> :
         return Start <= other.Start && End >= other.End;
     }
 
+    /// <inheritdoc />
+    public bool IntersectsWith(IInterval<T> other)
+    {
+         return Contains(other.Start) || Contains(other.End);
+    }
+    
     /// <summary>
     /// Determines if this interval completely contains another.
     /// </summary>
@@ -215,14 +275,8 @@ public readonly struct Interval<T> :
     /// <returns>True if this interval contains the other.</returns>
     public bool Contains(Interval<T> other)
     {
-        if (!IsValid)
-            throw new ArgumentOutOfRangeException(nameof(IsValid),
-                $"\"this\" is a default, and therefore uninitialized, of {nameof(Interval<T>)}. Do not use default Interval instances.");
-
-        if (!other.IsValid)
-            throw new ArgumentOutOfRangeException(nameof(other.IsValid),
-                $"other.IsValid is false. It's likely a default instance of {other.GetType().Name}. Do not use default interval instances.");
-        
+        ThrowIfInvalid();
+        other.ThrowIfInvalid();
         return Start <= other.Start && End >= other.End;
     }
     #endregion
@@ -232,6 +286,8 @@ public readonly struct Interval<T> :
     /// <inheritdoc />
     public bool Equals(IInterval<T> other)
     {
+        ThrowIfInvalid();
+        if (IsEmpty && other.IsEmpty) return true;
         return Start == other.Start && End == other.End;
     }
 
@@ -242,6 +298,8 @@ public readonly struct Interval<T> :
     /// <inheritdoc />
     public bool Equals(Interval<T> other)
     {
+        ThrowIfInvalid();
+        if (IsEmpty && other.IsEmpty) return true;
         return Start.Equals(other.Start) && End.Equals(other.End);
     }
 
@@ -252,12 +310,14 @@ public readonly struct Interval<T> :
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
+        ThrowIfInvalid();
         return obj is Interval<T> other && Equals(other);
     }
 
     /// <inheritdoc />
     public override int GetHashCode()
     {
+        ThrowIfInvalid();
         return HashCode.Combine(Start, End);
     }
 
@@ -284,6 +344,17 @@ public readonly struct Interval<T> :
     }
 
     #endregion
+
+    #region Overrides of ValueType
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        ThrowIfInvalid();
+        return IsEmpty ? "{}" : $"{Start};{End}";
+    }
+
+    #endregion
 }
 
 /// <summary>
@@ -291,6 +362,20 @@ public readonly struct Interval<T> :
 /// </summary>
 public static class Interval
 {
+    #region Factory methods
+    
+    /// <summary>
+    /// Creates an interval from two limits.
+    /// </summary>
+    /// <param name="start">The starting limit of the interval</param>
+    /// <param name="end">The end limit of the interval</param>
+    /// <returns>The new interval</returns>
+    public static Interval<T> Create<T>(IntervalLimit<T> start, IntervalLimit<T>  end)
+        where T : IComparable<T>, IEquatable<T>
+    {
+        return Interval<T>.Create(start,end);
+    }    
+    
     /// <summary>
     /// Creates an closed interval: [closedStart,closedEnd]
     /// (i.e. includes both closedStart and closedEnd)
@@ -299,7 +384,7 @@ public static class Interval
     /// <param name="closedEnd">The inclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> Closed<T>(T closedStart, T closedEnd)
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.Closed(closedStart,closedEnd);
 
     /// <summary>
@@ -310,7 +395,7 @@ public static class Interval
     /// <param name="openEnd">The exclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> Open<T>(T openStart, T openEnd)
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.Open(openStart,openEnd);
 
     /// <summary>
@@ -321,7 +406,7 @@ public static class Interval
     /// <param name="closedEnd">The inclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> OpenClosed<T>(T openStart, T closedEnd)
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.OpenClosed(openStart,closedEnd);
 
     /// <summary>
@@ -332,7 +417,7 @@ public static class Interval
     /// <param name="openEnd">The exclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> ClosedOpen<T>(T closedStart, T openEnd)
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.ClosedOpen(closedStart,openEnd);
     
     /// <summary>
@@ -342,7 +427,7 @@ public static class Interval
     /// <param name="openEnd">The exclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> UnboundedOpen<T>(T openEnd)
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.UnboundedOpen(openEnd);
     
     /// <summary>
@@ -352,7 +437,7 @@ public static class Interval
     /// <param name="closedEnd">The inclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> UnboundedClosed<T>(T closedEnd)
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.UnboundedClosed(closedEnd);
 
     /// <summary>
@@ -362,7 +447,7 @@ public static class Interval
     /// <param name="closedStart">the inclusive start to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> ClosedUnbounded<T>(T closedStart)
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.ClosedUnbounded(closedStart);
 
     /// <summary>
@@ -372,7 +457,7 @@ public static class Interval
     /// <param name="openStart">The exclusive start to the interval.</param>
     /// <returns>The new interval</returns>
     public static Interval<T> OpenUnbounded<T>(T openStart)
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.OpenUnbounded(openStart);
 
     /// <summary>
@@ -381,6 +466,34 @@ public static class Interval
     /// </summary>
     /// <returns>The new interval</returns>
     public static Interval<T> Unbounded<T>()
-        where T :IComparable<T>, IEquatable<T>
+        where T : IComparable<T>, IEquatable<T>
         =>  Interval<T>.Unbounded();
+
+    #endregion
+    
+    /// <summary>
+    /// Creates the intersection of two intervals.
+    /// </summary>
+    /// <param name="first"></param>
+    /// <param name="second"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static Interval<T> Intersect<T>(this Interval<T> first, Interval<T> second)
+        where T : IComparable<T>, IEquatable<T>
+    {
+        if (first.ContainsAll) return Interval<T>.All;
+        if (second.ContainsAll) return Interval<T>.All;
+        if (!first.Contains(second.Start) && !first.Contains(second.End))
+            return Interval<T>.Empty; // disjoint. Return the empty set.
+
+        var start = first.Contains(second.Start)
+            ? Compare.Max(first.Start, second.Start)
+            : first.Start;
+        
+        var end  = first.Contains(second.End)
+            ? Compare.Min(first.End, second.End)
+            : first.End;
+        
+        return Create(start, end);
+    }
 }

@@ -1,5 +1,8 @@
 ﻿namespace Jcd.Math.Examples;
 
+/// <summary>
+/// A sample custom type that can be used with an Interval
+/// </summary>
 internal class CustomValue : IComparable<CustomValue>, IComparable, IEquatable<CustomValue>
 {
     private readonly byte _value;

@@ -45,14 +45,29 @@ public interface IInterval<T> : IEquatable<IInterval<T>>
     /// <summary>
     /// Determines if the interval contains the provided point.
     /// </summary>
-    /// <param name="point">The point to compare</param>
+    /// <param name="value">The point to compare</param>
     /// <returns>True if the interval contains the point.</returns>
-    bool Contains(T point);
+    bool Contains(T value);
     
+    /// <summary>
+    /// Determines if the interval contains the provided limit.
+    /// </summary>
+    /// <param name="limit">The limit to inspect.</param>
+    /// <returns>True if the interval contains the limit.</returns>
+    bool Contains(IntervalLimit<T> limit);
+
     /// <summary>
     /// Determines if this interval completely contains another.
     /// </summary>
     /// <param name="other">The interval being compared for containment within the current.</param>
     /// <returns>True if this interval contains the other.</returns>
-    public bool Contains(IInterval<T> other);
+    bool Contains(IInterval<T> other);
+    
+    /// <summary>
+    /// Determines if the current interval contains any values
+    /// in common with another interval.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    bool IntersectsWith(IInterval<T> other);
 }

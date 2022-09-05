@@ -1,3 +1,4 @@
+#### [Jcd.Math](index.md 'index')
 ### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals').[IntervalLimit](Jcd.Math.Intervals.IntervalLimit.md 'Jcd.Math.Intervals.IntervalLimit')
 
 ## IntervalLimit.OpenStart<T>(T) Method

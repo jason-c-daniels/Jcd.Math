@@ -9,16 +9,16 @@ using System.Runtime.CompilerServices;
 namespace Jcd.Math.Intervals;
 
 /// <summary>
-/// A point in an interval.
+/// Defines a limit point in an interval. (i.e. starting point or ending point.) 
 /// </summary>
 /// <typeparam name="T">The data type for the interval using this limit.</typeparam>
 /// <remarks>
 /// For the purposes of this library:
 ///   * An Unbounded interval limit is both open and infinite. (HasLimitValue == false &amp;&amp; IsUnbounded == true &amp;&amp; IsOpen == true).
-///   * An Open interval limit is a non-infinite and open limit.  (i.e. HasLimitValue == true &amp;&amp; IsUnbounded == false &amp;&amp; IsOpen == true).
-///   * A Closed interval limit is both closed and non-infinite. (i.e. HasLimitValue == true &amp;&amp; IsUnbounded == false &amp;&amp; IsOpen == false).
-///   * Start interval limits compare as less than or equal to End interval limits for the same non-infinite limit value, depending on the Close-Open nature of the limits being compared.
-///   * Start interval limits compare as less than  End interval limits for infinite limit values.
+///   * An Open interval limit is a finite and open limit.  (i.e. HasLimitValue == true &amp;&amp; IsUnbounded == false &amp;&amp; IsOpen == true).
+///   * A Closed interval limit is both closed and finite. (i.e. HasLimitValue == true &amp;&amp; IsUnbounded == false &amp;&amp; IsOpen == false).
+///   * Start interval limits compare as less than or equal to End interval limits for the same non-infinite limit value, depending on the Closed-Open nature of the limits being compared.
+///   * Start interval limits compare as less than End interval limits for infinite (Unbounded) limit values.
 ///   * Open-Start interval limits compare greater than Closed-Start interval limits.
 ///   * Open-End interval limits compare less than Closed-End interval limits.
 ///   * Unbounded-Start interval limits compare less than Open or Closed-Start interval limits.
@@ -44,7 +44,7 @@ public readonly struct IntervalLimit<T> :
     public IntervalLimitConstraint Constraint { get; }
     
     /// <summary>
-    /// The limit for the interval point, if applicable. (Unbounded = null or default(T), the value is ignored.)
+    /// The limit value for the interval point, if applicable. (Unbounded = default(T), the value is ignored for comparisons.)
     /// </summary>
     public T? Limit { get; }
     
@@ -54,19 +54,19 @@ public readonly struct IntervalLimit<T> :
     public IntervalLimitType LimitType { get; }
 
     /// <summary>
-    /// Indicates if this interval limit is an interval start limit.
-    /// If so, when Unbounded is true the Limit value is treated as -infinity.
+    /// Indicates if this interval limit is a start limit.
+    /// When true and Unbounded is true the Limit value is treated as -infinity.
     /// </summary>
     public bool IsStart => LimitType.IsStart;
     
     /// <summary>
     /// Indicates if this interval limit is an interval end limit.
-    /// If so, when Unbounded is true the Limit value is treated as +infinity.
+    /// When true and Unbounded is true the Limit value is treated as +infinity.
     /// </summary>
     public bool IsEnd => LimitType.IsEnd;
     
     /// <summary>
-    /// Indicates if the limit is open. (Unbounded is open at +/-infinity)
+    /// Indicates if the limit is open. (Note: Unbounded is open at +/-infinity)
     /// </summary>
     public bool IsOpen => Constraint.IsOpen;
     
@@ -81,12 +81,12 @@ public readonly struct IntervalLimit<T> :
     public bool IsUnbounded => Constraint.IsUnbounded;
 
     /// <summary>
-    /// Indicates if there is a discrete, non-infinite value for a limit.
+    /// Indicates if there is a discrete, non-infinite value for the limit.
     /// </summary>
-    /// <returns>True if IsUnbounded is false</returns>
     public bool HasLimitValue => Constraint.HasLimitValue;
     
     #region Constructor and Factory methods
+
     /// <summary>
     /// Construct an interval limit from a limit value, constraint and type. 
     /// </summary>
@@ -189,7 +189,7 @@ public readonly struct IntervalLimit<T> :
         // when dealing with both start constraints or both end constraints
         if (x.LimitType == y.LimitType)
         {
-            // Unbounded on both means -infinity or +infinity for both, therefore they're equal.
+            // Unbounded on both means -infinity or +infinity for both, therefore they're the same limit point.
             if (x.IsUnbounded && y.IsUnbounded) return 0;
             
             // The left hand side has no limit and the right hand side has a limit.
@@ -206,13 +206,15 @@ public readonly struct IntervalLimit<T> :
             
             // At this point, we know that both have a limit value.
             // So compare the limit values directly and cache the result.
+            // Also, suppress possible null warning with "!". 
             var limitComparison = x.Limit!.CompareTo(y.Limit!);
             
             // When we have the same limit value check for differences in constraint. (Open vs Closed)
             if (limitComparison == 0 
-                && x.Constraint != y.Constraint 
-                //&& x.HasLimitValue 
-                //&& y.HasLimitValue
+                && x.Constraint != y.Constraint
+                // We already know the following two commented out lines are true. Left here to keep the full logic in view.
+                // && x.HasLimitValue  
+                // && y.HasLimitValue 
                 )
             {
                 // For the same non-infinite limit value
@@ -232,16 +234,12 @@ public readonly struct IntervalLimit<T> :
                     return x.LimitType == IntervalLimitType.Start ? 1 : -1;
             }
             
-            // the limit value comparison was not equal, return the result
-            // in other words:
-            //         (s1,...) < [s2,...) when s1 < s2
-            // and
-            //         (...,e1) > (...,e2] when e1 > e2
+            // The limit value comparison was not equal, return the computed result
             return limitComparison;
         }
 
         // if x is a start, we know y is an end.
-        if (x.LimitType.IsStart)
+        if (x.IsStart)
         {
             // compare actual limit values if both have them.
             // starts always come before ends.
@@ -266,7 +264,7 @@ public readonly struct IntervalLimit<T> :
         }
 
         // if x is an end, we know y is a start.
-        if (x.LimitType.IsEnd)
+        if (x.IsEnd)
         {
             // compare actual limit values if both have them.
             // ends always come after starts.
@@ -290,7 +288,6 @@ public readonly struct IntervalLimit<T> :
         
         // This is theoretically unreachable code.
         // But by default we'll just call starts less than ends just to cover our bases.
-        // IntervalLimitType provides exactly that facility so just call CompareTo
         return x.LimitType.CompareTo(y.LimitType);
     }
 
@@ -617,6 +614,40 @@ public readonly struct IntervalLimit<T> :
     }
 
     #endregion
+
+    /// <summary>
+    /// Ensures that an interval limit is a start limit by examining properties
+    /// and, if necessary returning a new instance. Boundedness, Openness and
+    /// Limit value are all retained.
+    /// </summary>
+    /// <param name="value">The value to convert.</param>
+    /// <typeparam name="T">The underlying data type.</typeparam>
+    /// <returns>A start limit</returns>
+    public static IntervalLimit<T> MakeStart(IntervalLimit<T> value)
+    {
+        if (value.IsStart) return value;
+        if (value.IsUnbounded) return IntervalLimit<T>.UnboundedStart();
+        return value.IsOpen
+            ? OpenStart(value.Limit!)
+            : ClosedStart(value.Limit!);
+    }
+
+    /// <summary>
+    /// Ensures that an interval limit is a end limit by examining properties
+    /// and, if necessary returning a new instance. Boundedness, Openness and
+    /// Limit value are all retained.
+    /// </summary>
+    /// <param name="value">The value to convert.</param>
+    /// <typeparam name="T">The underlying data type.</typeparam>
+    /// <returns>An end limit</returns>
+    public static IntervalLimit<T> MakeEnd(IntervalLimit<T> value) 
+    {
+        if (value.IsEnd) return value;
+        if (value.IsUnbounded) return UnboundedEnd();
+        return value.IsOpen
+            ? OpenEnd(value.Limit!)
+            : ClosedEnd(value.Limit!);
+    }
 }
 
 /// <summary>

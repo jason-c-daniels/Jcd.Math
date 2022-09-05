@@ -1,3 +1,4 @@
+#### [Jcd.Math](index.md 'index')
 ### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals')
 
 ## IInterval<T> Interface
@@ -18,8 +19,7 @@ System.IEquatable<Jcd.Math.Intervals.IInterval<T>>
 The underlying data type for the interval.
 
 Derived  
-&#8627; [Interval&lt;T&gt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')  
-&#8627; [Range&lt;T&gt;](Jcd.Math.Intervals.Range_T_.md 'Jcd.Math.Intervals.Range<T>')
+&#8627; [Interval&lt;T&gt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')
 
 Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')[T](Jcd.Math.Intervals.IInterval_T_.md#Jcd.Math.Intervals.IInterval_T_.T 'Jcd.Math.Intervals.IInterval<T>.T')[&gt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
 
@@ -34,4 +34,6 @@ Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/S
 | Methods | |
 | :--- | :--- |
 | [Contains(IInterval&lt;T&gt;)](Jcd.Math.Intervals.IInterval_T_.Contains(Jcd.Math.Intervals.IInterval_T_).md 'Jcd.Math.Intervals.IInterval<T>.Contains(Jcd.Math.Intervals.IInterval<T>)') | Determines if this interval completely contains another. |
+| [Contains(IntervalLimit&lt;T&gt;)](Jcd.Math.Intervals.IInterval_T_.Contains(Jcd.Math.Intervals.IntervalLimit_T_).md 'Jcd.Math.Intervals.IInterval<T>.Contains(Jcd.Math.Intervals.IntervalLimit<T>)') | Determines if the interval contains the provided limit. |
 | [Contains(T)](Jcd.Math.Intervals.IInterval_T_.Contains(T).md 'Jcd.Math.Intervals.IInterval<T>.Contains(T)') | Determines if the interval contains the provided point. |
+| [IntersectsWith(IInterval&lt;T&gt;)](Jcd.Math.Intervals.IInterval_T_.IntersectsWith(Jcd.Math.Intervals.IInterval_T_).md 'Jcd.Math.Intervals.IInterval<T>.IntersectsWith(Jcd.Math.Intervals.IInterval<T>)') | Determines if the current interval contains any values<br/>in common with another interval. |

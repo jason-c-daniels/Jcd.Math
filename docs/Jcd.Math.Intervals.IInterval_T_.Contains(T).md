@@ -1,3 +1,4 @@
+#### [Jcd.Math](index.md 'index')
 ### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals').[IInterval&lt;T&gt;](Jcd.Math.Intervals.IInterval_T_.md 'Jcd.Math.Intervals.IInterval<T>')
 
 ## IInterval<T>.Contains(T) Method
@@ -5,13 +6,13 @@
 Determines if the interval contains the provided point.
 
 ```csharp
-bool Contains(T point);
+bool Contains(T value);
 ```
 #### Parameters
 
-<a name='Jcd.Math.Intervals.IInterval_T_.Contains(T).point'></a>
+<a name='Jcd.Math.Intervals.IInterval_T_.Contains(T).value'></a>
 
-`point` [T](Jcd.Math.Intervals.IInterval_T_.md#Jcd.Math.Intervals.IInterval_T_.T 'Jcd.Math.Intervals.IInterval<T>.T')
+`value` [T](Jcd.Math.Intervals.IInterval_T_.md#Jcd.Math.Intervals.IInterval_T_.T 'Jcd.Math.Intervals.IInterval<T>.T')
 
 The point to compare
 

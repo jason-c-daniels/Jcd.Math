@@ -1,8 +1,9 @@
+#### [Jcd.Math](index.md 'index')
 ### [Jcd.Math.Intervals](Jcd.Math.Intervals.md 'Jcd.Math.Intervals').[Interval&lt;T&gt;](Jcd.Math.Intervals.Interval_T_.md 'Jcd.Math.Intervals.Interval<T>')
 
 ## Interval<T>.Contains(IInterval<T>) Method
 
-Determines if this interval completely contains another.
+Returns true if this interval completely contains the provided interval.
 
 ```csharp
 public bool Contains(Jcd.Math.Intervals.IInterval<T> other);
@@ -19,4 +20,4 @@ Implements [Contains(IInterval&lt;T&gt;)](Jcd.Math.Intervals.IInterval_T_.Contai
 
 #### Returns
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')  
-True if this interval contains the other.
+True if this interval contains both endpoints of `other`.
