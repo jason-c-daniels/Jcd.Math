@@ -11,7 +11,7 @@ System.IComparable,
 System.IEquatable<Jcd.Math.Intervals.IntervalLimit<T>>,
 System.IComparable<T>,
 System.IEquatable<T>
-    where T : System.IComparable<T>
+    where T : System.IComparable<T>, System.IEquatable<T>
 ```
 #### Type parameters
 

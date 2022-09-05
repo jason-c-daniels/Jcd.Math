@@ -8,7 +8,7 @@ For example: ...,limit]
 
 ```csharp
 public static Jcd.Math.Intervals.IntervalLimit<T> ClosedEnd<T>(T limit)
-    where T : System.IComparable<T>;
+    where T : System.IComparable<T>, System.IEquatable<T>;
 ```
 #### Type parameters
 

@@ -7,7 +7,7 @@ namespace Jcd.Math.Intervals;
 /// </summary>
 /// <typeparam name="T">The underlying data type for the interval.</typeparam>
 public interface IInterval<T> : IEquatable<IInterval<T>> 
-    where T : IComparable<T>
+    where T : IComparable<T>, IEquatable<T>
 {
     /// <summary>
     /// Indicates if the interval was properly constructed.

@@ -30,7 +30,7 @@ public readonly struct IntervalLimit<T> :
         IEquatable<IntervalLimit<T>>,
         IComparable<T>,
         IEquatable<T>
-    where T : IComparable<T>
+    where T : IComparable<T>, IEquatable<T>
 {
     /// <summary>
     /// The default IntervalLimit. This is equivalent to IntervalLimit&lt;T&gt;.UnboundedStart
@@ -632,7 +632,7 @@ public static class IntervalLimit
     /// <returns>The new interval limit</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> UnboundedStart<T>()
-        where T: IComparable<T>
+        where T: IComparable<T>, IEquatable<T>
         => IntervalLimit<T>.UnboundedStart();
 
     /// <summary>
@@ -643,7 +643,7 @@ public static class IntervalLimit
     /// <returns>The new interval limit</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> UnboundedEnd<T>()
-        where T: IComparable<T>
+        where T: IComparable<T>, IEquatable<T>
         => IntervalLimit<T>.UnboundedEnd();
 
     /// <summary>
@@ -654,7 +654,7 @@ public static class IntervalLimit
     /// <returns>The new interval limit</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> OpenStart<T>(T limit)
-        where T : IComparable<T>
+        where T : IComparable<T>, IEquatable<T>
         => IntervalLimit<T>.OpenStart(limit);
 
     /// <summary>
@@ -665,7 +665,7 @@ public static class IntervalLimit
     /// <returns>The new interval limit</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> ClosedStart<T>(T limit)
-        where T : IComparable<T>
+        where T : IComparable<T>, IEquatable<T>
         => IntervalLimit<T>.ClosedStart(limit);
     
     /// <summary>
@@ -676,7 +676,7 @@ public static class IntervalLimit
     /// <returns>The new interval limit</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> OpenEnd<T>(T limit)
-        where T : IComparable<T>
+        where T : IComparable<T>, IEquatable<T>
         => IntervalLimit<T>.OpenEnd(limit);
 
     /// <summary>
@@ -687,6 +687,6 @@ public static class IntervalLimit
     /// <returns>The new interval limit</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> ClosedEnd<T>(T limit)
-        where T : IComparable<T>
+        where T : IComparable<T>, IEquatable<T>
         => IntervalLimit<T>.ClosedEnd(limit);   
 }

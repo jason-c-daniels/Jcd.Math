@@ -7,7 +7,7 @@ Defines the operations and properties needed to create an interval.
 ```csharp
 public interface IInterval<T> :
 System.IEquatable<Jcd.Math.Intervals.IInterval<T>>
-    where T : System.IComparable<T>
+    where T : System.IComparable<T>, System.IEquatable<T>
 ```
 #### Type parameters
 

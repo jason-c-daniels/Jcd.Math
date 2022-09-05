@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Diagnostics;
+using Jcd.Math.Examples;
 using Jcd.Math.Intervals;
 const int numberOfItemsToCreate = 100_000_000;
 

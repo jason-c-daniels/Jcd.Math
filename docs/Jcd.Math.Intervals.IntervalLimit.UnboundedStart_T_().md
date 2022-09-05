@@ -8,7 +8,7 @@ For example: (-infinity,...
 
 ```csharp
 public static Jcd.Math.Intervals.IntervalLimit<T> UnboundedStart<T>()
-    where T : System.IComparable<T>;
+    where T : System.IComparable<T>, System.IEquatable<T>;
 ```
 #### Type parameters
 

@@ -1,4 +1,6 @@
-﻿public class CustomValue : IComparable<CustomValue>, IComparable
+﻿namespace Jcd.Math.Examples;
+
+internal class CustomValue : IComparable<CustomValue>, IComparable, IEquatable<CustomValue>
 {
     private readonly byte _value;
 
@@ -25,5 +27,15 @@
         return obj is CustomValue other ? _value.CompareTo(other._value) : throw new ArgumentException($"Object must be of type {nameof(CustomValue)}");
     }
     
+    #endregion
+
+    #region Implementation of IEquatable<CustomValue>
+
+    /// <inheritdoc />
+    public bool Equals(CustomValue? other)
+    {
+        return CompareTo(other) == 0;
+    }
+
     #endregion
 }
