@@ -7,6 +7,12 @@ const int numberOfItemsToCreate = 100_000_000;
 
 var _ = Interval<byte>.Closed(10,100);
 var __ = _.Contains(11);
+TimeOpenIntervalCreates();
+TimeOpenClosedIntervalCreates();
+TimeClosedOpenIntervalCreates();
+TimeClosedUnboundedIntervalCreates();
+TimeUnboundedClosedIntervalCreates();
+TimeUnboundedIntervalCreates();
 TimeClosedIntervalCreates();
 TimeClosedIntervalCopies();
 TimeClosedIntervalContainsValue();
@@ -246,6 +252,90 @@ static void TimeClosedIntervalCreates()
     sw.Stop();
     Console.WriteLine(
         $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} instances created in {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeOpenIntervalCreates()
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ = Interval<byte>.Open(1,10);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Open)} instances created in {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeOpenClosedIntervalCreates()
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ = Interval<byte>.OpenClosed(1,10);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.OpenClosed)} instances created in {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeClosedOpenIntervalCreates()
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ = Interval<byte>.ClosedOpen(1,10);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.ClosedOpen)} instances created in {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeClosedUnboundedIntervalCreates()
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ = Interval<byte>.ClosedUnbounded(1);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.ClosedUnbounded)} instances created in {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeUnboundedClosedIntervalCreates()
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ = Interval<byte>.UnboundedClosed(1);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.UnboundedClosed)} instances created in {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeUnboundedIntervalCreates()
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ = Interval<byte>.Unbounded();
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Unbounded)} instances created in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeClosedIntervalCopies()
