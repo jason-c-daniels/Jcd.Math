@@ -9,6 +9,7 @@ var __ = _.Contains(11);
 TimeClosedIntervalCreates();
 TimeClosedIntervalCopies();
 TimeClosedIntervalContainsValue();
+TimeClosedIntervalContainsAnotherInterval();
 TimeRangeExtensionsInRange();
 TimeRangeExtensionsCompareToRange();
 TimeIntervalLimitCreates();
@@ -201,7 +202,6 @@ static void TimeInterfaceCompareToCalls<T>(IComparable<T> ilt0, T ilt1)
     Console.WriteLine($"{numberOfItemsToCreate:n0} IComparable<{typeof(T).Name}>.CompareTo calls in {sw.ElapsedMilliseconds}ms");
 }
 
-
 static void TimeRawEnumLessThanCalls()
 {
     var ilt0 = (RawEnum)0;
@@ -275,6 +275,22 @@ static void TimeClosedIntervalContainsValue()
     sw.Stop();
     Console.WriteLine(
         $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} contains a value performed in {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeClosedIntervalContainsAnotherInterval()
+{
+    var interval = Interval<byte>.Closed(1, 254);
+    var interval2 = Interval<byte>.Closed(2, 253);
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        var _ =interval.Contains(interval2);
+    }
+
+    sw.Stop();
+    Console.WriteLine(
+        $"{numberOfItemsToCreate:n0} {nameof(Interval)}.{nameof(Interval.Closed)} contains another Interval performed in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeRangeExtensionsInRange()
