@@ -39,13 +39,13 @@ public readonly struct IntervalLimitConstraint : IEquatable<IntervalLimitConstra
     /// Indicates if the specified interval endpoint includes the
     /// start/end point in question.
     /// </summary>
-    public bool IsOpen => _state != ClosedValue;
+    public bool IsOpen => !IsClosed;
 
     /// <summary>
     /// Indicates if the specified interval endpoint contains any
     /// limit whatsoever. (i.e. is it fully open at the start or end?)
     /// </summary>
-    public bool HasLimitValue => _state != UnboundedState;
+    public bool HasLimitValue => !IsUnbounded;
 
     /// <summary>
     /// Indicates if there is no limit on the bounds of this constraint.

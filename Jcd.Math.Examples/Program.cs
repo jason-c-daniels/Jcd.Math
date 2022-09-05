@@ -66,7 +66,7 @@ static void TimeIntervalLimitCompareToValue()
     for (var i = 0; i < numberOfItemsToCreate; i++)
     {
         var _ = s.CompareTo(12);
-        var __ = s.CompareTo(12);
+        var __ = e.CompareTo(12);
     }
 
     sw.Stop();
@@ -191,12 +191,13 @@ static void TimeIntervalLimitCreates()
     sw.Start();
     for (var i = 0; i < numberOfItemsToCreate; i++)
     {
-        var _ = IntervalLimit<byte>.ClosedStart(10);
+        var _ = IntervalLimit<byte>.ClosedStart(1);
+        var __ = IntervalLimit<byte>.ClosedEnd(10);
     }
 
     sw.Stop();
     Console.WriteLine(
-        $"{numberOfItemsToCreate:n0} {nameof(IntervalLimit)}<byte> instances created in {sw.ElapsedMilliseconds}ms");
+        $"{numberOfItemsToCreate:n0} {nameof(IntervalLimit)}<byte> x2 instances created in {sw.ElapsedMilliseconds}ms");
 }
 
 static void TimeClosedIntervalCreates()
