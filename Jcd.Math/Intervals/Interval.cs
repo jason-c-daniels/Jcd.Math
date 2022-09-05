@@ -176,11 +176,6 @@ public readonly struct Interval<T> :
     
     private Interval(IntervalLimit<T> start, IntervalLimit<T> end)
     {
-        /*
-        if (start.CompareTo(end) > 0)
-            throw new ArgumentOutOfRangeException(nameof(end), $"Detected start ({start}) > end ({end}). End must be >= start");
-        */
-        
         Start = start;
         End = end;
     }

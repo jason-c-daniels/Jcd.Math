@@ -20,6 +20,8 @@ TimeIntervalLimitTypeCompareToCalls();
 TimeIntervalLimitLessThanCalls();
 TimeRawEnumTypeCasts();
 TimeRawEnumCompareToCalls();
+TimeRawCompareToCalls<byte>(1, 10);
+TimeInterfaceCompareToCalls((byte)1, (byte)10);
 TimeRawEnumLessThanCalls();
 
 IntervalLimit<int> ild;
@@ -168,6 +170,37 @@ static void TimeRawEnumCompareToCalls()
     sw.Stop();
     Console.WriteLine($"{numberOfItemsToCreate:n0} {nameof(RawEnum)} CompareTo calls in {sw.ElapsedMilliseconds}ms");
 }
+
+static void TimeRawCompareToCalls<T>(T ilt0, T ilt1)
+   where T : IComparable<T>
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        // this boxing allocation slows down comparisons.
+        var r0 = ilt0.CompareTo(ilt1); 
+    }
+
+    sw.Stop();
+    Console.WriteLine($"{numberOfItemsToCreate:n0} Raw {typeof(T).Name} CompareTo calls in {sw.ElapsedMilliseconds}ms");
+}
+
+static void TimeInterfaceCompareToCalls<T>(IComparable<T> ilt0, T ilt1)
+    where T : IComparable<T>
+{
+    var sw = new Stopwatch();
+    sw.Start();
+    for (var i = 0; i < numberOfItemsToCreate; i++)
+    {
+        // this boxing allocation slows down comparisons.
+        var r0 = ilt0.CompareTo(ilt1); 
+    }
+
+    sw.Stop();
+    Console.WriteLine($"{numberOfItemsToCreate:n0} IComparable<{typeof(T).Name}>.CompareTo calls in {sw.ElapsedMilliseconds}ms");
+}
+
 
 static void TimeRawEnumLessThanCalls()
 {
