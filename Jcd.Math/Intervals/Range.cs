@@ -10,20 +10,20 @@ namespace Jcd.Math.Intervals;
 /// </summary>
 /// <typeparam name="T">The underlying data type.</typeparam>
 public readonly struct Range<T> : IInterval<T>, IEquatable<Range<T>>
-    where T: IComparable<T>
+    where T: IComparable<T>, IEquatable<T>
 {
     #region Implementation of IInterval<T>
 
     /// <inheritdoc />
-    public bool IsValid => Start.LimitType == IntervalLimitType.Start
-                           && End.LimitType == IntervalLimitType.End
+    public bool IsValid => Start.IsStart
+                           && End.IsEnd
                            ;
 
     /// <inheritdoc />
     public bool IsEmpty => false;
 
     /// <inheritdoc />
-    public bool IsSingleValue => Start.Limit!.CompareTo(End.Limit!) == 0;
+    public bool IsSingleValue => Start.Limit!.Equals(End.Limit!);
 
     /// <inheritdoc />
     public IntervalLimit<T> Start { get; }

@@ -19,6 +19,11 @@ Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/S
 | [End](Jcd.Math.Intervals.IntervalLimitType.End.md 'Jcd.Math.Intervals.IntervalLimitType.End') | The end point of an interval. End must be >= start |
 | [Start](Jcd.Math.Intervals.IntervalLimitType.Start.md 'Jcd.Math.Intervals.IntervalLimitType.Start') | The start point of an interval. Start must be <= end |
 
+| Properties | |
+| :--- | :--- |
+| [IsEnd](Jcd.Math.Intervals.IntervalLimitType.IsEnd.md 'Jcd.Math.Intervals.IntervalLimitType.IsEnd') | Indicates if this is an End IntervalLimitType |
+| [IsStart](Jcd.Math.Intervals.IntervalLimitType.IsStart.md 'Jcd.Math.Intervals.IntervalLimitType.IsStart') | Indicates if this is a Start IntervalLimitType |
+
 | Methods | |
 | :--- | :--- |
 | [CompareTo(object)](Jcd.Math.Intervals.IntervalLimitType.CompareTo(object).md 'Jcd.Math.Intervals.IntervalLimitType.CompareTo(object)') | Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object. |

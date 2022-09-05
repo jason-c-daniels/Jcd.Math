@@ -7,7 +7,7 @@ Creates a left-open, right-unbounded interval: (openStart, +infinity)
 
 ```csharp
 public static Jcd.Math.Intervals.Interval<T> OpenUnbounded<T>(T openStart)
-    where T : System.IComparable<T>;
+    where T : System.IComparable<T>, System.IEquatable<T>;
 ```
 #### Type parameters
 

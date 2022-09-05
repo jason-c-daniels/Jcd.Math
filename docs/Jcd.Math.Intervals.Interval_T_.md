@@ -10,7 +10,7 @@ public readonly struct Interval<T> :
 Jcd.Math.Intervals.IInterval<T>,
 System.IEquatable<Jcd.Math.Intervals.IInterval<T>>,
 System.IEquatable<Jcd.Math.Intervals.Interval<T>>
-    where T : System.IComparable<T>
+    where T : System.IComparable<T>, System.IEquatable<T>
 ```
 #### Type parameters
 
@@ -24,7 +24,7 @@ Implements [Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md
 
 | Fields | |
 | :--- | :--- |
-| [Invalid](Jcd.Math.Intervals.Interval_T_.Invalid.md 'Jcd.Math.Intervals.Interval<T>.Invalid') | By default an uninitialized |
+| [Invalid](Jcd.Math.Intervals.Interval_T_.Invalid.md 'Jcd.Math.Intervals.Interval<T>.Invalid') | By default an uninitialized and invalid instance. |
 
 | Properties | |
 | :--- | :--- |

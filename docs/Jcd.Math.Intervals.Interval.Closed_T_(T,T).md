@@ -7,7 +7,7 @@ Creates an closed interval: [closedStart,closedEnd]
 
 ```csharp
 public static Jcd.Math.Intervals.Interval<T> Closed<T>(T closedStart, T closedEnd)
-    where T : System.IComparable<T>;
+    where T : System.IComparable<T>, System.IEquatable<T>;
 ```
 #### Type parameters
 

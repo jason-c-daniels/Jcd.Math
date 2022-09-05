@@ -10,7 +10,7 @@ public readonly struct Range<T> :
 Jcd.Math.Intervals.IInterval<T>,
 System.IEquatable<Jcd.Math.Intervals.IInterval<T>>,
 System.IEquatable<Jcd.Math.Intervals.Range<T>>
-    where T : System.IComparable<T>
+    where T : System.IComparable<T>, System.IEquatable<T>
 ```
 #### Type parameters
 

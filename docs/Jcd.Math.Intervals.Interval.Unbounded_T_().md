@@ -7,7 +7,7 @@ Creates a completely unbounded interval. (-infinity, +infinity)
 
 ```csharp
 public static Jcd.Math.Intervals.Interval<T> Unbounded<T>()
-    where T : System.IComparable<T>;
+    where T : System.IComparable<T>, System.IEquatable<T>;
 ```
 #### Type parameters
 

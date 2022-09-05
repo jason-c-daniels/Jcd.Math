@@ -57,13 +57,13 @@ public readonly struct IntervalLimit<T> :
     /// Indicates if this interval limit is an interval start limit.
     /// If so, when Unbounded is true the Limit value is treated as -infinity.
     /// </summary>
-    public bool IsStart => LimitType == IntervalLimitType.Start;
+    public bool IsStart => LimitType.IsStart;
     
     /// <summary>
     /// Indicates if this interval limit is an interval end limit.
     /// If so, when Unbounded is true the Limit value is treated as +infinity.
     /// </summary>
-    public bool IsEnd => LimitType == IntervalLimitType.End;
+    public bool IsEnd => LimitType.IsEnd;
     
     /// <summary>
     /// Indicates if the limit is open. (Unbounded is open at +/-infinity)

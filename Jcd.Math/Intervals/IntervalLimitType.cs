@@ -25,6 +25,16 @@ public readonly struct IntervalLimitType :
     /// </summary>
     public static IntervalLimitType End = new (EndValue);
 
+    /// <summary>
+    /// Indicates if this is a Start IntervalLimitType
+    /// </summary>
+    public bool IsStart => _value == StartValue;
+
+    /// <summary>
+    /// Indicates if this is an End IntervalLimitType
+    /// </summary>
+    public bool IsEnd => _value == EndValue;
+    
     private IntervalLimitType(byte value)
     {
         if (value != StartValue && value != EndValue)

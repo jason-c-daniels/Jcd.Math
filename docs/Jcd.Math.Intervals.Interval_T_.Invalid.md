@@ -2,7 +2,7 @@
 
 ## Interval<T>.Invalid Field
 
-By default an uninitialized
+By default an uninitialized and invalid instance.
 
 ```csharp
 public static Interval<T> Invalid;

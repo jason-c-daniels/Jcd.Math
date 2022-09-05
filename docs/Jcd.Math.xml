@@ -117,7 +117,7 @@
         </member>
         <member name="F:Jcd.Math.Intervals.Interval`1.Invalid">
             <summary>
-            By default an uninitialized 
+            By default an uninitialized and invalid instance.
             </summary>
         </member>
         <member name="P:Jcd.Math.Intervals.Interval`1.Start">
@@ -784,6 +784,16 @@
         <member name="F:Jcd.Math.Intervals.IntervalLimitType.End">
             <summary>
             The end point of an interval. End must be &gt;= start
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimitType.IsStart">
+            <summary>
+            Indicates if this is a Start IntervalLimitType
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Intervals.IntervalLimitType.IsEnd">
+            <summary>
+            Indicates if this is an End IntervalLimitType
             </summary>
         </member>
         <member name="M:Jcd.Math.Intervals.IntervalLimitType.Equals(Jcd.Math.Intervals.IntervalLimitType)">

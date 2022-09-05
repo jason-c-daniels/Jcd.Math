@@ -12,7 +12,7 @@ namespace Jcd.Math.Intervals;
 public readonly struct Interval<T> : 
     IInterval<T>, 
     IEquatable<Interval<T>>
-    where T : IComparable<T>
+    where T : IComparable<T>, IEquatable<T>
 {
     /// <summary>
     /// Indicates if the interval was properly constructed.
@@ -23,31 +23,30 @@ public readonly struct Interval<T> :
     /// fields and properties in an uninitialized instance.
     /// (This is a .Net standard 2.0 assembly after all)
     /// </remarks> 
-    public bool IsValid => Start.LimitType == IntervalLimitType.Start 
-                           && End.LimitType == IntervalLimitType.End ;
+    public bool IsValid => Start.IsStart && End.IsEnd;
 
     /// <summary>
     ///  Indicates if the interval is empty:
     /// (0,0), (1,1) ...etc. are empty intervals.
     /// </summary>
-    public bool IsEmpty =>    Start.Constraint.HasLimitValue 
-                           && End.Constraint.HasLimitValue 
-                           && Start.Constraint.IsOpen 
-                           && End.Constraint.IsOpen 
-                           && Start.Limit!.CompareTo(End.Limit!)==0;
+    public bool IsEmpty =>    Start.HasLimitValue 
+                           && End.HasLimitValue 
+                           && Start.IsOpen 
+                           && End.IsOpen 
+                           && Start.Limit!.Equals(End.Limit!);
     
     /// <summary>
     /// Indicates if the interval is empty:
     /// [0,0], [1,1] ...etc. are single value intervals.
     /// </summary>
-    public bool IsSingleValue => Start.Constraint.HasLimitValue 
-                           && End.Constraint.HasLimitValue 
-                           && Start.Constraint.IsClosed 
-                           && End.Constraint.IsClosed 
-                           && Start.Limit!.CompareTo(End.Limit!)==0;
+    public bool IsSingleValue => Start.HasLimitValue 
+                           && End.HasLimitValue 
+                           && Start.IsClosed 
+                           && End.IsClosed 
+                           && Start.Limit!.Equals(End.Limit!);
 
     /// <summary>
-    /// By default an uninitialized 
+    /// By default an uninitialized and invalid instance.
     /// </summary>
     public static Interval<T> Invalid;
     
@@ -75,8 +74,7 @@ public readonly struct Interval<T> :
     {
         if (closedStart.CompareTo(closedEnd) > 0)
             throw new ArgumentOutOfRangeException(nameof(closedEnd), $"Detected start ({closedStart}) > end ({closedEnd}). End must be >= start");
-        
-        return new(IntervalLimit.ClosedStart(closedStart), IntervalLimit.ClosedEnd(closedEnd));
+        return new Interval<T>(IntervalLimit.ClosedStart(closedStart), IntervalLimit.ClosedEnd(closedEnd));
     }
 
     /// <summary>
@@ -303,7 +301,7 @@ public static class Interval
     /// <param name="closedEnd">The inclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> Closed<T>(T closedStart, T closedEnd)
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.Closed(closedStart,closedEnd);
 
     /// <summary>
@@ -314,7 +312,7 @@ public static class Interval
     /// <param name="openEnd">The exclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> Open<T>(T openStart, T openEnd)
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.Open(openStart,openEnd);
 
     /// <summary>
@@ -325,7 +323,7 @@ public static class Interval
     /// <param name="closedEnd">The inclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> OpenClosed<T>(T openStart, T closedEnd)
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.OpenClosed(openStart,closedEnd);
 
     /// <summary>
@@ -336,7 +334,7 @@ public static class Interval
     /// <param name="openEnd">The exclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> ClosedOpen<T>(T closedStart, T openEnd)
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.ClosedOpen(closedStart,openEnd);
     
     /// <summary>
@@ -346,7 +344,7 @@ public static class Interval
     /// <param name="openEnd">The exclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> UnboundedOpen<T>(T openEnd)
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.UnboundedOpen(openEnd);
     
     /// <summary>
@@ -356,7 +354,7 @@ public static class Interval
     /// <param name="closedEnd">The inclusive end to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> UnboundedClosed<T>(T closedEnd)
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.UnboundedClosed(closedEnd);
 
     /// <summary>
@@ -366,7 +364,7 @@ public static class Interval
     /// <param name="closedStart">the inclusive start to the interval</param>
     /// <returns>The new interval</returns>
     public static Interval<T> ClosedUnbounded<T>(T closedStart)
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.ClosedUnbounded(closedStart);
 
     /// <summary>
@@ -376,7 +374,7 @@ public static class Interval
     /// <param name="openStart">The exclusive start to the interval.</param>
     /// <returns>The new interval</returns>
     public static Interval<T> OpenUnbounded<T>(T openStart)
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.OpenUnbounded(openStart);
 
     /// <summary>
@@ -385,6 +383,6 @@ public static class Interval
     /// </summary>
     /// <returns>The new interval</returns>
     public static Interval<T> Unbounded<T>()
-        where T :IComparable<T>
+        where T :IComparable<T>, IEquatable<T>
         =>  Interval<T>.Unbounded();
 }
