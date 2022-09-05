@@ -184,18 +184,18 @@ public readonly struct IntervalLimit<T> :
         if (x.LimitType == y.LimitType)
         {
             // Unbounded on both means -infinity or +infinity for both, therefore they're equal.
-            if (x.Constraint.IsUnbounded && y.Constraint.IsUnbounded) return 0;
+            if (x.IsUnbounded && y.IsUnbounded) return 0;
             
             // The left hand side has no limit and the right hand side has a limit.
             // When both are a start this is x = -infinity, therefore x < y.
             // conversely when it's an end limit, x = +infinity, therefore x > y.
-            if (x.Constraint.IsUnbounded && y.Constraint.HasLimitValue)
+            if (x.IsUnbounded && y.HasLimitValue)
                 return y.LimitType == IntervalLimitType.Start ? -1 : 1;
             
             // The right hand side has no limit and the left hand side has a limit.
             // When both are a start this makes y = -infinity, therefore x > y.
             // conversely when it's an end limit, y = +infinity, therefore x < y.
-            if (x.Constraint.HasLimitValue && y.Constraint.IsUnbounded) 
+            if (x.HasLimitValue && y.IsUnbounded) 
                 return x.LimitType == IntervalLimitType.Start ? 1 : -1;
             
             // At this point, we know that both have a limit value.
@@ -215,14 +215,14 @@ public readonly struct IntervalLimit<T> :
                 //    in other words [start,...) < (start,...)   
                 // conversely a closed end is greater than an open end.
                 //    in other words (...,end] > (...,end)
-                if (x.Constraint.IsClosed && y.Constraint.IsOpen) 
+                if (x.IsClosed && y.IsOpen) 
                     return x.LimitType == IntervalLimitType.Start ? -1 : 1;
                 
                 // An open start is greater than a closed start.
                 //    in other words (start,...) > [start,...)
                 // conversely an open end is less than an closed end.
                 //    in other words (...,end) < (...,end]
-                if (x.Constraint.IsOpen && y.Constraint.IsClosed) 
+                if (x.IsOpen && y.IsClosed) 
                     return x.LimitType == IntervalLimitType.Start ? 1 : -1;
             }
             
@@ -235,14 +235,14 @@ public readonly struct IntervalLimit<T> :
         }
 
         // if x is a start, we know y is an end.
-        if (x.LimitType == IntervalLimitType.Start)
+        if (x.LimitType.IsStart)
         {
             // compare actual limit values if both have them.
             // starts always come before ends.
             // Therefore:
             //      if x.Limit <= y.Limit : x < y
             //      otherwise x > y
-            if (x.Constraint.HasLimitValue && y.Constraint.HasLimitValue)
+            if (x.HasLimitValue && y.HasLimitValue)
             {
                 var lc = x.Limit!.CompareTo(y.Limit!);
                 if (lc <= 0) return -1; // if x.Limit <= y.Limit : x < y
@@ -260,14 +260,14 @@ public readonly struct IntervalLimit<T> :
         }
 
         // if x is an end, we know y is a start.
-        if (x.LimitType == IntervalLimitType.End)
+        if (x.LimitType.IsEnd)
         {
             // compare actual limit values if both have them.
             // ends always come after starts.
             // Therefore:
             //      if x.Limit >= y.Limit : x > y
             //      otherwise x < y
-            if (x.Constraint.HasLimitValue && y.Constraint.HasLimitValue)
+            if (x.HasLimitValue && y.HasLimitValue)
             {
                 var lc = x.Limit!.CompareTo(y.Limit!);
                 if (lc >= 0) return 1; // if x.Limit >= y.Limit : x > y
