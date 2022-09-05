@@ -112,6 +112,7 @@ public readonly struct IntervalLimit<T> :
     /// For example: (-infinity,... 
     /// </summary>
     /// <returns>The new interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> UnboundedStart() => UnboundedStartData;
 
     private static readonly IntervalLimit<T> UnboundedStartData =
@@ -123,6 +124,7 @@ public readonly struct IntervalLimit<T> :
     /// For example: ...,+infinity) 
     /// </summary>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> UnboundedEnd() => UnboundedEndData;
     private static readonly IntervalLimit<T> UnboundedEndData = 
         new (IntervalLimitType.End, IntervalLimitConstraint.Unbounded, default(T?));
@@ -134,6 +136,7 @@ public readonly struct IntervalLimit<T> :
     /// </summary>
     /// <param name="limit">the limiting value.</param>
     /// <returns>The new interval limit.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> OpenStart(T limit) =>
         new (IntervalLimitType.Start, IntervalLimitConstraint.Open, limit);
 
@@ -144,6 +147,7 @@ public readonly struct IntervalLimit<T> :
     /// </summary>
     /// <param name="limit">the limiting value.</param>
     /// <returns>The new interval limit.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> ClosedStart(T limit) =>
         new (IntervalLimitType.Start, IntervalLimitConstraint.Closed, limit);
 
@@ -154,6 +158,7 @@ public readonly struct IntervalLimit<T> :
     /// </summary>
     /// <param name="limit">the limiting value.</param>
     /// <returns>The new interval limit.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> OpenEnd(T limit) =>
         new (IntervalLimitType.End, IntervalLimitConstraint.Open, limit);
 
@@ -164,6 +169,7 @@ public readonly struct IntervalLimit<T> :
     /// </summary>
     /// <param name="limit">the limiting value.</param>
     /// <returns>The new interval limit.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> ClosedEnd(T limit) =>
         new (IntervalLimitType.End, IntervalLimitConstraint.Closed, limit);
     
@@ -533,6 +539,7 @@ public readonly struct IntervalLimit<T> :
     /// <param name="left">The left hand parameter</param>
     /// <param name="right">The right hand parameter</param>
     /// <returns>True if equivalent.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator ==(IntervalLimit<T> left, T right)
     {
         return left.Equals(right);
@@ -623,6 +630,7 @@ public static class IntervalLimit
     /// For example: (-infinity,... 
     /// </summary>
     /// <returns>The new interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> UnboundedStart<T>()
         where T: IComparable<T>
         => IntervalLimit<T>.UnboundedStart();
@@ -633,6 +641,7 @@ public static class IntervalLimit
     /// For example: ...,+infinity) 
     /// </summary>
     /// <returns>The new interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> UnboundedEnd<T>()
         where T: IComparable<T>
         => IntervalLimit<T>.UnboundedEnd();
@@ -643,6 +652,7 @@ public static class IntervalLimit
     /// For example: (limit,... 
     /// </summary>
     /// <returns>The new interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> OpenStart<T>(T limit)
         where T : IComparable<T>
         => IntervalLimit<T>.OpenStart(limit);
@@ -653,6 +663,7 @@ public static class IntervalLimit
     /// For example: [limit,... 
     /// </summary>
     /// <returns>The new interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> ClosedStart<T>(T limit)
         where T : IComparable<T>
         => IntervalLimit<T>.ClosedStart(limit);
@@ -663,6 +674,7 @@ public static class IntervalLimit
     /// For example: ...,limit) 
     /// </summary>
     /// <returns>The new interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> OpenEnd<T>(T limit)
         where T : IComparable<T>
         => IntervalLimit<T>.OpenEnd(limit);
@@ -673,6 +685,7 @@ public static class IntervalLimit
     /// For example: ...,limit] 
     /// </summary>
     /// <returns>The new interval limit</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntervalLimit<T> ClosedEnd<T>(T limit)
         where T : IComparable<T>
         => IntervalLimit<T>.ClosedEnd(limit);   

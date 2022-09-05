@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Jcd.Math.Intervals;
 
@@ -45,12 +46,14 @@ public readonly struct IntervalLimitType :
     #region Equality members
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(IntervalLimitType other)
     {
         return _value == other._value;
     }
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public override bool Equals(object? obj)
     {
         return obj is IntervalLimitType other && Equals(other);
@@ -68,6 +71,7 @@ public readonly struct IntervalLimitType :
     /// <param name="left">The left hand operand.</param>
     /// <param name="right">The right hand operand.</param>
     /// <returns>True if they're equal.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator ==(IntervalLimitType left, IntervalLimitType right)
     {
         return left.Equals(right);
@@ -79,6 +83,7 @@ public readonly struct IntervalLimitType :
     /// <param name="left">The left hand operand.</param>
     /// <param name="right">The right hand operand.</param>
     /// <returns>True if they're not equal.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator !=(IntervalLimitType left, IntervalLimitType right)
     {
         return !left.Equals(right);
@@ -89,12 +94,14 @@ public readonly struct IntervalLimitType :
     #region Relational members
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CompareTo(IntervalLimitType other)
     {
         return _value.CompareTo(other._value);
     }
 
     /// <inheritdoc />
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CompareTo(object? obj)
     {
         if (ReferenceEquals(null, obj)) return 1;
@@ -107,6 +114,7 @@ public readonly struct IntervalLimitType :
     /// <param name="left">The left hand operand.</param>
     /// <param name="right">The right hand operand.</param>
     /// <returns>True if left is less than right.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <(IntervalLimitType left, IntervalLimitType right)
     {
         return left._value < right._value;
@@ -118,6 +126,7 @@ public readonly struct IntervalLimitType :
     /// <param name="left">The left hand operand.</param>
     /// <param name="right">The right hand operand.</param>
     /// <returns>True if left is greater than right.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator >(IntervalLimitType left, IntervalLimitType right)
     {
         return left._value > right._value;
@@ -129,6 +138,7 @@ public readonly struct IntervalLimitType :
     /// <param name="left">The left hand operand.</param>
     /// <param name="right">The right hand operand.</param>
     /// <returns>True if left is less than or equal to right.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <=(IntervalLimitType left, IntervalLimitType right)
     {
         return left._value <= right._value;
@@ -140,6 +150,7 @@ public readonly struct IntervalLimitType :
     /// <param name="left">The left hand operand.</param>
     /// <param name="right">The right hand operand.</param>
     /// <returns>True if left is greater  than or equal to right.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator >=(IntervalLimitType left, IntervalLimitType right)
     {
         return left._value >= right._value;
@@ -154,6 +165,7 @@ public readonly struct IntervalLimitType :
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static explicit operator IntervalLimitType(byte value)
         => new (value);
 
@@ -162,6 +174,7 @@ public readonly struct IntervalLimitType :
     /// </summary>
     /// <param name="type">the type to convert</param>
     /// <returns>The underlying value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static explicit operator byte(IntervalLimitType type) => type._value; 
     
     #endregion

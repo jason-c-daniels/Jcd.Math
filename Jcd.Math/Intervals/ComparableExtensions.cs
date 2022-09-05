@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
+
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace Jcd.Math.Intervals;
@@ -33,6 +35,7 @@ public static class ComparableExtensions
     /// <param name="end">End of the range to check.</param>
     /// <typeparam name="T">The data type being compared.</typeparam>
     /// <returns>-1, for less than, 0 for in range, 1 for greater than end.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int CompareToRange<T>(this T value, T start, T end)
         where T: IComparable<T>
     {
