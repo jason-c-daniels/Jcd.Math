@@ -28,11 +28,11 @@ Implements [Jcd.Math.Intervals.IInterval&lt;](Jcd.Math.Intervals.IInterval_T_.md
 
 | Properties | |
 | :--- | :--- |
-| [End](Jcd.Math.Intervals.Interval_T_.End.md 'Jcd.Math.Intervals.Interval<T>.End') | The closedEnd of the interval. |
+| [End](Jcd.Math.Intervals.Interval_T_.End.md 'Jcd.Math.Intervals.Interval<T>.End') | The end of the interval. |
 | [IsEmpty](Jcd.Math.Intervals.Interval_T_.IsEmpty.md 'Jcd.Math.Intervals.Interval<T>.IsEmpty') | Indicates if the interval is empty:<br/>0,0), (1,1) ...etc. are empty intervals. |
 | [IsSingleValue](Jcd.Math.Intervals.Interval_T_.IsSingleValue.md 'Jcd.Math.Intervals.Interval<T>.IsSingleValue') | Indicates if the interval is empty:<br/>[0,0], [1,1] ...etc. are single value intervals. |
 | [IsValid](Jcd.Math.Intervals.Interval_T_.IsValid.md 'Jcd.Math.Intervals.Interval<T>.IsValid') | Indicates if the interval was properly constructed. |
-| [Start](Jcd.Math.Intervals.Interval_T_.Start.md 'Jcd.Math.Intervals.Interval<T>.Start') | The openStart of the interval. |
+| [Start](Jcd.Math.Intervals.Interval_T_.Start.md 'Jcd.Math.Intervals.Interval<T>.Start') | The start of the interval. |
 
 | Methods | |
 | :--- | :--- |

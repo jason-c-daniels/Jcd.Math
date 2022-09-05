@@ -39,9 +39,7 @@ public readonly struct Interval<T> :
     /// Indicates if the interval is empty:
     /// [0,0], [1,1] ...etc. are single value intervals.
     /// </summary>
-    public bool IsSingleValue => Start.HasLimitValue 
-                           && End.HasLimitValue 
-                           && Start.IsClosed 
+    public bool IsSingleValue => Start.IsClosed 
                            && End.IsClosed 
                            && Start.Limit!.Equals(End.Limit!);
 
@@ -51,12 +49,12 @@ public readonly struct Interval<T> :
     public static Interval<T> Invalid;
     
     /// <summary>
-    /// The openStart of the interval.
+    /// The start of the interval.
     /// </summary>
     public IntervalLimit<T> Start { get; }
     
     /// <summary>
-    /// The closedEnd of the interval.
+    /// The end of the interval.
     /// </summary>
     public IntervalLimit<T> End { get; }
 

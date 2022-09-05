@@ -2,7 +2,7 @@
 
 ## Interval<T>.Start Property
 
-The openStart of the interval.
+The start of the interval.
 
 ```csharp
 public Jcd.Math.Intervals.IntervalLimit<T> Start { get; }

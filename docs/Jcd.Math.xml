@@ -122,12 +122,12 @@
         </member>
         <member name="P:Jcd.Math.Intervals.Interval`1.Start">
             <summary>
-            The openStart of the interval.
+            The start of the interval.
             </summary>
         </member>
         <member name="P:Jcd.Math.Intervals.Interval`1.End">
             <summary>
-            The closedEnd of the interval.
+            The end of the interval.
             </summary>
         </member>
         <member name="M:Jcd.Math.Intervals.Interval`1.Closed(`0,`0)">
