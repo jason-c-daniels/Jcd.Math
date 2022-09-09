@@ -18,7 +18,8 @@ public static class OperationSpeed
     private const double NanosecondsPerCycle = MicrosecondsPerCycle * 1000;
     private const double PicosecondsPerCycle = NanosecondsPerCycle * 1000;
     
-    public static void Report(string actionName, int repetitionCount, TimeSpan duration, int operationsPerRepetition=1)
+    public static void Report(string actionName, TimeSpan duration, 
+                              int repetitionCount,int operationsPerRepetition = 1)
     {
         var operationCount = repetitionCount * operationsPerRepetition;
         var timeForSingleCallInMs = duration.TotalMilliseconds / operationCount;

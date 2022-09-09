@@ -3,7 +3,7 @@
 
 ## Compare.Max<T>(T, T, IComparer<T>) Method
 
-Returns the greater of two values for an IComparable
+Returns the greater of two values for an IComparable<T>
 
 ```csharp
 public static T Max<T>(T val1, T val2, System.Collections.Generic.IComparer<T> comparer)

@@ -3,7 +3,7 @@
 
 ## Compare.Min<T>(T, T) Method
 
-Returns the lesser of two values for an IComparable
+Returns the lesser of two values for an IComparable<T>
 
 ```csharp
 public static T Min<T>(T val1, T val2)

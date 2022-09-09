@@ -10,13 +10,13 @@ namespace Jcd.Math;
 ///    (C# 11, .NET7?) they will be off of the Math. class.
 /// 
 /// 2. Some custom extension methods that everyone seems to have to
-///    create, despite well known algorithms.
+///    create, despite well known algorithms. (InRange and CompareToRange)
 ///  
 /// </summary>
 public static class Compare
 {
     /// <summary>
-    /// Returns the lesser of two values for an IComparable
+    /// Returns the lesser of two values for an IComparable&lt;T&gt;
     /// </summary>
     /// <param name="val1">The first of two values to compare.</param>
     /// <param name="val2">The second of two values to compare.</param>
@@ -26,7 +26,7 @@ public static class Compare
         => val1.CompareTo(val2) <= 0 ? val1 : val2;
     
     /// <summary>
-    /// Returns the lesser of two values for an IComparable
+    /// Returns the lesser of two values for an IComparable&lt;T&gt;
     /// </summary>
     /// <param name="val1">The first of two values to compare.</param>
     /// <param name="val2">The second of two values to compare.</param>
@@ -37,7 +37,7 @@ public static class Compare
         => comparer.Compare(val1,val2) <= 0 ? val1 : val2;
     
     /// <summary>
-    /// Returns the greater of two values for an IComparable
+    /// Returns the greater of two values for an IComparable&lt;T&gt;
     /// </summary>
     /// <param name="val1">The first value to compare.</param>
     /// <param name="val2">The second value to compare.</param>
@@ -48,7 +48,7 @@ public static class Compare
         => val1.CompareTo(val2) >= 0 ? val1 : val2;
     
     /// <summary>
-    /// Returns the greater of two values for an IComparable
+    /// Returns the greater of two values for an IComparable&lt;T&gt;
     /// </summary>
     /// <param name="val1">The first of two values to compare.</param>
     /// <param name="val2">The second of two values to compare.</param>
@@ -129,7 +129,7 @@ public static class Compare
     /// <typeparam name="T">The data type being compared.</typeparam>
     /// <returns>-1, for less than, 0 for in range, 1 for greater than end.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int CompareToRange<T>(this T value, T start, T end)
+    public static int ToRange<T>(this T value, T start, T end)
         where T: IComparable<T>
     {
         return value.InRange(start,end) 

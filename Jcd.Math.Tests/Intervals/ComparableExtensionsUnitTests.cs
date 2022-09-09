@@ -23,6 +23,6 @@ public class ComparableExtensionsUnitTests
     [InlineData(11,2,10,1)]
     public void CompareToRange_Returns_Expected_Value_For_Range(int value, int start, int end, int expected)
     {
-        Assert.Equal(expected,value.CompareToRange(start,end));
+        Assert.Equal(expected,value.ToRange(start,end));
     }
 }

@@ -11,13 +11,13 @@
                (C# 11, .NET7?) they will be off of the Math. class.
             
             2. Some custom extension methods that everyone seems to have to
-               create, despite well known algorithms.
+               create, despite well known algorithms. (InRange and CompareToRange)
              
             </summary>
         </member>
         <member name="M:Jcd.Math.Compare.Min``1(``0,``0)">
             <summary>
-            Returns the lesser of two values for an IComparable
+            Returns the lesser of two values for an IComparable&lt;T&gt;
             </summary>
             <param name="val1">The first of two values to compare.</param>
             <param name="val2">The second of two values to compare.</param>
@@ -26,7 +26,7 @@
         </member>
         <member name="M:Jcd.Math.Compare.Min``1(``0,``0,System.Collections.Generic.IComparer{``0})">
             <summary>
-            Returns the lesser of two values for an IComparable
+            Returns the lesser of two values for an IComparable&lt;T&gt;
             </summary>
             <param name="val1">The first of two values to compare.</param>
             <param name="val2">The second of two values to compare.</param>
@@ -36,7 +36,7 @@
         </member>
         <member name="M:Jcd.Math.Compare.Max``1(``0,``0)">
             <summary>
-            Returns the greater of two values for an IComparable
+            Returns the greater of two values for an IComparable&lt;T&gt;
             </summary>
             <param name="val1">The first value to compare.</param>
             <param name="val2">The second value to compare.</param>
@@ -45,7 +45,7 @@
         </member>
         <member name="M:Jcd.Math.Compare.Max``1(``0,``0,System.Collections.Generic.IComparer{``0})">
             <summary>
-            Returns the greater of two values for an IComparable
+            Returns the greater of two values for an IComparable&lt;T&gt;
             </summary>
             <param name="val1">The first of two values to compare.</param>
             <param name="val2">The second of two values to compare.</param>
@@ -94,7 +94,7 @@
             <typeparam name="T">The data type being compared.</typeparam>
             <returns>true if the value is within the range.</returns>
         </member>
-        <member name="M:Jcd.Math.Compare.CompareToRange``1(``0,``0,``0)">
+        <member name="M:Jcd.Math.Compare.ToRange``1(``0,``0,``0)">
             <summary>
             Determines if a value is less than the start (-1) of the
             closed interval [start,end], within the interval (0),
@@ -105,6 +105,63 @@
             <param name="end">End of the range to check.</param>
             <typeparam name="T">The data type being compared.</typeparam>
             <returns>-1, for less than, 0 for in range, 1 for greater than end.</returns>
+        </member>
+        <member name="T:Jcd.Math.IDisjointComparer`2">
+            <summary>
+            A generic IComparer interface implements a method that compares 
+            two objects of differing types. It is used in conjunction with
+            the Infinity and Number structs to provide comparisons.
+            </summary>
+            <typeparam name="T1">The first type.</typeparam>
+            <typeparam name="T2">The second type.</typeparam>
+        </member>
+        <member name="M:Jcd.Math.IDisjointComparer`2.Compare(`0,`1)">
+            <summary>
+            Compares an instance of T1 to an instance of T2.
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.IDisjointComparer`2.Compare(`1,`0)">
+            <summary>
+            Compares an instance of T1 to an instance of T2.
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="T:Jcd.Math.IDisjointEqualityComparer`2">
+            <summary>
+            Defines methods to support the comparison of two items of differing
+            types for equality.
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+        </member>
+        <member name="M:Jcd.Math.IDisjointEqualityComparer`2.Equals(`0,`1)">
+            <summary>
+            Compares an instance of T1 to an instance of T2.
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>True if equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.IDisjointEqualityComparer`2.Equals(`1,`0)">
+            <summary>
+            Compares an instance of T1 to an instance of T2.
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>True if equivalent.</returns>
         </member>
         <member name="T:Jcd.Math.Intervals.IInterval`1">
             <summary>
@@ -1048,6 +1105,471 @@
             Provides some rudimentary (and generic) math types and algorithms not 
             found in .NET by default.
             </summary>
+        </member>
+        <member name="T:Jcd.Math.Numbers.Epsilon">
+            <summary>
+            A DDD inspired enumeration for epsilon (ε). 
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Numbers.Epsilon.Negative">
+            <summary>
+            Infinitesimally less than zero.
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Numbers.Epsilon.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Numbers.Epsilon.Positive">
+            <summary>
+            Infinitesimally greater than zero.
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Numbers.Epsilon._value">
+            <summary>
+            The identifier for this <c>Epsilon</c> instance.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.#ctor(System.SByte)">
+            <summary>
+            Constructs an <c>Epsilon</c> instance from the numeric id.
+            </summary>
+            <param name="value">The numeric id of the infinitesimal component.</param>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.Equals(Jcd.Math.Numbers.Epsilon)">
+            <summary>
+            Compares this instance to another for equivalence.
+            </summary>
+            <param name="other">the other instance to compare against.</param>
+            <returns>True if equivalent.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.op_Equality(Jcd.Math.Numbers.Epsilon,Jcd.Math.Numbers.Epsilon)">
+            <summary>
+            The equals operator. 
+            </summary>
+            <param name="left">the left hand operand</param>
+            <param name="right">the right hand operand</param>
+            <returns>true if equivalent</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.op_Inequality(Jcd.Math.Numbers.Epsilon,Jcd.Math.Numbers.Epsilon)">
+            <summary>
+            The not equals operator.
+            </summary>
+            <param name="left">the left hand operand</param>
+            <param name="right">the right hand operand</param>
+            <returns>true if not equivalent</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.CompareTo(Jcd.Math.Numbers.Epsilon)">
+            <summary>
+            Performs a relational (greater, less, equal) comparison between this instance
+            and another instance.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.CompareTo(System.Object)">
+            <summary>
+            Performs a relational (greater, less, equal) comparison between this instance
+            and an arbitrary object.
+            </summary>
+            <param name="obj">the other thing to compare it to.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">bad type for comparison.</exception>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.op_LessThan(Jcd.Math.Numbers.Epsilon,Jcd.Math.Numbers.Epsilon)">
+            <summary>
+            The less than operator.
+            </summary>
+            <param name="left">left hand operand</param>
+            <param name="right">right hand operand</param>
+            <returns>True if left is less than right</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.op_GreaterThan(Jcd.Math.Numbers.Epsilon,Jcd.Math.Numbers.Epsilon)">
+            <summary>
+            The greater than operator.
+            </summary>
+            <param name="left">left hand operand</param>
+            <param name="right">right hand operand</param>
+            <returns>True if left is greater than right</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.op_LessThanOrEqual(Jcd.Math.Numbers.Epsilon,Jcd.Math.Numbers.Epsilon)">
+            <summary>
+            The less than or equals operator.
+            </summary>
+            <param name="left">left hand operand</param>
+            <param name="right">right hand operand</param>
+            <returns>True if left is less than or equal to right</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.op_GreaterThanOrEqual(Jcd.Math.Numbers.Epsilon,Jcd.Math.Numbers.Epsilon)">
+            <summary>
+            The greater than or equals operator.
+            </summary>
+            <param name="left">left hand operand</param>
+            <param name="right">right hand operand</param>
+            <returns>True if left is greater than or equal to right</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Epsilon.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Jcd.Math.Numbers.FiniteNumber`1">
+            <summary>
+            The representation of a finite number with a specified storage type.
+            </summary>
+            <typeparam name="TStorage">The data type to use to represent the finite number.</typeparam>
+        </member>
+        <member name="P:Jcd.Math.Numbers.FiniteNumber`1.Value">
+            <summary>
+            The underlying value for this FiniteNumber.
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Numbers.FiniteNumber`1.Zero">
+            <summary>
+            The value of Zero as a FiniteNumber&lt;TStorage&gt;
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.#ctor(`0)">
+            <summary>
+            Construct a FiniteNumber from a specific value.
+            </summary>
+            <param name="value">The value to construct the number from.</param>
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.CompareTo(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.CompareTo(Jcd.Math.Numbers.Infinity)">
+            <summary>
+            Compares this number to an infinity.
+            A finite number is always larger than negative infinity.
+            Also it's always smaller than positive infinity.
+            </summary>
+            <param name="other">The infinity.</param>
+            <returns>-1 for Infinity.Positive; 1 for Infinity.Negative</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.CompareTo(Jcd.Math.Numbers.FiniteNumber{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.CompareTo(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.CompareTo``1(Jcd.Math.Numbers.FiniteNumber{``0})">
+            <summary>
+            Compare to another FiniteNumber with a different base storage type.
+            </summary>
+            <param name="other">The other value.</param>
+            <typeparam name="TOther">The other storage type.</typeparam>
+            <returns>0 if equivalent, -1 if less than, 1 if greater.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.CompareTo``1(``0)">
+            <summary>
+            Compare the value to another struct with a different base storage type.
+            </summary>
+            <param name="other">The other value.</param>
+            <typeparam name="TValue">The value storage type.</typeparam>
+            <returns>0 if equivalent, -1 if less than, 1 if greater.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.Equals``1(Jcd.Math.Numbers.FiniteNumber{``0})">
+            <summary>
+            Compare to another FiniteNumber with a different base storage type.
+            </summary>
+            <param name="other">The other value.</param>
+            <typeparam name="TOther">The other storage type.</typeparam>
+            <returns>0 if equivalent, -1 if less than, 1 if greater.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.Equals``1(``0)">
+            <summary>
+            Compare this FiniteNumber to an arbitrary struct.
+            This may incur a boxing operation if the struct isn't one
+            it knows how to handle.
+            </summary>
+            <param name="other">The value to compare against.</param>
+            <typeparam name="TValue">The data type of the value.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.Equals(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.Equals(Jcd.Math.Numbers.FiniteNumber{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.Equals(Jcd.Math.Numbers.Infinity)">
+            <summary>
+            We know that finite numbers are never equal to infinite
+            numbers by definition.
+            </summary>
+            <param name="other">the infinite number</param>
+            <returns>false. This is always false.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.FiniteNumber`1.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Jcd.Math.Numbers.Infinity">
+            <summary>
+            The default representation of any infinite value,
+            positive or negative, regardless (this one uses a
+            double implementation, for now. We'll see how
+            performant it is.)
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Numbers.Infinity.Positive">
+            <summary>
+            The default instance of Positive Infinity.
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Numbers.Infinity.Negative">
+            <summary>
+            The default instance of Negative Infinity.
+            </summary>
+        </member>
+        <member name="P:Jcd.Math.Numbers.Infinity.IsNegative">
+            <summary>
+            Indicates if this is Negative Infinity. 
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.#ctor(System.Boolean)">
+            <summary>
+            Constructs a new instance of Infinity.
+            </summary>
+            <param name="isNegative">
+            A flag indicating if this instance is negative
+            infinity (true) or positive infinity (false)
+            </param>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.CompareTo(Jcd.Math.Numbers.Infinity)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.CompareTo(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.CompareTo``1(``0)">
+            <summary>
+            Compares the infinity instance vs any other value/class.
+            </summary>
+            <param name="other"></param>
+            <typeparam name="T"></typeparam>
+            <returns>-1 if less than other; 1 if greater than other; o if equal.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.op_LessThan(Jcd.Math.Numbers.Infinity,Jcd.Math.Numbers.Infinity)">
+            <summary>
+            Determines if an infinity is less than another infinity. 
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand</param>
+            <returns>True if left less than right.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.op_GreaterThan(Jcd.Math.Numbers.Infinity,Jcd.Math.Numbers.Infinity)">
+            <summary>
+            Determines if an infinity is greater than another infinity. 
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand</param>
+            <returns>True if left greater than right.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.op_LessThanOrEqual(Jcd.Math.Numbers.Infinity,Jcd.Math.Numbers.Infinity)">
+            <summary>
+            Determines if an infinity is less than or equal to another infinity. 
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand</param>
+            <returns>True if left less than or equal to right.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.op_GreaterThanOrEqual(Jcd.Math.Numbers.Infinity,Jcd.Math.Numbers.Infinity)">
+            <summary>
+            Determines if an infinity is greater than another infinity. 
+            </summary>
+            <param name="left">The left hand operand.</param>
+            <param name="right">The right hand operand</param>
+            <returns>True if left greater than or equal to right.</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.Equals(Jcd.Math.Numbers.Infinity)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.op_Equality(Jcd.Math.Numbers.Infinity,Jcd.Math.Numbers.Infinity)">
+            <summary>
+            Compares an two Infinity instances for equivalence.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.Infinity.op_Inequality(Jcd.Math.Numbers.Infinity,Jcd.Math.Numbers.Infinity)">
+            <summary>
+            Compares an two Infinity instances for non-equivalence.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.NativeValueComparisons.Compare(System.Boolean,System.Byte)">
+            <summary>
+            Upcast bool to byte 0 if false 1 if true, then compare.
+            </summary>
+            <param name="x">left hand operand</param>
+            <param name="y">right hand operand</param>
+            <returns>-1 if x less than y; 1 if x greater than y; 0 if equal</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.NativeValueComparisons.Compare(System.Boolean,System.UInt16)">
+            <summary>
+            upcast bool to (byte)1/0 then compare.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Jcd.Math.Numbers.qNaN">
+            <summary>
+            A storage agnostic non-signaling NaN implementation.
+            </summary>
+        </member>
+        <member name="F:Jcd.Math.Numbers.qNaN.NaN">
+            <summary>
+            The singular instance of qNaN.
+            Not sure HOW I'll use this just yet...
+            I'll likely just implement operators for it against
+            other integral data types. Most, will compare to false.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.op_LessThan(Jcd.Math.Numbers.qNaN,Jcd.Math.Numbers.qNaN)">
+            <summary>
+            The less than operator.
+            </summary>
+            <param name="left">left hand operand</param>
+            <param name="right">right hand operand</param>
+            <returns>True if left is less than right</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.op_GreaterThan(Jcd.Math.Numbers.qNaN,Jcd.Math.Numbers.qNaN)">
+            <summary>
+            The greater than operator.
+            </summary>
+            <param name="left">left hand operand</param>
+            <param name="right">right hand operand</param>
+            <returns>True if left is greater than right</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.op_LessThanOrEqual(Jcd.Math.Numbers.qNaN,Jcd.Math.Numbers.qNaN)">
+            <summary>
+            The less than or equals operator.
+            </summary>
+            <param name="left">left hand operand</param>
+            <param name="right">right hand operand</param>
+            <returns>True if left is less than or equal to right</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.op_GreaterThanOrEqual(Jcd.Math.Numbers.qNaN,Jcd.Math.Numbers.qNaN)">
+            <summary>
+            The greater than or equals operator.
+            </summary>
+            <param name="left">left hand operand</param>
+            <param name="right">right hand operand</param>
+            <returns>True if left is greater than or equal to right</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.op_Equality(Jcd.Math.Numbers.qNaN,Jcd.Math.Numbers.qNaN)">
+            <summary>
+            The equals operator. 
+            </summary>
+            <param name="left">the left hand operand</param>
+            <param name="right">the right hand operand</param>
+            <returns>true if equivalent</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.op_Inequality(Jcd.Math.Numbers.qNaN,Jcd.Math.Numbers.qNaN)">
+            <summary>
+            The not equals operator.
+            </summary>
+            <param name="left">the left hand operand</param>
+            <param name="right">the right hand operand</param>
+            <returns>true if not equivalent</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.op_Equality(Jcd.Math.Numbers.Infinity,Jcd.Math.Numbers.qNaN)">
+            <summary>
+            The equals operator. 
+            </summary>
+            <param name="left">the left hand operand</param>
+            <param name="right">the right hand operand</param>
+            <returns>true if equivalent</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.op_Inequality(Jcd.Math.Numbers.Infinity,Jcd.Math.Numbers.qNaN)">
+            <summary>
+            The not equals operator.
+            </summary>
+            <param name="left">the left hand operand</param>
+            <param name="right">the right hand operand</param>
+            <returns>true if not equivalent</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.Equals(Jcd.Math.Numbers.qNaN)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.Equals``1(``0)">
+            <summary>
+            qNaN is always not equal to any value.
+            </summary>
+            <param name="other">The value to compare against.</param>
+            <typeparam name="T">The type of the value being compared.</typeparam>
+            <returns>false</returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="T:Jcd.Math.Numbers.qNaN.Comparer`1">
+            <summary>
+            The qNaN comparer implementation.
+            </summary>
+            <typeparam name="T">The other data being compared.</typeparam>
+        </member>
+        <member name="F:Jcd.Math.Numbers.qNaN.Comparer`1.Default">
+            <summary>
+            The default instance of the comparer.
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.Comparer`1.Compare(Jcd.Math.Numbers.qNaN,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.Comparer`1.Compare(`0,Jcd.Math.Numbers.qNaN)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.Comparer`1.Equals(Jcd.Math.Numbers.qNaN,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jcd.Math.Numbers.qNaN.Comparer`1.Equals(`0,Jcd.Math.Numbers.qNaN)">
+            <inheritdoc />
+        </member>
+        <member name="T:Jcd.Math.TypeExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Jcd.Math.TypeExtensions.IsUserDefinedStructOrEnum(System.Type)">
+            <summary>
+            Determines if a type is a user defined struct
+            or user defined enum.
+            </summary>
+            <param name="type">the type to inspect</param>
+            <returns>true if the type is a used defined struct or enum.</returns>
+        </member>
+        <member name="M:Jcd.Math.TypeExtensions.IsPrimitiveStructOrEnum(System.Type)">
+            <summary>
+            Determines if a type is a a primitive struct or primitive (built-in) enum
+            </summary>
+            <param name="type">the type to inspect.</param>
+            <returns>True if the type is a primitive struct or enum.</returns>
         </member>
     </members>
 </doc>

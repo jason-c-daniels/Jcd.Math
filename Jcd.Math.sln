@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcd.Math.Tests", "Jcd.Math.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcd.Math.Examples", "Jcd.Math.Examples\Jcd.Math.Examples.csproj", "{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcd.Math.NativeValueComparisonsGenerator", "Jcd.Math.NativeValueComparisonsGenerator\Jcd.Math.NativeValueComparisonsGenerator.csproj", "{3B4F697B-8260-4001-9CC6-13E78AE0987F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AFA31B5-1E65-4FCF-A6CD-CCB824DEAC83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B4F697B-8260-4001-9CC6-13E78AE0987F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B4F697B-8260-4001-9CC6-13E78AE0987F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B4F697B-8260-4001-9CC6-13E78AE0987F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B4F697B-8260-4001-9CC6-13E78AE0987F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
