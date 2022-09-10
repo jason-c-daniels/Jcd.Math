@@ -15,7 +15,7 @@ public static class Template
     /// * -1 when x lt; y
     /// *  1 when x gt; y
     /// </returns>
-    public int Compare($firstType$ x, $secondType$ y)
+    public static int Compare($firstType$ x, $secondType$ y)
     {
          var x1=($upcastType$)x;
          var y1=($upcastType$)y;
@@ -32,7 +32,7 @@ public static class Template
     /// * -1 when x lt; y
     /// *  1 when x gt; y
     /// </returns>
-    public int Compare($secondType$ x, $firstType$ y)
+    public static int Compare($secondType$ x, $firstType$ y)
     {
          var x1=($upcastType$)x;
          var y1=($upcastType$)y;
@@ -52,7 +52,7 @@ public static class Template
     /// * -1 when x lt; y
     /// *  1 when x gt; y
     /// </returns>
-    public int Compare($firstType$ x, $secondType$ y)
+    public static int Compare($firstType$ x, $secondType$ y)
     {
          var x1=($upcastType$)x;
          return x1.CompareTo(y);
@@ -68,7 +68,7 @@ public static class Template
     /// * -1 when x lt; y
     /// *  1 when x gt; y
     /// </returns>
-    public int Compare($secondType$ x, $firstType$ y)
+    public static int Compare($secondType$ x, $firstType$ y)
     {
          var y1=($upcastType$)y;
          return x.CompareTo(y1);
@@ -87,7 +87,7 @@ public static class Template
     /// * -1 when x lt; y
     /// *  1 when x gt; y
     /// </returns>
-    public int Compare($firstType$ x, $secondType$ y)
+    public static int Compare($firstType$ x, $secondType$ y)
     {
          var y1=($upcastType$)y;
          return x.CompareTo(y1);
@@ -103,7 +103,7 @@ public static class Template
     /// * -1 when x lt; y
     /// *  1 when x gt; y
     /// </returns>
-    public int Compare($secondType$ x, $firstType$ y)
+    public static int Compare($secondType$ x, $firstType$ y)
     {
          var x1=($upcastType$)x;
          return x1.CompareTo(y);
@@ -121,7 +121,7 @@ public static class Template
     /// *  true when x == y
     /// *  false otherwise
     /// </returns>
-    public bool Equals($firstType$ x, $secondType$ y)
+    public static bool Equals($firstType$ x, $secondType$ y)
     {
          var x1=($upcastType$)x;
          var y1=($upcastType$)y;
@@ -137,7 +137,7 @@ public static class Template
     /// *  true when x == y
     /// *  false otherwise
     /// </returns>
-    public bool Equals($secondType$ x, $firstType$ y)
+    public static bool Equals($secondType$ x, $firstType$ y)
     {
          var x1=($upcastType$)x;
          var y1=($upcastType$)y;
@@ -156,7 +156,7 @@ public static class Template
     /// *  true when x == y
     /// *  false otherwise
     /// </returns>
-    public bool Equals($firstType$ x, $secondType$ y)
+    public static bool Equals($firstType$ x, $secondType$ y)
     {
          var x1=($upcastType$)x;
          return x1.Equals(y);
@@ -171,7 +171,7 @@ public static class Template
     /// *  true when x == y
     /// *  false otherwise
     /// </returns>
-    public bool Equals($secondType$ x, $firstType$ y)
+    public static bool Equals($secondType$ x, $firstType$ y)
     {
          var y1=($upcastType$)y;
          return x.Equals(y1);
@@ -190,7 +190,7 @@ public static class Template
     /// *  true when x == y
     /// *  false otherwise
     /// </returns>
-    public bool Equals($firstType$ x, $secondType$ y)
+    public static bool Equals($firstType$ x, $secondType$ y)
     {
          var y1=($upcastType$)y;
          return x.Equals(y1);
@@ -205,7 +205,7 @@ public static class Template
     /// *  true when x == y
     /// *  false otherwise
     /// </returns>
-    public bool Equals($secondType$ x, $firstType$ y)
+    public static bool Equals($secondType$ x, $firstType$ y)
     {
          var x1=($upcastType$)x;
          return x1.Equals(y);
@@ -220,7 +220,8 @@ public static class Template
 ";
  
     #region bool templates
-    
+
+    // TODO: Determine if this template even makes any sense!
     /// <summary>
     /// Note: $firstType must be bool for this template to work.
     /// </summary>
@@ -238,7 +239,7 @@ public static class Template
     /// * -1 when x lt; y
     /// *  1 when x gt; y
     /// </returns>
-    public int Compare($firstType$ x, $secondType$ y)
+    public static int Compare($firstType$ x, $secondType$ y)
     {
          var y1 = y == 0 ? false : true;
          return x.CompareTo(y1);
@@ -256,7 +257,7 @@ public static class Template
     /// * -1 when x lt; y
     /// *  1 when x gt; y
     /// </returns>
-    public int Compare($firstType$ x, $secondType$ y)
+    public static int Compare($firstType$ x, $secondType$ y)
     {
          var x1 = x == 0 ? false : true;
          return x1.CompareTo(y);
@@ -277,9 +278,9 @@ public static class Template
     /// *  true when x == y
     /// *  false otherwise
     /// </returns>
-    public bool Equals($firstType$ x, $secondType$ y)
+    public static bool Equals($firstType$ x, $secondType$ y)
     {
-         var y1 = y == 0 ? false : true;
+         var y1 = y != 0;
          return x == y1;
     }
 
@@ -292,11 +293,10 @@ public static class Template
     /// *  true when x == y
     /// *  false otherwise
     /// </returns>
-    public bool Equals($secondType$ x, $firstType$ y)
+    public static bool Equals($secondType$ x, $firstType$ y)
     {
-         var x1=($upcastType$)x;
-         var y1=($upcastType$)y;
-         return x1.Equals(y1);
+         var x1 = x != 0;
+         return x1 == y;
     }
 ";
     

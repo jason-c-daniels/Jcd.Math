@@ -4,18 +4,20 @@
         <name>Jcd.Math</name>
     </assembly>
     <members>
-        <member name="T:Jcd.Math.Compare">
+        <member name="T:Jcd.Math.Comparer">
             <summary>
+            A comparison class that provides:
             1. A set of upcoming C# features:
                Generic `Min`, `Max`, and `Clamp`. Once MS has implemented these
                (C# 11, .NET7?) they will be off of the Math. class.
             
             2. Some custom extension methods that everyone seems to have to
-               create, despite well known algorithms. (InRange and CompareToRange)
+               create, despite well known algorithms.
+               (InRange and CompareToRange, T1 Compare&lt;T2&gt; where T1 : IComparable&lt;T2&gt;...etc)
              
             </summary>
         </member>
-        <member name="M:Jcd.Math.Compare.Min``1(``0,``0)">
+        <member name="M:Jcd.Math.Comparer.Min``1(``0,``0)">
             <summary>
             Returns the lesser of two values for an IComparable&lt;T&gt;
             </summary>
@@ -24,7 +26,7 @@
             <typeparam name="T">The data type of the values.</typeparam>
             <returns>The smaller of the two values. `val1` if equivalent.</returns>
         </member>
-        <member name="M:Jcd.Math.Compare.Min``1(``0,``0,System.Collections.Generic.IComparer{``0})">
+        <member name="M:Jcd.Math.Comparer.Min``1(``0,``0,System.Collections.Generic.IComparer{``0})">
             <summary>
             Returns the lesser of two values for an IComparable&lt;T&gt;
             </summary>
@@ -34,7 +36,7 @@
             <typeparam name="T">The data type of the values.</typeparam>
             <returns>The smaller of the two values. `val1` if equivalent.</returns>
         </member>
-        <member name="M:Jcd.Math.Compare.Max``1(``0,``0)">
+        <member name="M:Jcd.Math.Comparer.Max``1(``0,``0)">
             <summary>
             Returns the greater of two values for an IComparable&lt;T&gt;
             </summary>
@@ -43,7 +45,7 @@
             <typeparam name="T">The data type of the values.</typeparam>
             <returns>The greater of the two values. `val1` if equivalent.</returns>
         </member>
-        <member name="M:Jcd.Math.Compare.Max``1(``0,``0,System.Collections.Generic.IComparer{``0})">
+        <member name="M:Jcd.Math.Comparer.Max``1(``0,``0,System.Collections.Generic.IComparer{``0})">
             <summary>
             Returns the greater of two values for an IComparable&lt;T&gt;
             </summary>
@@ -53,7 +55,7 @@
             <typeparam name="T">The data type of the values.</typeparam>
             <returns>The greater of the two values. `val1` if equivalent.</returns>
         </member>
-        <member name="M:Jcd.Math.Compare.Clamp``1(``0,``0,``0)">
+        <member name="M:Jcd.Math.Comparer.Clamp``1(``0,``0,``0)">
             <summary>
             Returns a `value` clamped to the inclusive range of `min` and `max`.
             </summary>
@@ -69,7 +71,7 @@
                 - `value` : when `min` ≤ `value` ≤ `max`.
             </returns>
         </member>
-        <member name="M:Jcd.Math.Compare.Clamp``1(``0,``0,``0,System.Collections.Generic.IComparer{``0})">
+        <member name="M:Jcd.Math.Comparer.Clamp``1(``0,``0,``0,System.Collections.Generic.IComparer{``0})">
             <summary>
             Clamps a value to the specified range.
             </summary>
@@ -84,7 +86,7 @@
                 - value otherwise.
             </returns>
         </member>
-        <member name="M:Jcd.Math.Compare.InRange``1(``0,``0,``0)">
+        <member name="M:Jcd.Math.Comparer.InRange``1(``0,``0,``0)">
             <summary>
             Checks if a value is within a closed interval. (i.e. interval includes start and endpoints)
             </summary>
@@ -94,7 +96,7 @@
             <typeparam name="T">The data type being compared.</typeparam>
             <returns>true if the value is within the range.</returns>
         </member>
-        <member name="M:Jcd.Math.Compare.ToRange``1(``0,``0,``0)">
+        <member name="M:Jcd.Math.Comparer.ToRange``1(``0,``0,``0)">
             <summary>
             Determines if a value is less than the start (-1) of the
             closed interval [start,end], within the interval (0),
@@ -105,6 +107,52 @@
             <param name="end">End of the range to check.</param>
             <typeparam name="T">The data type being compared.</typeparam>
             <returns>-1, for less than, 0 for in range, 1 for greater than end.</returns>
+        </member>
+        <member name="M:Jcd.Math.Comparer.Compare``1(``0,``0)">
+            <summary>
+            Compares two IComparable&lt;T&gt; values
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <typeparam name="T">The data type</typeparam>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Comparer.Equals``1(``0,``0)">
+            <summary>
+            Compares two IEquatable&lt;T&gt; values for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <typeparam name="T">The data type</typeparam>
+            <returns>true if x == y; false otherwise</returns>
+        </member>
+        <member name="M:Jcd.Math.Comparer.Compare``2(``0,``1)">
+            <summary>
+            Compares two values of disparate types.
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <typeparam name="TX">The type for x</typeparam>
+            <typeparam name="TY">The type for y</typeparam>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Comparer.Equals``2(``0,``1)">
+            <summary>
+            Compares two values of disparate types.
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <typeparam name="TX">The type for x</typeparam>
+            <typeparam name="TY">The type for y</typeparam>
+            <returns>true if x == y; false otherwise.</returns>
         </member>
         <member name="T:Jcd.Math.IDisjointComparer`2">
             <summary>
@@ -1418,21 +1466,2409 @@
             <param name="right"></param>
             <returns></returns>
         </member>
-        <member name="M:Jcd.Math.Numbers.NativeValueComparisons.Compare(System.Boolean,System.Byte)">
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.Byte)">
             <summary>
-            Upcast bool to byte 0 if false 1 if true, then compare.
+            Checks a Boolean and a Byte for equality
             </summary>
-            <param name="x">left hand operand</param>
-            <param name="y">right hand operand</param>
-            <returns>-1 if x less than y; 1 if x greater than y; 0 if equal</returns>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
         </member>
-        <member name="M:Jcd.Math.Numbers.NativeValueComparisons.Compare(System.Boolean,System.UInt16)">
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.Boolean)">
             <summary>
-            upcast bool to (byte)1/0 then compare.
+            Checks a Byte and a Boolean for equality
             </summary>
-            <param name="x"></param>
-            <param name="y"></param>
-            <returns></returns>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.SByte)">
+            <summary>
+            Checks a Boolean and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.Boolean)">
+            <summary>
+            Checks a SByte and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.Int16)">
+            <summary>
+            Checks a Boolean and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.Boolean)">
+            <summary>
+            Checks a Int16 and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.UInt16)">
+            <summary>
+            Checks a Boolean and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.Boolean)">
+            <summary>
+            Checks a UInt16 and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.Int32)">
+            <summary>
+            Checks a Boolean and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.Boolean)">
+            <summary>
+            Checks a Int32 and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.UInt32)">
+            <summary>
+            Checks a Boolean and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.Boolean)">
+            <summary>
+            Checks a UInt32 and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.Single)">
+            <summary>
+            Checks a Boolean and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.Boolean)">
+            <summary>
+            Checks a Single and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.Int64)">
+            <summary>
+            Checks a Boolean and a Int64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int64,System.Boolean)">
+            <summary>
+            Checks a Int64 and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.UInt64)">
+            <summary>
+            Checks a Boolean and a UInt64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt64,System.Boolean)">
+            <summary>
+            Checks a UInt64 and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.Double)">
+            <summary>
+            Checks a Boolean and a Double for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Double,System.Boolean)">
+            <summary>
+            Checks a Double and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Boolean,System.Decimal)">
+            <summary>
+            Checks a Boolean and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.Boolean)">
+            <summary>
+            Checks a Decimal and a Boolean for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.SByte)">
+            <summary>
+            Checks a Byte and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.Byte)">
+            <summary>
+            Checks a SByte and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.SByte)">
+            <summary>
+            Compares a Byte to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.Byte)">
+            <summary>
+            Compares a SByte to a Byte 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.Byte)">
+            <summary>
+            Checks a Int16 and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.Int16)">
+            <summary>
+            Checks a Byte and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.Byte)">
+            <summary>
+            Compares a Int16 to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.Int16)">
+            <summary>
+            Compares a Byte to a Int16 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.SByte)">
+            <summary>
+            Checks a Int16 and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.Int16)">
+            <summary>
+            Checks a SByte and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.SByte)">
+            <summary>
+            Compares a Int16 to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.Int16)">
+            <summary>
+            Compares a SByte to a Int16 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.UInt16)">
+            <summary>
+            Checks a Int16 and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.Int16)">
+            <summary>
+            Checks a UInt16 and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.UInt16)">
+            <summary>
+            Compares a Int16 to a UInt16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.Int16)">
+            <summary>
+            Compares a UInt16 to a Int16 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.Byte)">
+            <summary>
+            Checks a UInt16 and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.UInt16)">
+            <summary>
+            Checks a Byte and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.Byte)">
+            <summary>
+            Compares a UInt16 to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.UInt16)">
+            <summary>
+            Compares a Byte to a UInt16 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.SByte)">
+            <summary>
+            Checks a UInt16 and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.UInt16)">
+            <summary>
+            Checks a SByte and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.SByte)">
+            <summary>
+            Compares a UInt16 to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.UInt16)">
+            <summary>
+            Compares a SByte to a UInt16 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.Byte)">
+            <summary>
+            Checks a Int32 and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.Int32)">
+            <summary>
+            Checks a Byte and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.Byte)">
+            <summary>
+            Compares a Int32 to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.Int32)">
+            <summary>
+            Compares a Byte to a Int32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.SByte)">
+            <summary>
+            Checks a Int32 and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.Int32)">
+            <summary>
+            Checks a SByte and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.SByte)">
+            <summary>
+            Compares a Int32 to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.Int32)">
+            <summary>
+            Compares a SByte to a Int32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.Int16)">
+            <summary>
+            Checks a Int32 and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.Int32)">
+            <summary>
+            Checks a Int16 and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.Int16)">
+            <summary>
+            Compares a Int32 to a Int16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.Int32)">
+            <summary>
+            Compares a Int16 to a Int32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.UInt16)">
+            <summary>
+            Checks a Int32 and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.Int32)">
+            <summary>
+            Checks a UInt16 and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.UInt16)">
+            <summary>
+            Compares a Int32 to a UInt16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.Int32)">
+            <summary>
+            Compares a UInt16 to a Int32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.UInt32)">
+            <summary>
+            Checks a Int32 and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.Int32)">
+            <summary>
+            Checks a UInt32 and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.UInt32)">
+            <summary>
+            Compares a Int32 to a UInt32
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.Int32)">
+            <summary>
+            Compares a UInt32 to a Int32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.Single)">
+            <summary>
+            Checks a Int32 and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.Int32)">
+            <summary>
+            Checks a Single and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.Single)">
+            <summary>
+            Compares a Int32 to a Single
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.Int32)">
+            <summary>
+            Compares a Single to a Int32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.Byte)">
+            <summary>
+            Checks a UInt32 and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.UInt32)">
+            <summary>
+            Checks a Byte and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.Byte)">
+            <summary>
+            Compares a UInt32 to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.UInt32)">
+            <summary>
+            Compares a Byte to a UInt32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.SByte)">
+            <summary>
+            Checks a UInt32 and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.UInt32)">
+            <summary>
+            Checks a SByte and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.SByte)">
+            <summary>
+            Compares a UInt32 to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.UInt32)">
+            <summary>
+            Compares a SByte to a UInt32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.Int16)">
+            <summary>
+            Checks a UInt32 and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.UInt32)">
+            <summary>
+            Checks a Int16 and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.Int16)">
+            <summary>
+            Compares a UInt32 to a Int16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.UInt32)">
+            <summary>
+            Compares a Int16 to a UInt32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.UInt16)">
+            <summary>
+            Checks a UInt32 and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.UInt32)">
+            <summary>
+            Checks a UInt16 and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.UInt16)">
+            <summary>
+            Compares a UInt32 to a UInt16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.UInt32)">
+            <summary>
+            Compares a UInt16 to a UInt32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.Single)">
+            <summary>
+            Checks a UInt32 and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.UInt32)">
+            <summary>
+            Checks a Single and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.Single)">
+            <summary>
+            Compares a UInt32 to a Single
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.UInt32)">
+            <summary>
+            Compares a Single to a UInt32 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.Byte)">
+            <summary>
+            Checks a Single and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.Single)">
+            <summary>
+            Checks a Byte and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.Byte)">
+            <summary>
+            Compares a Single to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.Single)">
+            <summary>
+            Compares a Byte to a Single 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.SByte)">
+            <summary>
+            Checks a Single and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.Single)">
+            <summary>
+            Checks a SByte and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.SByte)">
+            <summary>
+            Compares a Single to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.Single)">
+            <summary>
+            Compares a SByte to a Single 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.Int16)">
+            <summary>
+            Checks a Single and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.Single)">
+            <summary>
+            Checks a Int16 and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.Int16)">
+            <summary>
+            Compares a Single to a Int16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.Single)">
+            <summary>
+            Compares a Int16 to a Single 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.UInt16)">
+            <summary>
+            Checks a Single and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.Single)">
+            <summary>
+            Checks a UInt16 and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.UInt16)">
+            <summary>
+            Compares a Single to a UInt16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.Single)">
+            <summary>
+            Compares a UInt16 to a Single 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int64,System.Byte)">
+            <summary>
+            Checks a Int64 and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.Int64)">
+            <summary>
+            Checks a Byte and a Int64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int64,System.Byte)">
+            <summary>
+            Compares a Int64 to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.Int64)">
+            <summary>
+            Compares a Byte to a Int64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int64,System.SByte)">
+            <summary>
+            Checks a Int64 and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.Int64)">
+            <summary>
+            Checks a SByte and a Int64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int64,System.SByte)">
+            <summary>
+            Compares a Int64 to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.Int64)">
+            <summary>
+            Compares a SByte to a Int64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int64,System.Int16)">
+            <summary>
+            Checks a Int64 and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.Int64)">
+            <summary>
+            Checks a Int16 and a Int64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int64,System.Int16)">
+            <summary>
+            Compares a Int64 to a Int16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.Int64)">
+            <summary>
+            Compares a Int16 to a Int64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int64,System.UInt16)">
+            <summary>
+            Checks a Int64 and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.Int64)">
+            <summary>
+            Checks a UInt16 and a Int64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int64,System.UInt16)">
+            <summary>
+            Compares a Int64 to a UInt16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.Int64)">
+            <summary>
+            Compares a UInt16 to a Int64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int64,System.Int32)">
+            <summary>
+            Checks a Int64 and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.Int64)">
+            <summary>
+            Checks a Int32 and a Int64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int64,System.Int32)">
+            <summary>
+            Compares a Int64 to a Int32
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.Int64)">
+            <summary>
+            Compares a Int32 to a Int64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int64,System.UInt32)">
+            <summary>
+            Checks a Int64 and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.Int64)">
+            <summary>
+            Checks a UInt32 and a Int64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int64,System.UInt32)">
+            <summary>
+            Compares a Int64 to a UInt32
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.Int64)">
+            <summary>
+            Compares a UInt32 to a Int64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int64,System.Single)">
+            <summary>
+            Checks a Int64 and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.Int64)">
+            <summary>
+            Checks a Single and a Int64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int64,System.Single)">
+            <summary>
+            Compares a Int64 to a Single
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.Int64)">
+            <summary>
+            Compares a Single to a Int64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt64,System.Byte)">
+            <summary>
+            Checks a UInt64 and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.UInt64)">
+            <summary>
+            Checks a Byte and a UInt64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt64,System.Byte)">
+            <summary>
+            Compares a UInt64 to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.UInt64)">
+            <summary>
+            Compares a Byte to a UInt64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt64,System.UInt16)">
+            <summary>
+            Checks a UInt64 and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.UInt64)">
+            <summary>
+            Checks a UInt16 and a UInt64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt64,System.UInt16)">
+            <summary>
+            Compares a UInt64 to a UInt16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.UInt64)">
+            <summary>
+            Compares a UInt16 to a UInt64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt64,System.UInt32)">
+            <summary>
+            Checks a UInt64 and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.UInt64)">
+            <summary>
+            Checks a UInt32 and a UInt64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt64,System.UInt32)">
+            <summary>
+            Compares a UInt64 to a UInt32
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.UInt64)">
+            <summary>
+            Compares a UInt32 to a UInt64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt64,System.Single)">
+            <summary>
+            Checks a UInt64 and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.UInt64)">
+            <summary>
+            Checks a Single and a UInt64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt64,System.Single)">
+            <summary>
+            Compares a UInt64 to a Single
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.UInt64)">
+            <summary>
+            Compares a Single to a UInt64 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Double,System.Byte)">
+            <summary>
+            Checks a Double and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.Double)">
+            <summary>
+            Checks a Byte and a Double for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Double,System.Byte)">
+            <summary>
+            Compares a Double to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.Double)">
+            <summary>
+            Compares a Byte to a Double 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Double,System.SByte)">
+            <summary>
+            Checks a Double and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.Double)">
+            <summary>
+            Checks a SByte and a Double for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Double,System.SByte)">
+            <summary>
+            Compares a Double to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.Double)">
+            <summary>
+            Compares a SByte to a Double 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Double,System.Int16)">
+            <summary>
+            Checks a Double and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.Double)">
+            <summary>
+            Checks a Int16 and a Double for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Double,System.Int16)">
+            <summary>
+            Compares a Double to a Int16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.Double)">
+            <summary>
+            Compares a Int16 to a Double 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Double,System.UInt16)">
+            <summary>
+            Checks a Double and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.Double)">
+            <summary>
+            Checks a UInt16 and a Double for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Double,System.UInt16)">
+            <summary>
+            Compares a Double to a UInt16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.Double)">
+            <summary>
+            Compares a UInt16 to a Double 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Double,System.Int32)">
+            <summary>
+            Checks a Double and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.Double)">
+            <summary>
+            Checks a Int32 and a Double for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Double,System.Int32)">
+            <summary>
+            Compares a Double to a Int32
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.Double)">
+            <summary>
+            Compares a Int32 to a Double 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Double,System.UInt32)">
+            <summary>
+            Checks a Double and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.Double)">
+            <summary>
+            Checks a UInt32 and a Double for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Double,System.UInt32)">
+            <summary>
+            Compares a Double to a UInt32
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.Double)">
+            <summary>
+            Compares a UInt32 to a Double 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Double,System.Single)">
+            <summary>
+            Checks a Double and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.Double)">
+            <summary>
+            Checks a Single and a Double for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Double,System.Single)">
+            <summary>
+            Compares a Double to a Single
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.Double)">
+            <summary>
+            Compares a Single to a Double 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.Byte)">
+            <summary>
+            Checks a Decimal and a Byte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Byte,System.Decimal)">
+            <summary>
+            Checks a Byte and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Decimal,System.Byte)">
+            <summary>
+            Compares a Decimal to a Byte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Byte,System.Decimal)">
+            <summary>
+            Compares a Byte to a Decimal 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.SByte)">
+            <summary>
+            Checks a Decimal and a SByte for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.SByte,System.Decimal)">
+            <summary>
+            Checks a SByte and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Decimal,System.SByte)">
+            <summary>
+            Compares a Decimal to a SByte
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.SByte,System.Decimal)">
+            <summary>
+            Compares a SByte to a Decimal 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.Int16)">
+            <summary>
+            Checks a Decimal and a Int16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int16,System.Decimal)">
+            <summary>
+            Checks a Int16 and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Decimal,System.Int16)">
+            <summary>
+            Compares a Decimal to a Int16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int16,System.Decimal)">
+            <summary>
+            Compares a Int16 to a Decimal 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.UInt16)">
+            <summary>
+            Checks a Decimal and a UInt16 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt16,System.Decimal)">
+            <summary>
+            Checks a UInt16 and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Decimal,System.UInt16)">
+            <summary>
+            Compares a Decimal to a UInt16
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt16,System.Decimal)">
+            <summary>
+            Compares a UInt16 to a Decimal 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.Int32)">
+            <summary>
+            Checks a Decimal and a Int32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Int32,System.Decimal)">
+            <summary>
+            Checks a Int32 and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Decimal,System.Int32)">
+            <summary>
+            Compares a Decimal to a Int32
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Int32,System.Decimal)">
+            <summary>
+            Compares a Int32 to a Decimal 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.UInt32)">
+            <summary>
+            Checks a Decimal and a UInt32 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt32,System.Decimal)">
+            <summary>
+            Checks a UInt32 and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Decimal,System.UInt32)">
+            <summary>
+            Compares a Decimal to a UInt32
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt32,System.Decimal)">
+            <summary>
+            Compares a UInt32 to a Decimal 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.Single)">
+            <summary>
+            Checks a Decimal and a Single for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Single,System.Decimal)">
+            <summary>
+            Checks a Single and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Decimal,System.Single)">
+            <summary>
+            Compares a Decimal to a Single
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Single,System.Decimal)">
+            <summary>
+            Compares a Single to a Decimal 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.Decimal,System.UInt64)">
+            <summary>
+            Checks a Decimal and a UInt64 for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Equals(System.UInt64,System.Decimal)">
+            <summary>
+            Checks a UInt64 and a Decimal for equality
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  true when x == y
+            *  false otherwise
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.Decimal,System.UInt64)">
+            <summary>
+            Compares a Decimal to a UInt64
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
+        </member>
+        <member name="M:Jcd.Math.Numbers.PrimitiveValueComparer.Compare(System.UInt64,System.Decimal)">
+            <summary>
+            Compares a UInt64 to a Decimal 
+            </summary>
+            <param name="x">The first item to compare</param>
+            <param name="y">The second item to compare</param>
+            <returns>
+            *  0 when x == y
+            * -1 when x lt; y
+            *  1 when x gt; y
+            </returns>
         </member>
         <member name="T:Jcd.Math.Numbers.qNaN">
             <summary>

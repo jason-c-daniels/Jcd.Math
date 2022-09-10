@@ -4,7 +4,7 @@
 
 | Classes | |
 | :--- | :--- |
-| [NativeValueComparisons](Jcd.Math.Numbers.NativeValueComparisons.md 'Jcd.Math.Numbers.NativeValueComparisons') | |
+| [PrimitiveValueComparer](Jcd.Math.Numbers.PrimitiveValueComparer.md 'Jcd.Math.Numbers.PrimitiveValueComparer') | |
 
 | Structs | |
 | :--- | :--- |

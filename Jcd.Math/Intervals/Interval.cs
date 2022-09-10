@@ -487,11 +487,11 @@ public static class Interval
             return Interval<T>.Empty; // disjoint. Return the empty set.
 
         var start = first.Contains(second.Start)
-            ? Compare.Max(first.Start, second.Start)
+            ? Comparer.Max(first.Start, second.Start)
             : first.Start;
         
         var end  = first.Contains(second.End)
-            ? Compare.Min(first.End, second.End)
+            ? Comparer.Min(first.End, second.End)
             : first.End;
         
         return Create(start, end);

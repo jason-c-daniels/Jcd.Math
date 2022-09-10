@@ -7,7 +7,7 @@ found in .NET by default.
 
 | Classes | |
 | :--- | :--- |
-| [Compare](Jcd.Math.Compare.md 'Jcd.Math.Compare') | 1. A set of upcoming C# features:<br/>   Generic `Min`, `Max`, and `Clamp`. Once MS has implemented these<br/>   (C# 11, .NET7?) they will be off of the Math. class.<br/><br/>2. Some custom extension methods that everyone seems to have to<br/>   create, despite well known algorithms. (InRange and CompareToRange) |
+| [Comparer](Jcd.Math.Comparer.md 'Jcd.Math.Comparer') | A comparison class that provides:<br/>1. A set of upcoming C# features:<br/>   Generic `Min`, `Max`, and `Clamp`. Once MS has implemented these<br/>   (C# 11, .NET7?) they will be off of the Math. class.<br/><br/>2. Some custom extension methods that everyone seems to have to<br/>   create, despite well known algorithms.<br/>   (InRange and CompareToRange, T1 Compare<T2> where T1 : IComparable<T2>...etc) |
 | [TypeExtensions](Jcd.Math.TypeExtensions.md 'Jcd.Math.TypeExtensions') | |
 
 | Interfaces | |

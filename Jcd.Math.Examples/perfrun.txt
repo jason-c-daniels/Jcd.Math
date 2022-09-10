@@ -1,0 +1,57 @@
+C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\PerfTiming\IntegralDataTypes.cs(31,13): warning CS0219: The variable '_' is assigned but its value is never used [C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Jcd.Math.Examples.csproj]
+C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\PerfTiming\IntegralDataTypes.cs(32,13): warning CS0219: The variable '_2' is assigned but its value is never used [C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Jcd.Math.Examples.csproj]
+C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Program.cs(43,20): warning CS0168: The variable 'ild' is declared but never used [C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Jcd.Math.Examples.csproj]
+C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Program.cs(55,25): warning CS0168: The variable 'ilc' is declared but never used [C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Jcd.Math.Examples.csproj]
+C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Program.cs(60,5): warning CS0219: The variable 'i' is assigned but its value is never used [C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Jcd.Math.Examples.csproj]
+C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Program.cs(62,13): warning CS8321: The local function 'ReportTiming' is declared but never used [C:\Users\jdaniels\Source\Git\github.com\jason-c-daniels\Jcd.Math\Jcd.Math.Examples\Jcd.Math.Examples.csproj]
+upcast ushort to double worked
+long1.CompareTo(int1) worked
+int1.CompareTo(double2) Exception:Object must be of type Int32.
+double2.CompareTo(int1) worked
+uint1.CompareTo(double2) Exception:Object must be of type UInt32.
+double2.CompareTo(uint1) worked
+uint1.CompareTo(int1) Exception:Object must be of type UInt32.
+int1.CompareTo(uint1) Exception:Object must be of type Int32.
+int1 == double1 worked
+int1 == double2 worked
+int1 <= double1 worked
+int1 <= double2 worked
+int1 == double1 worked
+int1 == double2 worked
+int1 <= double1 worked
+int1 <= double2 worked
+  139.4ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   5 cycles/op; FiniteNumber`1<ulong>.CompareTo(-1L)
+  165.9ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   6 cycles/op; FiniteNumber`1<ulong>.CompareTo(negInf)
+   77.7ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   3 cycles/op; FiniteNumber`1<double>.CompareTo(negInf)
+  580.6ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  20 cycles/op; double.CompareTo(double.NegativeInfinity)
+   61.9ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; new FiniteNumber`1<byte>
+   62.5ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; new FiniteNumber`1<ulong>
+   65.5ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; new FiniteNumber`1<double>
+1,939.2ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  68 cycles/op; Interval`1.Open
+1,787.4ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  63 cycles/op; Interval`1.OpenClosed
+1,806.5ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  63 cycles/op; Interval`1.ClosedOpen
+  575.1ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  20 cycles/op; Interval`1.ClosedUnbounded
+  405.7ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  14 cycles/op; Interval`1.UnboundedClosed
+  367.9ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  13 cycles/op; Interval`1.Unbounded
+1,699.8ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  59 cycles/op; Interval`1.Closed
+   57.0ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; Copy Interval`1
+  790.5ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  28 cycles/op; Interval`1.Contains(value)
+1,664.2ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  58 cycles/op; Interval`1.Contains(otherInterval)
+  169.8ms; @3.5GHz; 100,000,000 reps; 2 ops/rep;   3 cycles/op; IntervalLimit`1 ClosedStart and ClosedEnd creation
+  232.4ms; @3.5GHz; 100,000,000 reps; 2 ops/rep;   4 cycles/op; IntervalLimit`1.CompareTo
+  178.4ms; @3.5GHz; 100,000,000 reps; 3 ops/rep;   2 cycles/op; IntervalLimitConstraint.IsClosed on .Open, .Closed and .Unbounded
+  203.3ms; @3.5GHz; 100,000,000 reps; 3 ops/rep;   2 cycles/op; IntervalLimitConstraint.IsOpen on .Open, .Closed and .Unbounded
+   61.7ms; @3.5GHz; 100,000,000 reps; 2 ops/rep;   1 cycles/op; Cast Interval IntervalLimitType to byte
+   66.2ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; IntervalLimitType.CompareTo
+   61.3ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; IntervalLimitType < other
+   59.2ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; Comparer.InRange(repetition,200,20_000_000)
+  266.3ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   9 cycles/op; Comparer.ToRange(repetition,200,20_000_000)
+   60.5ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; Byte.CompareTo
+   59.0ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; Int16.CompareTo
+   99.8ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   3 cycles/op; UInt32.CompareTo
+  108.1ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   4 cycles/op; UInt64.CompareTo
+   58.3ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; UInt64.CompareTo(UInt32)
+  549.3ms; @3.5GHz; 100,000,000 reps; 1  op/rep;  19 cycles/op; IComparable<Byte>.CompareTo(Byte)
+   57.6ms; @3.5GHz; 100,000,000 reps; 2 ops/rep;   1 cycles/op; Cast a byte (0 and then 1) to RawEnum
+2,982.8ms; @3.5GHz; 100,000,000 reps; 1  op/rep; 104 cycles/op; RawEnum.CompareTo
+   57.4ms; @3.5GHz; 100,000,000 reps; 1  op/rep;   2 cycles/op; RawEnum < other
